@@ -136,6 +136,3 @@ ALTER TABLE
 ALTER TABLE
     "housekeeper"
     ADD CONSTRAINT "housekeeper_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
-
-INSERT INTO type_resources (name, cost) values ('parking', 5646.00);
-INSERT INTO type_resources (name, cost) values ('landary', 5646.00);
