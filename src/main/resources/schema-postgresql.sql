@@ -93,7 +93,7 @@ ALTER TABLE
     ADD PRIMARY KEY ("housekeeper_id");
 CREATE TABLE "type_resources"
 (
-    "name_id" INTEGER        NOT NULL,
+    "name_id" SERIAL        NOT NULL,
     "name"    VARCHAR(255)   NOT NULL,
     "cost"    NUMERIC(10, 2) NOT NULL
 );
@@ -136,3 +136,6 @@ ALTER TABLE
 ALTER TABLE
     "housekeeper"
     ADD CONSTRAINT "housekeeper_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+INSERT INTO type_resources (name, cost) values ('parking', 5646.00);
+INSERT INTO type_resources (name, cost) values ('landary', 5646.00);
