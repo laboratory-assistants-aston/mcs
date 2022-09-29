@@ -1,7 +1,7 @@
 package ru.aston.mcs.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.aston.mcs.dao.TypeResourcesService;
+import ru.aston.mcs.service.TypeResourcesService;
 import ru.aston.mcs.dto.TypeResourcesDTO;
 import ru.aston.mcs.entity.TypeResources;
 import ru.aston.mcs.mappers.TypeResourcesListMapper;

@@ -1,7 +1,7 @@
-package ru.aston.mcs.dao.impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.dao.TypeResourcesService;
+import ru.aston.mcs.service.TypeResourcesService;
 import ru.aston.mcs.entity.TypeResources;
 import ru.aston.mcs.repository.TypeResourcesRepository;
 

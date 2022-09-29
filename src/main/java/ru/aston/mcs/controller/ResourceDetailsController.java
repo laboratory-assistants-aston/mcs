@@ -1,15 +1,11 @@
 package ru.aston.mcs.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.aston.mcs.dao.ResourceDetailsService;
-import ru.aston.mcs.dao.TypeResourcesService;
+import ru.aston.mcs.service.ResourceDetailsService;
 import ru.aston.mcs.dto.ResourceDetailsDTO;
 import ru.aston.mcs.entity.ResourceDetails;
-import ru.aston.mcs.entity.TypeResources;
 import ru.aston.mcs.mappers.ResourceDetailsListMapper;
 import ru.aston.mcs.mappers.ResourceDetailsMapper;
-import ru.aston.mcs.mappers.TypeResourcesListMapper;
-import ru.aston.mcs.mappers.TypeResourcesMapper;
 
 import java.util.List;
 

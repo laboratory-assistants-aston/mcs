@@ -1,7 +1,7 @@
-package ru.aston.mcs.dao.impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.dao.ResourceDetailsService;
+import ru.aston.mcs.service.ResourceDetailsService;
 import ru.aston.mcs.entity.ResourceDetails;
 import ru.aston.mcs.repository.ResourceDetailsRepository;
 import javax.transaction.Transactional;

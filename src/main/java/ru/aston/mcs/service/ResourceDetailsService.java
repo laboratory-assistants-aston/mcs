@@ -1,4 +1,4 @@
-package ru.aston.mcs.dao;
+package ru.aston.mcs.service;
 
 import ru.aston.mcs.entity.ResourceDetails;
 
