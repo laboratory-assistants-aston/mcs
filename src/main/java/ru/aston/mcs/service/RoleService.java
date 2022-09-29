@@ -1,15 +1,15 @@
 package ru.aston.mcs.service;
 
+import ru.aston.mcs.dto.RoleDTO;
 import ru.aston.mcs.entity.Role;
 
 import java.util.List;
 
 public interface RoleService {
-    List<Role> getAllRoles();
 
-    void saveRole(Role role);
+    void saveRole(RoleDTO roleDTO);
 
     void deleteRole(int roleId);
 
-    Role getRole(int roleId);
+    RoleDTO getRole(int roleId);
 }

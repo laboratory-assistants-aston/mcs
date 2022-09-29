@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dao.ManagerRepository;
+import ru.aston.mcs.dto.ManagerDTO;
 import ru.aston.mcs.entity.Manager;
+import ru.aston.mcs.mapper.ManagerMapper;
 import ru.aston.mcs.service.ManagerService;
 
 import java.util.List;
@@ -15,33 +17,21 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired
     ManagerRepository managerRepository;
 
+    @Autowired
+    private ManagerMapper managerMapper;
+
     @Override
-    @Transactional
-    public List<Manager> getAllManagers() {
-        return managerRepository.findAll();
+    public void saveManager(ManagerDTO managerDTO) {
+        managerRepository.save(managerMapper.managerDtoInManager(managerDTO));
     }
 
     @Override
-    @Transactional
-    public void saveManager(Manager manager) {
-        managerRepository.save(manager);
-    }
-
-    @Override
-    @Transactional
     public void deleteManager(int managerId) {
         managerRepository.deleteById(managerId);
     }
 
     @Override
-    @Transactional
-    public Manager getManager(int managerId) {
-        Manager manager = null;
-        Optional<Manager> managerOptional = managerRepository.findById(managerId);
-
-        if (managerOptional.isPresent()){
-            manager = managerOptional.get();
-        }
-        return manager;
+    public ManagerDTO getManager(int managerId) {
+        return managerMapper.managerInManagerDTO(managerRepository.findById(managerId).orElseThrow(RuntimeException::new));
     }
 }

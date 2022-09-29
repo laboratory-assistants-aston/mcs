@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dao.RoleRepository;
+import ru.aston.mcs.dto.RoleDTO;
 import ru.aston.mcs.entity.Role;
+import ru.aston.mcs.mapper.RoleMapper;
 import ru.aston.mcs.service.RoleService;
 
 import java.util.List;
@@ -15,33 +17,22 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    private RoleMapper roleMapper;
+
+
     @Override
-    @Transactional
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    public void saveRole(RoleDTO roleDTO) {
+        roleRepository.save(roleMapper.roleDtoInRole(roleDTO));
     }
 
     @Override
-    @Transactional
-    public void saveRole(Role role) {
-        roleRepository.save(role);
-    }
-
-    @Override
-    @Transactional
     public void deleteRole(int roleId) {
         roleRepository.deleteById(roleId);
     }
 
     @Override
-    @Transactional
-    public Role getRole(int roleId) {
-        Role role = null;
-        Optional<Role> roleOptional = roleRepository.findById(roleId);
-
-        if (roleOptional.isPresent()){
-            role = roleOptional.get();
-        }
-        return role;
+    public RoleDTO getRole(int roleId) {
+        return roleMapper.roleInRoleDTO(roleRepository.findById(roleId).orElseThrow(RuntimeException::new));
     }
 }

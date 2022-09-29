@@ -3,6 +3,7 @@ package ru.aston.mcs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.aston.mcs.dto.HousekeeperDTO;
 import ru.aston.mcs.entity.Housekeeper;
 import ru.aston.mcs.service.HousekeeperService;
 
@@ -14,31 +15,18 @@ public class HousekeeperController {
     @Autowired
     private HousekeeperService housekeeperService;
 
-    @GetMapping("/")
-    public List<Housekeeper> showAllHousekeepers(){
-        return housekeeperService.getAllHousekeepers();
-    }
-
     @GetMapping("/{id}")
-    public Housekeeper getHousekeeper(@PathVariable int id){
+    public HousekeeperDTO getHousekeeper(@PathVariable int id){
         return housekeeperService.getHousekeeper(id);
     }
 
     @PostMapping("/")
-    public Housekeeper addNewHousekeeper(@RequestBody Housekeeper housekeeper){
-        housekeeperService.saveHousekeeper(housekeeper);
-        return housekeeper;
-    }
-
-    @PutMapping("/")
-    public Housekeeper updateHousekeeper(@RequestBody Housekeeper housekeeper){
-        housekeeperService.saveHousekeeper(housekeeper);
-        return housekeeper;
+    public void addNewHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO){
+        housekeeperService.addAndSaveHousekeeper(housekeeperDTO);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteHousekeeper(@PathVariable int id){
+    public void deleteHousekeeper(@PathVariable int id){
         housekeeperService.deleteHousekeeper(id);
-        return "Housekeeper " + id + "was deleted";
     }
 }

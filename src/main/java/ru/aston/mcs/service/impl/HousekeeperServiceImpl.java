@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dao.HousekeeperRepository;
+import ru.aston.mcs.dto.HousekeeperDTO;
 import ru.aston.mcs.entity.Housekeeper;
+import ru.aston.mcs.mapper.HousekeeperMapper;
 import ru.aston.mcs.service.HousekeeperService;
 
 import java.util.List;
@@ -16,33 +18,21 @@ public class HousekeeperServiceImpl implements HousekeeperService {
     @Autowired
     HousekeeperRepository housekeeperRepository;
 
+    @Autowired
+    private HousekeeperMapper housekeeperMapper;
+
     @Override
-    @Transactional
-    public List<Housekeeper> getAllHousekeepers() {
-        return housekeeperRepository.findAll();
+    public void addAndSaveHousekeeper(HousekeeperDTO housekeeperDTO) {
+        housekeeperRepository.save(housekeeperMapper.housekeeperDtoInHousekeeper(housekeeperDTO));
     }
 
     @Override
-    @Transactional
-    public void saveHousekeeper(Housekeeper housekeeper) {
-        housekeeperRepository.save(housekeeper);
-    }
-
-    @Override
-    @Transactional
     public void deleteHousekeeper(int housekeeperId) {
         housekeeperRepository.deleteById(housekeeperId);
     }
 
     @Override
-    @Transactional
-    public Housekeeper getHousekeeper(int housekeeperId) {
-        Housekeeper housekeeper = null;
-        Optional<Housekeeper> housekeeperOptional = housekeeperRepository.findById(housekeeperId);
-
-        if (housekeeperOptional.isPresent()){
-            housekeeper = housekeeperOptional.get();
-        }
-        return housekeeper;
+    public HousekeeperDTO getHousekeeper(int housekeeperId) {
+        return housekeeperMapper.housekeeperInHousekeeperDto(housekeeperRepository.findById(housekeeperId).orElseThrow(RuntimeException::new));
     }
 }
