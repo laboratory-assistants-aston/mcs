@@ -136,3 +136,6 @@ ALTER TABLE
 ALTER TABLE
     "housekeeper"
     ADD CONSTRAINT "housekeeper_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+ALTER TABLE
+    "notifications"
+    ADD CONSTRAINT "notifications_user_id_foreign" FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
