@@ -1,6 +1,5 @@
 package ru.aston.mcs.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.entity.Manager;

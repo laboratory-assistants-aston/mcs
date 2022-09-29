@@ -23,7 +23,6 @@ public class Manager {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "role_id")
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;
