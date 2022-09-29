@@ -1,4 +1,4 @@
-package ru.aston.mcs.services;
+package ru.aston.mcs.service;
 
 import ru.aston.mcs.dto.UsersDto;
 

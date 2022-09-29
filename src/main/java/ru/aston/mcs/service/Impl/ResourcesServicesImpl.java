@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.ResourcesDto;
 import ru.aston.mcs.mapper.ResourcesMapper;
-import ru.aston.mcs.repositories.ResourcesRepository;
-import ru.aston.mcs.services.ResourcesServices;
+import ru.aston.mcs.repository.ResourcesRepository;
+import ru.aston.mcs.service.ResourcesServices;
 
 @Service
 public class ResourcesServicesImpl implements ResourcesServices {

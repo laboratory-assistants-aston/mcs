@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.service.ResourceDetailsService;
 import ru.aston.mcs.dto.ResourceDetailsDTO;
 import ru.aston.mcs.entity.ResourceDetails;
-import ru.aston.mcs.mappers.ResourceDetailsListMapper;
-import ru.aston.mcs.mappers.ResourceDetailsMapper;
+import ru.aston.mcs.mapper.ResourceDetailsListMapper;
+import ru.aston.mcs.mapper.ResourceDetailsMapper;
 
 import java.util.List;
 

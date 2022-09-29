@@ -1,4 +1,4 @@
-package ru.aston.mcs.mappers;
+package ru.aston.mcs.mapper;
 
 
 import org.mapstruct.Mapper;

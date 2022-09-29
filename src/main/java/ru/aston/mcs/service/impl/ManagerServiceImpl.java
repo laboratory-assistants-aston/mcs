@@ -2,15 +2,10 @@ package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.aston.mcs.dao.ManagerRepository;
+import ru.aston.mcs.repository.ManagerRepository;
 import ru.aston.mcs.dto.ManagerDTO;
-import ru.aston.mcs.entity.Manager;
 import ru.aston.mcs.mapper.ManagerMapper;
 import ru.aston.mcs.service.ManagerService;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {

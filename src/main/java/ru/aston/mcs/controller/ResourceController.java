@@ -3,7 +3,7 @@ package ru.aston.mcs.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.ResourcesDto;
-import ru.aston.mcs.services.ResourcesServices;
+import ru.aston.mcs.service.ResourcesServices;
 
 @RestController
 public class ResourceController {
