@@ -1,17 +1,23 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.Date;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table
 public class UserPassportData {
 
     @Id
     @Column(name = "passport_number")
+    @OneToOne(mappedBy = "passportId")
     private String passportNumber;
 
     @Column
@@ -26,50 +32,11 @@ public class UserPassportData {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    public UserPassportData() {
-    }
-
     public UserPassportData(String passportNumber, String series, Date dateOfIssue, String nationality, Date birthDate) {
         this.passportNumber = passportNumber;
         this.series = series;
         this.expireDate = dateOfIssue;
         this.nationality = nationality;
-        this.birthDate = birthDate;
-    }
-
-    public String getPassportNumber() {
-        return passportNumber;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(Date dateOfIssue) {
-        this.expireDate = dateOfIssue;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 }

@@ -1,10 +1,16 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+// Need to import the right User and Manager
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "notifications")
 public class Notification {
@@ -17,45 +23,16 @@ public class Notification {
     private String text;
 
     @Column(name = "user_id")
-    private int userId;
+    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
+    private User user;
 
-    @Column(name = "manager_id")
-    private int managerId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "managerId")
+    private Manager manager;
 
-    public Notification() {
-    }
-
-    public Notification(String text, int userId, int managerId) {
+    public Notification(String text, User user, Manager manager) {
         this.text = text;
-        this.userId = userId;
-        this.managerId = managerId;
-    }
-
-    public int getNotificationId() {
-        return notificationId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
+        this.user = user;
+        this.manager = manager;
     }
 }
