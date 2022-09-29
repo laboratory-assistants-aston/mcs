@@ -4,10 +4,7 @@ package ru.aston.mcs.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.HousekeeperDTO;
-import ru.aston.mcs.entity.Housekeeper;
 import ru.aston.mcs.service.HousekeeperService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/housekeepers")
