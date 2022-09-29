@@ -20,7 +20,7 @@ public class Housekeeper {
 
     @Column(name = "role_id")
     @OneToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "housekeeper_id")
     private Role role;
 
     @Column(name = "name")
