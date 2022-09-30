@@ -1,8 +1,9 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.aston.mcs.dto.NotificationDTO;
 import ru.aston.mcs.entity.Notification;
+import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.service.NotificationService;
 
 import java.util.List;
@@ -11,8 +12,13 @@ import java.util.List;
 @RequestMapping("/api/notifications")
 public class NotificationController {
 
-    @Autowired
     private NotificationService notificationService;
+    private NotificationMapper notificationMapper;
+
+    public NotificationController(NotificationService notificationService, NotificationMapper notificationMapper) {
+        this.notificationService = notificationService;
+        this.notificationMapper = notificationMapper;
+    }
 
     @GetMapping("/")
     public List<Notification> showAllNotifications(){
@@ -23,27 +29,29 @@ public class NotificationController {
     }
 
     @GetMapping("/{id}")
-    public Notification getNotification(@PathVariable int id){
+    public NotificationDTO getNotification(@PathVariable int id){
 
         Notification notification = notificationService.getNotification(id);
 
-        return notification;
+        return notificationMapper.notificationInNotificationDTO(notification);
     }
 
     @PostMapping("/")
-    public Notification addNewNotification(@RequestBody Notification notification){
+    public NotificationDTO addNewNotification(@RequestBody NotificationDTO notificationDTO){
 
+        Notification notification = notificationMapper.notificationDtoInNotification(notificationDTO);
         notificationService.saveNotification(notification);
 
-        return notification;
+        return notificationDTO;
     }
 
     @PutMapping("/")
-    public Notification updateNotification(@RequestBody Notification notification){
+    public NotificationDTO updateNotification(@RequestBody NotificationDTO notificationDTO){
 
+        Notification notification = notificationMapper.notificationDtoInNotification(notificationDTO);
         notificationService.saveNotification(notification);
 
-        return notification;
+        return notificationDTO;
     }
 
     @DeleteMapping("/{id}")

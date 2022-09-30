@@ -2,7 +2,7 @@ package ru.aston.mcs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.aston.mcs.dto.ResourcesDto;
+import ru.aston.mcs.dto.ResourcesDTO;
 import ru.aston.mcs.service.ResourcesServices;
 
 @RestController
@@ -11,12 +11,12 @@ public class ResourceController {
     ResourcesServices resourcesServices;
 
     @GetMapping("/resource")
-    public ResourcesDto getUser(@PathVariable Long id) {
+    public ResourcesDTO getUser(@PathVariable Long id) {
         return resourcesServices.getResource(id);
     }
 
     @PostMapping("/resource")
-    public void saveUser(@RequestBody ResourcesDto resourcesDto) {
+    public void saveUser(@RequestBody ResourcesDTO resourcesDto) {
         resourcesServices.addAndSaveResource(resourcesDto);
     }
 

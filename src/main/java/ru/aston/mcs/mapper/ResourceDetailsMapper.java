@@ -4,10 +4,6 @@ import org.mapstruct.Mapper;
 import ru.aston.mcs.dto.ResourceDetailsDTO;
 import ru.aston.mcs.entity.ResourceDetails;
 
-/**
- * @author Victoria Zhirnova
- * @project mcs
- */
 @Mapper(
         componentModel = "spring"
 )

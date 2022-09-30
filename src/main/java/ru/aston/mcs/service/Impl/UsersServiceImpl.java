@@ -2,7 +2,7 @@ package ru.aston.mcs.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.dto.UsersDto;
+import ru.aston.mcs.dto.UsersDTO;
 import ru.aston.mcs.mapper.UsersMapper;
 import ru.aston.mcs.repository.UsersRepository;
 import ru.aston.mcs.service.UsersService;
@@ -15,12 +15,12 @@ public class UsersServiceImpl implements UsersService {
     private UsersMapper usersMapper;
 
     @Override
-    public UsersDto getUser(Long id) {
+    public UsersDTO getUser(Long id) {
         return usersMapper.usersInUsersDto(usersRepository.findById(id).orElseThrow(RuntimeException::new));
     }
 
     @Override
-    public void addAndSaveUser(UsersDto userDto) {
+    public void addAndSaveUser(UsersDTO userDto) {
 
         usersRepository.save(usersMapper.usersDtoInUsers(userDto));
     }

@@ -1,11 +1,11 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.dto.UsersDto;
+import ru.aston.mcs.dto.UsersDTO;
 
 public interface UsersService {
-    UsersDto getUser(Long id);
+    UsersDTO getUser(Long id);
 
-    void addAndSaveUser(UsersDto userDto);
+    void addAndSaveUser(UsersDTO userDto);
 
     void deleteUser(Long id);
 }

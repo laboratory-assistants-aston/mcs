@@ -24,6 +24,7 @@ public class ResourceDetailsServiceImpl implements ResourceDetailsService {
     }
 
     @Override
+    @Transactional
     public void saveResourceDetails(ResourceDetails resourceDetails) {
         resourceDetailsRepository.save(resourceDetails);
     }

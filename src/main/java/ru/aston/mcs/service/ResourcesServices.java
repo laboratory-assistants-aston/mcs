@@ -1,11 +1,11 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.dto.ResourcesDto;
+import ru.aston.mcs.dto.ResourcesDTO;
 
 public interface ResourcesServices {
-    ResourcesDto getResource(Long id);
+    ResourcesDTO getResource(Long id);
 
-    void addAndSaveResource(ResourcesDto userDto);
+    void addAndSaveResource(ResourcesDTO userDto);
 
     void deleteResource(Long id);
 }
