@@ -24,16 +24,14 @@ public class Manager {
     @Column(name = "surname")
     private String surname;
 
-    @OneToOne
-    @JoinColumn(name = "role_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_id")
     private Role role;
 
-    @Column(name = "resources_id")
     @OneToMany
     @JoinColumn(name = "manager_id")
     private List<Resource> resourceList;
 
-    @Column(name = "users_id")
     @OneToMany
     @JoinColumn(name = "manager_id")
     private List<Users> userList;
