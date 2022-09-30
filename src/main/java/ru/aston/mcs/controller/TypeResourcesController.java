@@ -1,11 +1,11 @@
 package ru.aston.mcs.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.aston.mcs.service.TypeResourcesService;
 import ru.aston.mcs.dto.TypeResourcesDTO;
 import ru.aston.mcs.entity.TypeResources;
 import ru.aston.mcs.mapper.TypeResourcesListMapper;
 import ru.aston.mcs.mapper.TypeResourcesMapper;
+import ru.aston.mcs.service.TypeResourcesService;
 
 import java.util.List;
 
@@ -24,24 +24,24 @@ public class TypeResourcesController {
     }
 
     @GetMapping("/")
-    public List<TypeResourcesDTO> getAllTypeResources(){
+    public List<TypeResourcesDTO> getAllTypeResources() {
 
         List<TypeResources> allTypeResources = typeResourcesService.getAllTypeResources();
 
-        return  typeResourcesListMapper.toDTOList(allTypeResources);
+        return typeResourcesListMapper.toDTOList(allTypeResources);
 
     }
 
     @GetMapping("/{id}")
-    public TypeResourcesDTO getTypeResources(@PathVariable int id){
+    public TypeResourcesDTO getTypeResources(@PathVariable Long id) {
 
         TypeResources typeResources = typeResourcesService.getTypeResources(id);
 
-        return  typeResourcesMapper.toDTO(typeResources);
+        return typeResourcesMapper.toDTO(typeResources);
     }
 
     @PostMapping("/")
-    public TypeResourcesDTO addTypeResources(@RequestBody TypeResourcesDTO typeResourcesDto){
+    public TypeResourcesDTO addTypeResources(@RequestBody TypeResourcesDTO typeResourcesDto) {
 
         TypeResources typeResources = typeResourcesMapper.toModel(typeResourcesDto);
         typeResourcesService.saveTypeResources(typeResources);
@@ -50,7 +50,7 @@ public class TypeResourcesController {
     }
 
     @PutMapping("/")
-    public TypeResourcesDTO updateTypeResources(@RequestBody TypeResourcesDTO typeResourcesDto){
+    public TypeResourcesDTO updateTypeResources(@RequestBody TypeResourcesDTO typeResourcesDto) {
 
         TypeResources typeResources = typeResourcesMapper.toModel(typeResourcesDto);
         typeResourcesService.saveTypeResources(typeResources);
@@ -59,7 +59,7 @@ public class TypeResourcesController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTypeResources(@PathVariable int id){
+    public String deleteTypeResources(@PathVariable Long id) {
 
         typeResourcesService.deleteTypeResources(id);
 

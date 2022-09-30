@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import ru.aston.mcs.entity.enums.GenderType;
 import ru.aston.mcs.entity.Resource;
-import ru.aston.mcs.entity.enums.Role;
 
 import java.util.List;
 

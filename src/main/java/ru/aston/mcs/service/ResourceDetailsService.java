@@ -9,7 +9,7 @@ public interface ResourceDetailsService {
 
     void saveResourceDetails(ResourceDetails resourceDetails);
 
-    void deleteResourceDetails(int detailsId);
+    void deleteResourceDetails(Long detailsId);
 
-    ResourceDetails getResourceDetails(int detailsId);
+    ResourceDetails getResourceDetails(Long detailsId);
 }

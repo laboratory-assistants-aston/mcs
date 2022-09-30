@@ -1,12 +1,12 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.entity.Manager;
+
 
 public interface ManagerService {
 
     void saveManager(Manager manager);
 
-    void deleteManager(int managerId);
+    void deleteManager(Long managerId);
 
-    Manager getManager(int managerId);
+    ManagerDTO getManager(Long managerId);
 }

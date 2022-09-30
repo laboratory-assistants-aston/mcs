@@ -21,7 +21,7 @@ public class NotificationController {
     }
 
     @GetMapping("/")
-    public List<Notification> showAllNotifications(){
+    public List<Notification> showAllNotifications() {
 
         List<Notification> allNotifications = notificationService.getAllNotifications();
 
@@ -29,7 +29,7 @@ public class NotificationController {
     }
 
     @GetMapping("/{id}")
-    public NotificationDTO getNotification(@PathVariable int id){
+    public NotificationDTO getNotification(@PathVariable Long id) {
 
         Notification notification = notificationService.getNotification(id);
 
@@ -37,7 +37,7 @@ public class NotificationController {
     }
 
     @PostMapping("/")
-    public NotificationDTO addNewNotification(@RequestBody NotificationDTO notificationDTO){
+    public NotificationDTO addNewNotification(@RequestBody NotificationDTO notificationDTO) {
 
         Notification notification = notificationMapper.notificationDtoInNotification(notificationDTO);
         notificationService.saveNotification(notification);
@@ -46,7 +46,7 @@ public class NotificationController {
     }
 
     @PutMapping("/")
-    public NotificationDTO updateNotification(@RequestBody NotificationDTO notificationDTO){
+    public NotificationDTO updateNotification(@RequestBody NotificationDTO notificationDTO) {
 
         Notification notification = notificationMapper.notificationDtoInNotification(notificationDTO);
         notificationService.saveNotification(notification);
@@ -55,7 +55,7 @@ public class NotificationController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteNotification(@PathVariable int id){
+    public String deleteNotification(@PathVariable Long id) {
 
         notificationService.deleteNotification(id);
 

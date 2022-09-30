@@ -24,6 +24,7 @@ public class HousekeeperController {
     }
 
     @GetMapping("/{id}")
+/*<<<<<<< feature/LA-role_fix
     public HousekeeperDTO getHousekeeper(@PathVariable int id){
         return housekeeperMapper.housekeeperInHousekeeperDto(housekeeperService.getHousekeeper(id));
     }
@@ -31,10 +32,18 @@ public class HousekeeperController {
     @PostMapping("/")
     public void addNewHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO){
         housekeeperService.addAndSaveHousekeeper(housekeeperMapper.housekeeperDtoInHousekeeper(housekeeperDTO));
+*/
+    public HousekeeperDTO getHousekeeper(@PathVariable Long id) {
+        return housekeeperService.getHousekeeper(id);
+    }
+
+    @PostMapping("/")
+    public void addNewHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO) {
+        housekeeperService.addAndSaveHousekeeper(housekeeperDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteHousekeeper(@PathVariable int id){
+    public void deleteHousekeeper(@PathVariable Long id) {
         housekeeperService.deleteHousekeeper(id);
     }
 }

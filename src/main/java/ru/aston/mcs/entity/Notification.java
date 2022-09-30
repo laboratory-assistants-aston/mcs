@@ -1,5 +1,6 @@
 package ru.aston.mcs.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +12,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "notifications")
+@AllArgsConstructor
 public class Notification {
 
     @Id
     @Column(name = "notification_id")
-    private int notificationId;
+    private Long notificationId;
 
     @Column
     private String text;
@@ -28,9 +30,5 @@ public class Notification {
     @JoinColumn(name = "managerId")
     private Manager manager;
 
-    public Notification(String text, Users user, Manager manager) {
-        this.text = text;
-        this.user = user;
-        this.manager = manager;
-    }
+
 }

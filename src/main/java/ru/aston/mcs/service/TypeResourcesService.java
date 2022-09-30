@@ -9,7 +9,7 @@ public interface TypeResourcesService {
 
     void saveTypeResources(TypeResources typeResources);
 
-    void deleteTypeResources(int nameId);
+    void deleteTypeResources(Long nameId);
 
-    TypeResources getTypeResources(int nameId);
+    TypeResources getTypeResources(Long nameId);
 }

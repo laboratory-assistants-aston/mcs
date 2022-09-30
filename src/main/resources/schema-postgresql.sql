@@ -89,7 +89,7 @@ ALTER TABLE
     ADD PRIMARY KEY ("housekeeper_id");
 CREATE TABLE "type_resources"
 (
-    "name_id" SERIAL        NOT NULL,
+    "name_id" SERIAL         NOT NULL,
     "name"    VARCHAR(255)   NOT NULL,
     "cost"    NUMERIC(10, 2) NOT NULL
 );

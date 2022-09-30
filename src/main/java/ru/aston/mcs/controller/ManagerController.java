@@ -3,10 +3,7 @@ package ru.aston.mcs.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.ManagerDTO;
-import ru.aston.mcs.mapper.ManagerMapper;
 import ru.aston.mcs.service.ManagerService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/managers")
@@ -19,6 +16,7 @@ public class ManagerController {
     private ManagerMapper managerMapper;
 
     @GetMapping("/{id}")
+/*<<<<<<< feature/LA-role_fix
     public ManagerDTO getManager(@PathVariable int id){
         return managerMapper.managerInManagerDTO(managerService.getManager(id));
     }
@@ -26,10 +24,18 @@ public class ManagerController {
     @PostMapping("/")
     public void addNewManager(@RequestBody ManagerDTO managerDTO){
         managerService.saveManager(managerMapper.managerDtoInManager(managerDTO));
+=======*/
+    public ManagerDTO getManager(@PathVariable Long id) {
+        return managerService.getManager(id);
+    }
+
+    @PostMapping("/")
+    public void addNewManager(@RequestBody ManagerDTO managerDTO) {
+        managerService.saveManager(managerDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteManager(@PathVariable int id){
+    public void deleteManager(@PathVariable Long id) {
         managerService.deleteManager(id);
     }
 }
