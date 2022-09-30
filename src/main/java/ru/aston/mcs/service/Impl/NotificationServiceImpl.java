@@ -3,7 +3,7 @@ package ru.aston.mcs.service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.aston.mcs.dao.NotificationRepository;
+import ru.aston.mcs.repository.NotificationRepository;
 import ru.aston.mcs.entity.Notification;
 import ru.aston.mcs.service.NotificationService;
 

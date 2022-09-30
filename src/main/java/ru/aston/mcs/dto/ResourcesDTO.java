@@ -8,11 +8,11 @@ import ru.aston.mcs.entity.Status;
 @Data
 @Builder
 @AllArgsConstructor
-public class ResourcesDto {
+public class ResourcesDTO {
     private Long id;
     private Integer duringTime;
     private Status status;
-    private TypeResourcesDto nameId;
-    private DetailsResourcesDto detailsId;
-    private UsersDto usersId;
+    private TypeResourcesDTO nameId;
+    private ResourceDetailsDTO detailsId;
+    private UsersDTO usersId;
 }

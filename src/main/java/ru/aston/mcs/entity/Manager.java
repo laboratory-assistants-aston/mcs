@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,7 +36,7 @@ public class Manager {
     @Column(name = "users_id")
     @OneToMany
     @JoinColumn(name = "manager_id")
-    private List<User> userList;
+    private List<Users> userList;
 
     @Column(name = "email")
     private String email;

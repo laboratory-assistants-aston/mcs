@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
-public class UsersDto {
+public class UsersDTO {
     private Long id;
     private GenderType gender;
     private String name;
@@ -21,6 +21,6 @@ public class UsersDto {
     private String address;
     private String code;
     private List<Resource> resourceId;
-    private PassportDataDto passportId;
+    private UserPassportDataDTO passportId;
     private Roles role;
 }

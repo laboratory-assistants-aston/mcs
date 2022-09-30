@@ -1,4 +1,4 @@
-package ru.aston.mcs.service.impl;
+package ru.aston.mcs.service.Impl;
 
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.service.ResourceDetailsService;
@@ -24,6 +24,7 @@ public class ResourceDetailsServiceImpl implements ResourceDetailsService {
     }
 
     @Override
+    @Transactional
     public void saveResourceDetails(ResourceDetails resourceDetails) {
         resourceDetailsRepository.save(resourceDetails);
     }

@@ -32,8 +32,7 @@ public class UserPassportData {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    public UserPassportData(String passportNumber, String series, Date dateOfIssue, String nationality, Date birthDate) {
-        this.passportNumber = passportNumber;
+    public UserPassportData(String series, Date dateOfIssue, String nationality, Date birthDate) {
         this.series = series;
         this.expireDate = dateOfIssue;
         this.nationality = nationality;

@@ -27,7 +27,7 @@ public class Resource {
     private TypeResources nameId;
     @OneToOne
     @JoinColumn(name = "details_id", nullable = false)
-    private DetailsResources detailsId;
+    private ResourceDetails detailsId;
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Users usersId;

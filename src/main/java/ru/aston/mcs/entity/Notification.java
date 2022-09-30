@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-// Need to import the right User and Manager
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,13 +22,13 @@ public class Notification {
 
     @Column(name = "user_id")
     @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
-    private User user;
+    private Users user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "managerId")
     private Manager manager;
 
-    public Notification(String text, User user, Manager manager) {
+    public Notification(String text, Users user, Manager manager) {
         this.text = text;
         this.user = user;
         this.manager = manager;
