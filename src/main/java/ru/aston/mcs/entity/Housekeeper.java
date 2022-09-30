@@ -18,9 +18,8 @@ public class Housekeeper {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "role_id")
-    @OneToOne
-    @JoinColumn(name = "housekeeper_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_id", nullable = false)
     private Role role;
 
     @Column(name = "name")
