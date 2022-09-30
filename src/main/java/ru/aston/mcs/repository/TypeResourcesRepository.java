@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.aston.mcs.entity.TypeResources;
 
 @Repository
-public interface TypeResourcesRepository extends JpaRepository<TypeResources, Integer> {
+public interface TypeResourcesRepository extends JpaRepository<TypeResources, Long> {
 }

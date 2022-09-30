@@ -1,9 +1,10 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.service.ResourceDetailsService;
 import ru.aston.mcs.entity.ResourceDetails;
 import ru.aston.mcs.repository.ResourceDetailsRepository;
+import ru.aston.mcs.service.ResourceDetailsService;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -31,17 +32,17 @@ public class ResourceDetailsServiceImpl implements ResourceDetailsService {
 
     @Override
     @Transactional
-    public void deleteResourceDetails(int detailsId) {
+    public void deleteResourceDetails(Long detailsId) {
         resourceDetailsRepository.deleteById(detailsId);
     }
 
     @Override
     @Transactional
-    public ResourceDetails getResourceDetails(int detailsId) {
+    public ResourceDetails getResourceDetails(Long detailsId) {
         ResourceDetails resourceDetails = null;
         Optional<ResourceDetails> resourceDetailsOptional = resourceDetailsRepository.findById(detailsId);
 
-        if (resourceDetailsOptional.isPresent()){
+        if (resourceDetailsOptional.isPresent()) {
             resourceDetails = resourceDetailsOptional.get();
         }
         return resourceDetails;

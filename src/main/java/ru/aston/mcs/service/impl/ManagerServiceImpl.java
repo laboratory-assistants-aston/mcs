@@ -1,13 +1,15 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.repository.ManagerRepository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.ManagerDTO;
 import ru.aston.mcs.mapper.ManagerMapper;
+import ru.aston.mcs.repository.ManagerRepository;
 import ru.aston.mcs.service.ManagerService;
 
 @Service
+@Transactional
 public class ManagerServiceImpl implements ManagerService {
     @Autowired
     ManagerRepository managerRepository;
@@ -21,12 +23,12 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public void deleteManager(int managerId) {
+    public void deleteManager(Long managerId) {
         managerRepository.deleteById(managerId);
     }
 
     @Override
-    public ManagerDTO getManager(int managerId) {
+    public ManagerDTO getManager(Long managerId) {
         return managerMapper.managerInManagerDTO(managerRepository.findById(managerId).orElseThrow(RuntimeException::new));
     }
 }

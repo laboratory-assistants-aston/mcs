@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.aston.mcs.entity.Housekeeper;
 
 @Repository
-public interface HousekeeperRepository extends JpaRepository<Housekeeper, Integer> {
+public interface HousekeeperRepository extends JpaRepository<Housekeeper, Long> {
 }

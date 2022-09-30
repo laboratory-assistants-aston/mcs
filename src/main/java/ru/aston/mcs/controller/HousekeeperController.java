@@ -13,17 +13,17 @@ public class HousekeeperController {
     private HousekeeperService housekeeperService;
 
     @GetMapping("/{id}")
-    public HousekeeperDTO getHousekeeper(@PathVariable int id){
+    public HousekeeperDTO getHousekeeper(@PathVariable Long id) {
         return housekeeperService.getHousekeeper(id);
     }
 
     @PostMapping("/")
-    public void addNewHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO){
+    public void addNewHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO) {
         housekeeperService.addAndSaveHousekeeper(housekeeperDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteHousekeeper(@PathVariable int id){
+    public void deleteHousekeeper(@PathVariable Long id) {
         housekeeperService.deleteHousekeeper(id);
     }
 }

@@ -1,15 +1,12 @@
 package ru.aston.mcs.service;
 
 import ru.aston.mcs.dto.ManagerDTO;
-import ru.aston.mcs.entity.Manager;
-
-import java.util.List;
 
 public interface ManagerService {
 
     void saveManager(ManagerDTO managerDTO);
 
-    void deleteManager(int managerId);
+    void deleteManager(Long managerId);
 
-    ManagerDTO getManager(int managerId);
+    ManagerDTO getManager(Long managerId);
 }

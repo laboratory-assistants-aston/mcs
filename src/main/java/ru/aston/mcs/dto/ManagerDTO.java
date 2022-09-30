@@ -1,19 +1,20 @@
 package ru.aston.mcs.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import ru.aston.mcs.entity.Role;
 
 import java.util.List;
 
-@Data
-@Builder
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ManagerDTO {
-    private int id;
+    private Long id;
     private String name;
     private String surname;
-    private RoleDTO role;
+    private Role role;
     private List<ResourcesDTO> resourceList;
     private List<UsersDTO> userList;
     private String email;

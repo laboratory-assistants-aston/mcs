@@ -1,13 +1,17 @@
 package ru.aston.mcs.dto;
 
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ResourceDetailsDTO {
-    private Integer detailsId;
+    private Long detailsId;
     private Date startTime;
     private Date endTime;
     private String information;

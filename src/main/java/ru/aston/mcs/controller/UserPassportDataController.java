@@ -1,9 +1,7 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.UserPassportDataDTO;
-import ru.aston.mcs.entity.ResourceDetails;
 import ru.aston.mcs.entity.UserPassportData;
 import ru.aston.mcs.mapper.UserPassportDataMapper;
 import ru.aston.mcs.service.UserPassportDataService;
@@ -23,7 +21,7 @@ public class UserPassportDataController {
     }
 
     @GetMapping("/")
-    public List<UserPassportData> showAllUserPassportDatas(){
+    public List<UserPassportData> showAllUserPassportDatas() {
 
         List<UserPassportData> allUserPassportDatas = userPassportDataService.getAllUserPassportDatas();
 
@@ -31,7 +29,7 @@ public class UserPassportDataController {
     }
 
     @GetMapping("/{id}")
-    public UserPassportDataDTO getUserPassportData(@PathVariable int id){
+    public UserPassportDataDTO getUserPassportData(@PathVariable Long id) {
 
         UserPassportData userPassportData = userPassportDataService.getUserPassportData(String.valueOf(id));
 
@@ -39,7 +37,7 @@ public class UserPassportDataController {
     }
 
     @PostMapping("/")
-    public UserPassportDataDTO addNewUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO){
+    public UserPassportDataDTO addNewUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
 
         UserPassportData userPassportData = userPassportDataMapper.userPassportDataDtoInUserPassportData(userPassportDataDTO);
         userPassportDataService.saveUserPassportData(userPassportData);
@@ -48,7 +46,7 @@ public class UserPassportDataController {
     }
 
     @PutMapping("/")
-    public UserPassportDataDTO updateUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO){
+    public UserPassportDataDTO updateUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
 
         UserPassportData userPassportData = userPassportDataMapper.userPassportDataDtoInUserPassportData(userPassportDataDTO);
         userPassportDataService.saveUserPassportData(userPassportData);
@@ -57,7 +55,7 @@ public class UserPassportDataController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUserPassportData(@PathVariable int id){
+    public String deleteUserPassportData(@PathVariable Long id) {
 
         userPassportDataService.deleteUserPassportData(String.valueOf(id));
 
