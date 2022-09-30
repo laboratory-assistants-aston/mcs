@@ -1,16 +1,16 @@
 package ru.aston.mcs.service;
 
 
-import ru.aston.mcs.entity.UserPassportData;
+import ru.aston.mcs.dto.UserPassportDataDTO;
 
 import java.util.List;
 
 public interface UserPassportDataService {
-    List<UserPassportData> getAllUserPassportDatas();
+    List<UserPassportDataDTO> getAllUserPassportDatas();
 
-    void saveUserPassportData(UserPassportData userPassportData);
+    void addAndSaveUserPassportData(UserPassportDataDTO userPassportDataDTO);
 
     void deleteUserPassportData(String userPassportDataId);
 
-    UserPassportData getUserPassportData(String userPassportDataId);
+    UserPassportDataDTO getUserPassportData(String userPassportDataId);
 }

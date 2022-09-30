@@ -1,13 +1,15 @@
 package ru.aston.mcs.dto;
 
-import lombok.*;
-import ru.aston.mcs.entity.Status;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ru.aston.mcs.entity.enums.Status;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
 public class ResourcesDTO {
     private Long id;
     private Integer duringTime;

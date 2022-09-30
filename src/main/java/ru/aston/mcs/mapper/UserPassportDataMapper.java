@@ -4,9 +4,15 @@ import org.mapstruct.Mapper;
 import ru.aston.mcs.dto.UserPassportDataDTO;
 import ru.aston.mcs.entity.UserPassportData;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserPassportDataMapper {
-    UserPassportData userPassportDataDtoInUserPassportData(UserPassportDataDTO userPassportDataDTO);
+    UserPassportData toModel(UserPassportDataDTO userPassportDataDTO);
 
-    UserPassportDataDTO userPassportDataInUserPassportDataDTO(UserPassportData userPassportData);
+    UserPassportDataDTO toDTO(UserPassportData userPassportData);
+
+    List<UserPassportData> toModelList(List<UserPassportDataDTO> userPassportDataDTO);
+
+    List<UserPassportDataDTO> toDTOList(List<UserPassportData> userPassportData);
 }

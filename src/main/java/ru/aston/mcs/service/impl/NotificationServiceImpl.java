@@ -1,53 +1,48 @@
 package ru.aston.mcs.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.mapper.NotificationMapper;
+import ru.aston.mcs.repository.NotificationRepository;
 import ru.aston.mcs.service.NotificationService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class NotificationServiceImpl implements NotificationService {
 
-    @Autowired
-    NotificationRepository notificationRepository;
+    private final NotificationRepository notificationRepository;
+    private final NotificationMapper notificationMapper;
 
-    @Override
-    @Transactional
-    public List<Notification> getAllNotifications() {
-        return notificationRepository.findAll();
+    public NotificationServiceImpl(NotificationRepository notificationRepository, NotificationMapper notificationMapper) {
+        this.notificationRepository = notificationRepository;
+        this.notificationMapper = notificationMapper;
     }
 
     @Override
-    @Transactional
-    public void saveNotification(Notification notification) {
-        notificationRepository.save(notification);
+
+    public List<NotificationDTO> getAllNotifications() {
+        return notificationMapper.toDTOList(notificationRepository.findAll());
     }
 
     @Override
-    @Transactional
+    public void addAndSaveNotification(NotificationDTO notificationDTO) {
+
+        notificationRepository.save(
+                notificationMapper.toModel(notificationDTO));
+    }
+
+    @Override
     public void deleteNotification(Long notificationId) {
         notificationRepository.deleteById(notificationId);
     }
 
     @Override
-    @Transactional
-/*
-    public Notification getNotification(int notificationId) {
-        Notification notification = null;
-        Optional<Notification> notificationOptional = notificationRepository.findById(notificationId);
-
-        if (notificationOptional.isPresent()){
-*/
-    public Notification getNotification(Long notificationId) {
-        Notification notification = null;
-        Optional<Notification> notificationOptional = notificationRepository.findById(notificationId);
-
-        if (notificationOptional.isPresent()) {
-            notification = notificationOptional.get();
-        }
-        return notification;
+    public NotificationDTO getNotification(Long notificationId) {
+        return notificationMapper.toDTO(
+                notificationRepository.findById(notificationId)
+                        .orElseThrow(RuntimeException::new));
     }
 }

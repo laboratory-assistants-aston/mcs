@@ -1,50 +1,48 @@
 package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.entity.TypeResources;
+import ru.aston.mcs.dto.TypeResourcesDTO;
+import ru.aston.mcs.mapper.TypeResourcesMapper;
 import ru.aston.mcs.repository.TypeResourcesRepository;
 import ru.aston.mcs.service.TypeResourcesService;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class TypeResourcesServicesImpl implements TypeResourcesService {
 
-    public final TypeResourcesRepository typeResourcesRepository;
+    private final TypeResourcesRepository typeResourcesRepository;
+    private final TypeResourcesMapper typeResourcesMapper;
 
-    public TypeResourcesServicesImpl(TypeResourcesRepository typeResourcesRepository) {
+    public TypeResourcesServicesImpl(TypeResourcesRepository typeResourcesRepository, TypeResourcesMapper typeResourcesMapper) {
         this.typeResourcesRepository = typeResourcesRepository;
+        this.typeResourcesMapper = typeResourcesMapper;
     }
 
     @Override
-    @Transactional
-    public List<TypeResources> getAllTypeResources() {
-        return typeResourcesRepository.findAll();
+    public List<TypeResourcesDTO> getAllTypeResources() {
+        return typeResourcesMapper.toDTOList(typeResourcesRepository.findAll());
     }
 
     @Override
-    @Transactional
-    public void saveTypeResources(TypeResources typeResources) {
-        typeResourcesRepository.save(typeResources);
+    public TypeResourcesDTO getTypeResources(Long nameId) {
+
+        return typeResourcesMapper.toDTO(
+                typeResourcesRepository.findById(nameId)
+                        .orElseThrow(RuntimeException::new));
     }
 
     @Override
-    @Transactional
+    public void addAndSaveTypeResources(TypeResourcesDTO typeResourcesDTO) {
+
+        typeResourcesRepository.save(typeResourcesMapper.toModel(typeResourcesDTO));
+    }
+
+    @Override
     public void deleteTypeResources(Long nameId) {
         typeResourcesRepository.deleteById(nameId);
     }
 
-    @Override
-    @Transactional
-    public TypeResources getTypeResources(Long nameId) {
-        TypeResources typeResources = null;
-        Optional<TypeResources> typeResourcesOptional = typeResourcesRepository.findById(nameId);
-
-        if (typeResourcesOptional.isPresent()) {
-            typeResources = typeResourcesOptional.get();
-        }
-        return typeResources;
-    }
 }

@@ -1,15 +1,16 @@
 package ru.aston.mcs.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
-
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
 public class UserPassportDataDTO {
     private String passportNumber;
     private String series;

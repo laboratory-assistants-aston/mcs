@@ -1,64 +1,54 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import ru.aston.mcs.dto.UserPassportDataDTO;
-import ru.aston.mcs.entity.UserPassportData;
-import ru.aston.mcs.mapper.UserPassportDataMapper;
 import ru.aston.mcs.service.UserPassportDataService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/userpassportdatas")
+@RequestMapping("/api/user-passport-datas")
 public class UserPassportDataController {
 
-    public UserPassportDataService userPassportDataService;
-    public UserPassportDataMapper userPassportDataMapper;
+    public final UserPassportDataService userPassportDataService;
 
-    public UserPassportDataController(UserPassportDataService userPassportDataService, UserPassportDataMapper userPassportDataMapper) {
+    public UserPassportDataController(UserPassportDataService userPassportDataService) {
         this.userPassportDataService = userPassportDataService;
-        this.userPassportDataMapper = userPassportDataMapper;
     }
 
     @GetMapping("/")
-    public List<UserPassportData> showAllUserPassportDatas() {
+    public List<UserPassportDataDTO> getAllUserPassportDatas() {
 
-        List<UserPassportData> allUserPassportDatas = userPassportDataService.getAllUserPassportDatas();
-
-        return allUserPassportDatas;
+        return userPassportDataService.getAllUserPassportDatas();
     }
 
     @GetMapping("/{id}")
     public UserPassportDataDTO getUserPassportData(@PathVariable Long id) {
 
-        UserPassportData userPassportData = userPassportDataService.getUserPassportData(String.valueOf(id));
-
-        return userPassportDataMapper.userPassportDataInUserPassportDataDTO(userPassportData);
+        return userPassportDataService.getUserPassportData(String.valueOf(id));
     }
 
     @PostMapping("/")
-    public UserPassportDataDTO addNewUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
+    public void addNewUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
 
-        UserPassportData userPassportData = userPassportDataMapper.userPassportDataDtoInUserPassportData(userPassportDataDTO);
-        userPassportDataService.saveUserPassportData(userPassportData);
-
-        return userPassportDataDTO;
+        userPassportDataService.addAndSaveUserPassportData(userPassportDataDTO);
     }
 
     @PutMapping("/")
-    public UserPassportDataDTO updateUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
-
-        UserPassportData userPassportData = userPassportDataMapper.userPassportDataDtoInUserPassportData(userPassportDataDTO);
-        userPassportDataService.saveUserPassportData(userPassportData);
-
-        return userPassportDataDTO;
+    public void updateUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
+        userPassportDataService.addAndSaveUserPassportData(userPassportDataDTO);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUserPassportData(@PathVariable Long id) {
+    public void deleteUserPassportData(@PathVariable Long id) {
 
         userPassportDataService.deleteUserPassportData(String.valueOf(id));
-
-        return "UserPassportData " + id + " was deleted";
     }
 }

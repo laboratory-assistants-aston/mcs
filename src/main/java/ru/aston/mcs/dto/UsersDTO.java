@@ -1,16 +1,21 @@
 package ru.aston.mcs.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import ru.aston.mcs.entity.enums.GenderType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import ru.aston.mcs.entity.Resource;
+import ru.aston.mcs.entity.enums.GenderType;
+import ru.aston.mcs.entity.enums.Role;
 
 import java.util.List;
 
-@Data
-//@Builder
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+//@Builder
 public class UsersDTO {
     private Long id;
     private GenderType gender;

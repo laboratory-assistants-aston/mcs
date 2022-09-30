@@ -1,6 +1,9 @@
 package ru.aston.mcs.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.aston.mcs.entity.Manager;
 import ru.aston.mcs.entity.Users;
 
@@ -9,7 +12,6 @@ import ru.aston.mcs.entity.Users;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
 public class NotificationDTO {
     private Long notificationId;
     private String text;

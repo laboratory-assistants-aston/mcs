@@ -1,9 +1,14 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import ru.aston.mcs.dto.NotificationDTO;
-import ru.aston.mcs.entity.Notification;
-import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.service.NotificationService;
 
 import java.util.List;
@@ -13,52 +18,38 @@ import java.util.List;
 public class NotificationController {
 
     private NotificationService notificationService;
-    private NotificationMapper notificationMapper;
 
-    public NotificationController(NotificationService notificationService, NotificationMapper notificationMapper) {
+    public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
-        this.notificationMapper = notificationMapper;
     }
 
     @GetMapping("/")
-    public List<Notification> showAllNotifications() {
+    public List<NotificationDTO> showAllNotifications() {
 
-        List<Notification> allNotifications = notificationService.getAllNotifications();
-
-        return allNotifications;
+        return notificationService.getAllNotifications();
     }
 
     @GetMapping("/{id}")
     public NotificationDTO getNotification(@PathVariable Long id) {
 
-        Notification notification = notificationService.getNotification(id);
-
-        return notificationMapper.notificationInNotificationDTO(notification);
+        return notificationService.getNotification(id);
     }
 
     @PostMapping("/")
-    public NotificationDTO addNewNotification(@RequestBody NotificationDTO notificationDTO) {
+    public void addNewNotification(@RequestBody NotificationDTO notificationDTO) {
 
-        Notification notification = notificationMapper.notificationDtoInNotification(notificationDTO);
-        notificationService.saveNotification(notification);
-
-        return notificationDTO;
+        notificationService.addAndSaveNotification(notificationDTO);
+        ;
     }
 
     @PutMapping("/")
-    public NotificationDTO updateNotification(@RequestBody NotificationDTO notificationDTO) {
-
-        Notification notification = notificationMapper.notificationDtoInNotification(notificationDTO);
-        notificationService.saveNotification(notification);
-
-        return notificationDTO;
+    public void updateNotification(@RequestBody NotificationDTO notificationDTO) {
+        notificationService.addAndSaveNotification(notificationDTO);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteNotification(@PathVariable Long id) {
+    public void deleteNotification(@PathVariable Long id) {
 
         notificationService.deleteNotification(id);
-
-        return "Notification " + id + "was deleted";
     }
 }

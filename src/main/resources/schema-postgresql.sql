@@ -1,32 +1,32 @@
 CREATE TABLE "users"
 (
-    "user_id"      INTEGER        NOT NULL,
-    "name"         VARCHAR(255)   NOT NULL,
-    "surname"      VARCHAR(255)   NOT NULL,
-    "phone"        VARCHAR(255)   NOT NULL,
-    "address"      VARCHAR(255)   NOT NULL,
-    "code"         INTEGER        NOT NULL,
-    "email"        VARCHAR(255)   NOT NULL,
-    "gender"       VARCHAR(255)   CHECK
-        ("gender" IN ('MALE','FEMALE')) NOT NULL,
-    "resources_id" INTEGER        NOT NULL,
-    "passport_id"  VARCHAR(255)   NOT NULL,
-    "role"      VARCHAR(255) CHECK
-        ("role" IN ('HOUSEKEEPER','MANAGER','USER')) NOT NULL,
-    "balance"      NUMERIC(10, 2) NOT NULL
+    "user_id"      INTEGER                             NOT NULL,
+    "name"         VARCHAR(255)                        NOT NULL,
+    "surname"      VARCHAR(255)                        NOT NULL,
+    "phone"        VARCHAR(255)                        NOT NULL,
+    "address"      VARCHAR(255)                        NOT NULL,
+    "code"         INTEGER                             NOT NULL,
+    "email"        VARCHAR(255)                        NOT NULL,
+    "gender"       VARCHAR(255) CHECK
+        ("gender" IN ('MALE', 'FEMALE'))               NOT NULL,
+    "resources_id" INTEGER                             NOT NULL,
+    "passport_id"  VARCHAR(255)                        NOT NULL,
+    "role"         VARCHAR(255) CHECK
+        ("role" IN ('HOUSEKEEPER', 'MANAGER', 'USER')) NOT NULL,
+    "balance"      NUMERIC(10, 2)                      NOT NULL
 );
 ALTER TABLE
     "users"
     ADD PRIMARY KEY ("user_id");
 CREATE TABLE "resource"
 (
-    "resource_id" INTEGER  NOT NULL,
-    "name_id"     INTEGER  NOT NULL,
-    "during_time" INTEGER  NOT NULL,
-    "user_id"     INTEGER  NOT NULL,
-    "details_id"  INTEGER  NOT NULL,
+    "resource_id" INTEGER                                  NOT NULL,
+    "name_id"     INTEGER                                  NOT NULL,
+    "during_time" INTEGER                                  NOT NULL,
+    "user_id"     INTEGER                                  NOT NULL,
+    "details_id"  INTEGER                                  NOT NULL,
     "status"      VARCHAR(255) CHECK
-        ("status" IN ('LOCKED','BOOKED','READY_TO_USE')) NOT NULL
+        ("status" IN ('LOCKED', 'BOOKED', 'READY_TO_USE')) NOT NULL
 );
 ALTER TABLE
     "resource"
@@ -63,26 +63,26 @@ ALTER TABLE
     ADD PRIMARY KEY ("passport_number");
 CREATE TABLE "managers"
 (
-    "manager_id"   INTEGER      NOT NULL,
-    "name"         VARCHAR(255) NOT NULL,
-    "surname"      VARCHAR(255) NOT NULL,
-    "role"      VARCHAR(255) CHECK
-        ("role" IN ('HOUSEKEEPER','MANAGER','USER')) NOT NULL,
-    "resources_id" INTEGER      NOT NULL,
-    "users_id"     INTEGER      NOT NULL,
-    "email"        VARCHAR(255) NOT NULL
+    "manager_id"   INTEGER                             NOT NULL,
+    "name"         VARCHAR(255)                        NOT NULL,
+    "surname"      VARCHAR(255)                        NOT NULL,
+    "role"         VARCHAR(255) CHECK
+        ("role" IN ('HOUSEKEEPER', 'MANAGER', 'USER')) NOT NULL,
+    "resources_id" INTEGER                             NOT NULL,
+    "users_id"     INTEGER                             NOT NULL,
+    "email"        VARCHAR(255)                        NOT NULL
 );
 ALTER TABLE
     "managers"
     ADD PRIMARY KEY ("manager_id");
 CREATE TABLE "housekeeper"
 (
-    "housekeeper_id" INTEGER      NOT NULL,
-    "role"      VARCHAR(255) CHECK
-        ("role" IN ('HOUSEKEEPER','MANAGER','USER')) NOT NULL,
-    "name"           VARCHAR(255) NOT NULL,
-    "surname"        VARCHAR(255) NOT NULL,
-    "email"          VARCHAR(255) NOT NULL
+    "housekeeper_id" INTEGER                           NOT NULL,
+    "role"           VARCHAR(255) CHECK
+        ("role" IN ('HOUSEKEEPER', 'MANAGER', 'USER')) NOT NULL,
+    "name"           VARCHAR(255)                      NOT NULL,
+    "surname"        VARCHAR(255)                      NOT NULL,
+    "email"          VARCHAR(255)                      NOT NULL
 );
 ALTER TABLE
     "housekeeper"
@@ -120,9 +120,6 @@ ALTER TABLE
 ALTER TABLE
     "notifications"
     ADD CONSTRAINT "notifications_manager_id_foreign" FOREIGN KEY ("manager_id") REFERENCES "managers" ("manager_id");
-ALTER TABLE
-    "notifications"
-    ADD CONSTRAINT "notifications_user_id_foreign" FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 ALTER TABLE
     "notifications"
     ADD CONSTRAINT "notifications_user_id_foreign" FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");

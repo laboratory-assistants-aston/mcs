@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 
@@ -33,10 +35,4 @@ public class UserPassportData {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    public UserPassportData(String series, Date dateOfIssue, String nationality, Date birthDate) {
-        this.series = series;
-        this.expireDate = dateOfIssue;
-        this.nationality = nationality;
-        this.birthDate = birthDate;
-    }
 }

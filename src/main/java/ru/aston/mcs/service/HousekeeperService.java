@@ -1,10 +1,14 @@
 package ru.aston.mcs.service;
 
 
-public interface HousekeeperService {
-    List<Housekeeper> getAllHousekeepers();
+import ru.aston.mcs.dto.HousekeeperDTO;
 
-    void addAndSaveHousekeeper(Housekeeper housekeeper);
+import java.util.List;
+
+public interface HousekeeperService {
+    List<HousekeeperDTO> getAllHousekeepers();
+
+    void addAndSaveHousekeeper(HousekeeperDTO housekeeperDTO);
 
     void deleteHousekeeper(Long housekeeperId);
 

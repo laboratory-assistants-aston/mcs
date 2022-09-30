@@ -1,47 +1,49 @@
 package ru.aston.mcs.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.aston.mcs.dto.UserPassportDataDTO;
+import ru.aston.mcs.mapper.UserPassportDataMapper;
+import ru.aston.mcs.repository.UserPassportDataRepository;
 import ru.aston.mcs.service.UserPassportDataService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class UserPassportDataServiceImpl implements UserPassportDataService {
 
-    @Autowired
-    UserPassportDataRepository userPassportDataRepository;
+    private final UserPassportDataRepository userPassportDataRepository;
 
-    @Override
-    @Transactional
-    public List<UserPassportData> getAllUserPassportDatas() {
-        return userPassportDataRepository.findAll();
+    private final UserPassportDataMapper userPassportDataMapper;
+
+    public UserPassportDataServiceImpl(UserPassportDataRepository userPassportDataRepository, UserPassportDataMapper userPassportDataMapper) {
+        this.userPassportDataRepository = userPassportDataRepository;
+        this.userPassportDataMapper = userPassportDataMapper;
     }
 
     @Override
-    @Transactional
-    public void saveUserPassportData(UserPassportData userPassportData) {
-        userPassportDataRepository.save(userPassportData);
+    public List<UserPassportDataDTO> getAllUserPassportDatas() {
+        return userPassportDataMapper.toDTOList(
+                userPassportDataRepository.findAll());
     }
 
     @Override
-    @Transactional
+    public void addAndSaveUserPassportData(UserPassportDataDTO userPassportDataDTO) {
+        userPassportDataRepository.save(
+                userPassportDataMapper.toModel(userPassportDataDTO));
+    }
+
+    @Override
     public void deleteUserPassportData(String userPassportDataId) {
         userPassportDataRepository.deleteById(userPassportDataId);
     }
 
     @Override
-    @Transactional
-    public UserPassportData getUserPassportData(String userPassportDataId) {
-        UserPassportData userPassportData = null;
-        Optional<UserPassportData> userPassportDataOptional = userPassportDataRepository.findById(userPassportDataId);
+    public UserPassportDataDTO getUserPassportData(String userPassportDataId) {
+        return userPassportDataMapper.toDTO(
+                userPassportDataRepository.findById(userPassportDataId)
+                        .orElseThrow(RuntimeException::new));
 
-        if (userPassportDataOptional.isPresent()){
-            userPassportData = userPassportDataOptional.get();
-        }
-
-        return userPassportData;
     }
 }

@@ -1,11 +1,15 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.entity.Users;
+import ru.aston.mcs.dto.UsersDTO;
+
+import java.util.List;
 
 public interface UsersService {
-    Users getUser(Long id);
+    List<UsersDTO> getAllUser();
 
-    void addAndSaveUser(Users user);
+    UsersDTO getUser(Long id);
+
+    void createUser(UsersDTO user);
 
     void deleteUser(Long id);
 }

@@ -1,6 +1,5 @@
 package ru.aston.mcs.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.HousekeeperDTO;
@@ -14,39 +13,34 @@ import java.util.List;
 @Transactional
 public class HousekeeperServiceImpl implements HousekeeperService {
 
-    @Autowired
-    HousekeeperRepository housekeeperRepository;
+    private final HousekeeperRepository housekeeperRepository;
+    private final HousekeeperMapper housekeeperMapper;
 
-    @Override
-    @Transactional
-    public Housekeeper getHousekeeper(int housekeeperId) {
-        return housekeeperRepository.findById(housekeeperId).orElse(null);
-    }
-
-    @Override
-    public List<Housekeeper> getAllHousekeepers() {
-        return housekeeperRepository.findAll();
-    }
-
-   @Override
-/*
-    @Transactional
-    public void addAndSaveHousekeeper(Housekeeper housekeeper) {
-        housekeeperRepository.save(housekeeper);
-    }
-
-    @Override
-    @Transactional
-    public void deleteHousekeeper(int housekeeperId) {
-        housekeeperRepository.deleteById(housekeeperId);
-
-    public void deleteHousekeeper(Long housekeeperId) {
-        housekeeperRepository.deleteById(housekeeperId);
+    public HousekeeperServiceImpl(HousekeeperRepository housekeeperRepository, HousekeeperMapper housekeeperMapper) {
+        this.housekeeperRepository = housekeeperRepository;
+        this.housekeeperMapper = housekeeperMapper;
     }
 
     @Override
     public HousekeeperDTO getHousekeeper(Long housekeeperId) {
-        return housekeeperMapper.housekeeperInHousekeeperDto(housekeeperRepository.findById(housekeeperId).orElseThrow(RuntimeException::new));
-*/
+        return housekeeperMapper.toDTO(
+                housekeeperRepository.findById(housekeeperId)
+                        .orElse(null));
+    }
+
+    @Override
+    public List<HousekeeperDTO> getAllHousekeepers() {
+        return housekeeperMapper.toDTOList(housekeeperRepository.findAll());
+    }
+
+    @Override
+    public void addAndSaveHousekeeper(HousekeeperDTO housekeeperDTO) {
+        housekeeperRepository.save(housekeeperMapper.toModel(housekeeperDTO));
+
+    }
+
+    @Override
+    public void deleteHousekeeper(Long housekeeperId) {
+        housekeeperRepository.deleteById(housekeeperId);
     }
 }

@@ -4,9 +4,15 @@ import org.mapstruct.Mapper;
 import ru.aston.mcs.dto.ManagerDTO;
 import ru.aston.mcs.entity.Manager;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ManagerMapper {
-    Manager managerDtoInManager(ManagerDTO managerDTO);
+    Manager toModel(ManagerDTO managerDTO);
 
-    ManagerDTO managerInManagerDTO(Manager manager);
+    ManagerDTO toDTO(Manager manager);
+
+    List<Manager> toModelList(List<ManagerDTO> resourceDetailsDTOList);
+
+    List<ManagerDTO> toDTOList(List<Manager> modelList);
 }

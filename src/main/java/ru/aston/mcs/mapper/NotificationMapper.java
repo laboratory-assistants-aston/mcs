@@ -4,9 +4,15 @@ import org.mapstruct.Mapper;
 import ru.aston.mcs.dto.NotificationDTO;
 import ru.aston.mcs.entity.Notification;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface NotificationMapper {
-    Notification notificationDtoInNotification(NotificationDTO notificationDTO);
+    Notification toModel(NotificationDTO notificationDTO);
 
-    NotificationDTO notificationInNotificationDTO(Notification notification);
+    NotificationDTO toDTO(Notification notification);
+
+    List<Notification> toModelList(List<NotificationDTO> resourceDetailsDTOList);
+
+    List<NotificationDTO> toDTOList(List<Notification> modelList);
 }

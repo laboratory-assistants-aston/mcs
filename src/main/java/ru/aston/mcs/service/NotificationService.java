@@ -1,15 +1,15 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.entity.Notification;
+import ru.aston.mcs.dto.NotificationDTO;
 
 import java.util.List;
 
 public interface NotificationService {
-    List<Notification> getAllNotifications();
+    List<NotificationDTO> getAllNotifications();
 
-    void saveNotification(Notification notification);
+    void addAndSaveNotification(NotificationDTO notification);
 
     void deleteNotification(Long notificationId);
 
-    Notification getNotification(Long notificationId);
+    NotificationDTO getNotification(Long notificationId);
 }

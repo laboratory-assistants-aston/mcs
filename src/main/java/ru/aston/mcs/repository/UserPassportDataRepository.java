@@ -8,4 +8,5 @@ import ru.aston.mcs.entity.UserPassportData;
 
 @Repository
 public interface UserPassportDataRepository extends JpaRepository<UserPassportData, String> {
+
 }

@@ -1,16 +1,16 @@
 package ru.aston.mcs.service;
 
 import ru.aston.mcs.dto.ResourcesDTO;
-import ru.aston.mcs.entity.Resource;
+
+import java.util.List;
 
 public interface ResourcesServices {
-/*    ResourcesDTO getResource(Long id);
 
-    void addAndSaveResource(ResourcesDTO userDto);
+    List<ResourcesDTO> getAllResources();
 
-    void deleteResource(Long id);*/
-    Resource getResource(Long id);
+    ResourcesDTO getResource(Long id);
 
-    void addAndSaveResource(Resource user);
+    void addAndSaveResource(ResourcesDTO resourcesDTO);
+
     void deleteResource(Long id);
 }

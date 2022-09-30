@@ -1,15 +1,15 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.entity.ResourceDetails;
+import ru.aston.mcs.dto.ResourceDetailsDTO;
 
 import java.util.List;
 
 public interface ResourceDetailsService {
-    List<ResourceDetails> getAllResourceDetails();
+    List<ResourceDetailsDTO> getAllResourceDetails();
 
-    void saveResourceDetails(ResourceDetails resourceDetails);
+    void addAndSaveResourceDetails(ResourceDetailsDTO resourceDetailsDTO);
 
     void deleteResourceDetails(Long detailsId);
 
-    ResourceDetails getResourceDetails(Long detailsId);
+    ResourceDetailsDTO getResourceDetails(Long detailsId);
 }

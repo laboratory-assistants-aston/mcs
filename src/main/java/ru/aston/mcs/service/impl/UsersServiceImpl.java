@@ -1,12 +1,13 @@
 package ru.aston.mcs.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.UsersDTO;
 import ru.aston.mcs.mapper.UsersMapper;
 import ru.aston.mcs.repository.UsersRepository;
 import ru.aston.mcs.service.UsersService;
+
+import java.util.List;
 
 @Service
 /*
@@ -34,20 +35,28 @@ public class UsersServiceImpl implements UsersService {
 */
 @Transactional
 public class UsersServiceImpl implements UsersService {
-    @Autowired
-    UsersRepository usersRepository;
-    @Autowired
-    private UsersMapper usersMapper;
 
-    @Override
-    public UsersDTO getUser(Long id) {
-        return usersMapper.usersInUsersDto(usersRepository.findById(id).orElseThrow(RuntimeException::new));
+    private final UsersRepository usersRepository;
+    private final UsersMapper usersMapper;
+
+    public UsersServiceImpl(UsersRepository usersRepository, UsersMapper usersMapper) {
+        this.usersRepository = usersRepository;
+        this.usersMapper = usersMapper;
     }
 
     @Override
-    public void addAndSaveUser(UsersDTO userDto) {
+    public List<UsersDTO> getAllUser() {
+        return usersMapper.toDTOList(usersRepository.findAll());
+    }
 
-        usersRepository.save(usersMapper.usersDtoInUsers(userDto));
+    @Override
+    public UsersDTO getUser(Long id) {
+        return usersMapper.toDTO(usersRepository.findById(id).orElseThrow(RuntimeException::new));
+    }
+
+    @Override
+    public void createUser(UsersDTO userDto) {
+        usersRepository.save(usersMapper.toModel(userDto));
     }
 
     @Override

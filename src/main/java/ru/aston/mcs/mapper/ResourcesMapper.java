@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ResourcesMapper {
-    Resource resourceDtoInResource(ResourcesDTO wordDto);
+    Resource toModel(ResourcesDTO wordDto);
 
-    ResourcesDTO resourceInResourceDto(Resource word);
+    ResourcesDTO toDTO(Resource word);
 
-    List<Resource> listResourceDtoInResourceList(List<ResourcesDTO> wordDtoList);
+    List<Resource> toModelList(List<ResourcesDTO> wordDtoList);
 
-    List<ResourcesDTO> listResourceInResourceDtoList(List<Resource> wordDtoList);
+    List<ResourcesDTO> toDTOList(List<Resource> wordDtoList);
 }
