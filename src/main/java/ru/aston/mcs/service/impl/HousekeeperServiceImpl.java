@@ -1,13 +1,15 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.repository.HousekeeperRepository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.HousekeeperDTO;
 import ru.aston.mcs.mapper.HousekeeperMapper;
+import ru.aston.mcs.repository.HousekeeperRepository;
 import ru.aston.mcs.service.HousekeeperService;
 
 @Service
+@Transactional
 public class HousekeeperServiceImpl implements HousekeeperService {
 
     @Autowired
@@ -22,12 +24,12 @@ public class HousekeeperServiceImpl implements HousekeeperService {
     }
 
     @Override
-    public void deleteHousekeeper(int housekeeperId) {
+    public void deleteHousekeeper(Long housekeeperId) {
         housekeeperRepository.deleteById(housekeeperId);
     }
 
     @Override
-    public HousekeeperDTO getHousekeeper(int housekeeperId) {
+    public HousekeeperDTO getHousekeeper(Long housekeeperId) {
         return housekeeperMapper.housekeeperInHousekeeperDto(housekeeperRepository.findById(housekeeperId).orElseThrow(RuntimeException::new));
     }
 }

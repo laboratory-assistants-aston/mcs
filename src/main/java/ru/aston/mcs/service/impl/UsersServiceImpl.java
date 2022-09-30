@@ -1,13 +1,15 @@
-package ru.aston.mcs.services.impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.UsersDTO;
 import ru.aston.mcs.mapper.UsersMapper;
 import ru.aston.mcs.repository.UsersRepository;
 import ru.aston.mcs.service.UsersService;
 
 @Service
+@Transactional
 public class UsersServiceImpl implements UsersService {
     @Autowired
     UsersRepository usersRepository;

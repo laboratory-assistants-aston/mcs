@@ -1,11 +1,11 @@
 package ru.aston.mcs.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.aston.mcs.service.ResourceDetailsService;
 import ru.aston.mcs.dto.ResourceDetailsDTO;
 import ru.aston.mcs.entity.ResourceDetails;
 import ru.aston.mcs.mapper.ResourceDetailsListMapper;
 import ru.aston.mcs.mapper.ResourceDetailsMapper;
+import ru.aston.mcs.service.ResourceDetailsService;
 
 import java.util.List;
 
@@ -25,15 +25,15 @@ public class ResourceDetailsController {
     }
 
     @GetMapping("/")
-    public List<ResourceDetailsDTO> getAllTypeResources(){
+    public List<ResourceDetailsDTO> getAllTypeResources() {
 
         List<ResourceDetails> allResourceDetails = resourceDetailsService.getAllResourceDetails();
 
-        return  resourceDetailsListMapper.toDTOList(allResourceDetails);
+        return resourceDetailsListMapper.toDTOList(allResourceDetails);
     }
 
     @GetMapping("/{id}")
-    public ResourceDetailsDTO getTypeResources(@PathVariable int id){
+    public ResourceDetailsDTO getTypeResources(@PathVariable Long id) {
 
         ResourceDetails resourceDetails = resourceDetailsService.getResourceDetails(id);
 
@@ -41,21 +41,21 @@ public class ResourceDetailsController {
     }
 
     @PostMapping("/")
-    public ResourceDetailsDTO addTypeResources(@RequestBody ResourceDetailsDTO resourceDetailsDTO){
+    public ResourceDetailsDTO addTypeResources(@RequestBody ResourceDetailsDTO resourceDetailsDTO) {
         ResourceDetails resourceDetails = resourceDetailsMapper.toModel(resourceDetailsDTO);
         resourceDetailsService.saveResourceDetails(resourceDetails);
         return resourceDetailsDTO;
     }
 
     @PutMapping("/")
-    public ResourceDetailsDTO updateTypeResources(@RequestBody ResourceDetailsDTO resourceDetailsDTO){
+    public ResourceDetailsDTO updateTypeResources(@RequestBody ResourceDetailsDTO resourceDetailsDTO) {
         ResourceDetails resourceDetails = resourceDetailsMapper.toModel(resourceDetailsDTO);
         resourceDetailsService.saveResourceDetails(resourceDetails);
         return resourceDetailsDTO;
     }
 
     @DeleteMapping("/{id}")
-    public String deleteTypeResources(@PathVariable int id){
+    public String deleteTypeResources(@PathVariable Long id) {
         resourceDetailsService.deleteResourceDetails(id);
         return "ResourceDetails" + id + "was deleted";
     }

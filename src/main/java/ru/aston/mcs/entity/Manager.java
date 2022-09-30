@@ -1,5 +1,6 @@
 package ru.aston.mcs.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,11 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "managers")
 @Entity
+@AllArgsConstructor
 public class Manager {
     @Id
     @Column(name = "manager_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -25,13 +27,15 @@ public class Manager {
     private String surname;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_id")
+    @Column(name = "role")
     private Role role;
 
+    @Column(name = "resources_id")
     @OneToMany
     @JoinColumn(name = "manager_id")
     private List<Resource> resourceList;
 
+    @Column(name = "users_id")
     @OneToMany
     @JoinColumn(name = "manager_id")
     private List<Users> userList;

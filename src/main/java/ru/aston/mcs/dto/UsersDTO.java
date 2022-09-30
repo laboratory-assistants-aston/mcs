@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import ru.aston.mcs.entity.GenderType;
 import ru.aston.mcs.entity.Resource;
+import ru.aston.mcs.entity.Role;
 
 import java.util.List;
 
@@ -22,5 +23,5 @@ public class UsersDTO {
     private String code;
     private List<Resource> resourceId;
     private UserPassportDataDTO passportId;
-    private Roles role;
+    private Role role;
 }

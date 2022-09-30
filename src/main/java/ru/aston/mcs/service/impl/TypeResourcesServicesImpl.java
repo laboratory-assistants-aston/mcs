@@ -1,9 +1,9 @@
 package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.service.TypeResourcesService;
 import ru.aston.mcs.entity.TypeResources;
 import ru.aston.mcs.repository.TypeResourcesRepository;
+import ru.aston.mcs.service.TypeResourcesService;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -32,17 +32,17 @@ public class TypeResourcesServicesImpl implements TypeResourcesService {
 
     @Override
     @Transactional
-    public void deleteTypeResources(int nameId) {
+    public void deleteTypeResources(Long nameId) {
         typeResourcesRepository.deleteById(nameId);
     }
 
     @Override
     @Transactional
-    public TypeResources getTypeResources(int nameId) {
+    public TypeResources getTypeResources(Long nameId) {
         TypeResources typeResources = null;
         Optional<TypeResources> typeResourcesOptional = typeResourcesRepository.findById(nameId);
 
-        if (typeResourcesOptional.isPresent()){
+        if (typeResourcesOptional.isPresent()) {
             typeResources = typeResourcesOptional.get();
         }
         return typeResources;

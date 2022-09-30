@@ -1,10 +1,14 @@
 package ru.aston.mcs.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TypeResourcesDTO {
-    private Integer nameId;
+    private Long nameId;
     private String name;
     private Double cost;
 }

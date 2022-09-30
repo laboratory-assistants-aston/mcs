@@ -1,13 +1,15 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.ResourcesDTO;
 import ru.aston.mcs.mapper.ResourcesMapper;
 import ru.aston.mcs.repository.ResourcesRepository;
 import ru.aston.mcs.service.ResourcesServices;
 
 @Service
+@Transactional
 public class ResourcesServicesImpl implements ResourcesServices {
 
     @Autowired
