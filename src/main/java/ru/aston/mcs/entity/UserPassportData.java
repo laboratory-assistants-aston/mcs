@@ -19,7 +19,6 @@ public class UserPassportData {
 
     @Id
     @Column(name = "passport_number")
-    @OneToOne(mappedBy = "passportId")
     private String passportNumber;
 
     @Column

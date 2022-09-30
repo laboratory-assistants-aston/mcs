@@ -22,8 +22,8 @@ public class Notification {
     @Column
     private String text;
 
-    @Column(name = "user_id")
-    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @OneToOne
     private Users user;
 
     @ManyToOne(cascade = CascadeType.ALL)

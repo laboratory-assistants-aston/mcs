@@ -9,6 +9,29 @@ import ru.aston.mcs.repository.UsersRepository;
 import ru.aston.mcs.service.UsersService;
 
 @Service
+/*
+public class UsersServiceImpl implements UsersService {
+    @Autowired
+    UsersRepository usersRepository;
+
+
+    @Override
+    @Transactional
+    public Users getUser(Long id) {
+        return usersRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void addAndSaveUser(Users user) {
+        usersRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(Long id) {
+        usersRepository.deleteById(id);
+*/
 @Transactional
 public class UsersServiceImpl implements UsersService {
     @Autowired
@@ -30,6 +53,5 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public void deleteUser(Long id) {
         usersRepository.deleteById(id);
-
     }
 }

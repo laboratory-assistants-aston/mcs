@@ -4,11 +4,12 @@ import lombok.*;
 import ru.aston.mcs.entity.Manager;
 import ru.aston.mcs.entity.Users;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 public class NotificationDTO {
     private Long notificationId;
     private String text;

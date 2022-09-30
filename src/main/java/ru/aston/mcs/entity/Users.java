@@ -3,6 +3,8 @@ package ru.aston.mcs.entity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.aston.mcs.entity.enums.GenderType;
+import ru.aston.mcs.entity.enums.Role;
 
 import javax.persistence.*;
 import java.util.List;
@@ -41,7 +43,7 @@ public class Users {
     @Column(name = "pinkod", length = 8, nullable = false)
     private String code;
 
-    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usersId", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Resource> resourceId;
 

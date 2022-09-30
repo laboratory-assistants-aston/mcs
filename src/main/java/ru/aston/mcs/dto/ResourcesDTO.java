@@ -7,7 +7,7 @@ import ru.aston.mcs.entity.Status;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 public class ResourcesDTO {
     private Long id;
     private Integer duringTime;

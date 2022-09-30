@@ -6,11 +6,11 @@ import ru.aston.mcs.entity.Resource;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ResourcesMapper {
     Resource resourceDtoInResource(ResourcesDTO wordDto);
 
-    ResourcesDTO ResourceInResourceDto(Resource word);
+    ResourcesDTO resourceInResourceDto(Resource word);
 
     List<Resource> listResourceDtoInResourceList(List<ResourcesDTO> wordDtoList);
 

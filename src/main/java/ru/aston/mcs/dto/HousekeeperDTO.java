@@ -1,5 +1,6 @@
 package ru.aston.mcs.dto;
 
+
 import lombok.*;
 import ru.aston.mcs.entity.Role;
 
@@ -7,7 +8,7 @@ import ru.aston.mcs.entity.Role;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 public class HousekeeperDTO {
     private Long id;
     private Role role;

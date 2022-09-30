@@ -12,7 +12,19 @@ public class ManagerController {
     @Autowired
     private ManagerService managerService;
 
+    @Autowired
+    private ManagerMapper managerMapper;
+
     @GetMapping("/{id}")
+/*<<<<<<< feature/LA-role_fix
+    public ManagerDTO getManager(@PathVariable int id){
+        return managerMapper.managerInManagerDTO(managerService.getManager(id));
+    }
+
+    @PostMapping("/")
+    public void addNewManager(@RequestBody ManagerDTO managerDTO){
+        managerService.saveManager(managerMapper.managerDtoInManager(managerDTO));
+=======*/
     public ManagerDTO getManager(@PathVariable Long id) {
         return managerService.getManager(id);
     }

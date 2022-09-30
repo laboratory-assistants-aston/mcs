@@ -14,12 +14,10 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired
     ManagerRepository managerRepository;
 
-    @Autowired
-    private ManagerMapper managerMapper;
-
     @Override
-    public void saveManager(ManagerDTO managerDTO) {
-        managerRepository.save(managerMapper.managerDtoInManager(managerDTO));
+    @Transactional
+    public void saveManager(Manager manager) {
+        managerRepository.save(manager);
     }
 
     @Override
@@ -28,6 +26,11 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+/*<<<<<<< feature/LA-role_fix
+    @Transactional
+    public Manager getManager(int managerId) {
+        return managerRepository.findById(managerId).orElse(null);
+=======*/
     public ManagerDTO getManager(Long managerId) {
         return managerMapper.managerInManagerDTO(managerRepository.findById(managerId).orElseThrow(RuntimeException::new));
     }

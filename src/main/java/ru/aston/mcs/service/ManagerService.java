@@ -1,10 +1,10 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.dto.ManagerDTO;
+
 
 public interface ManagerService {
 
-    void saveManager(ManagerDTO managerDTO);
+    void saveManager(Manager manager);
 
     void deleteManager(Long managerId);
 

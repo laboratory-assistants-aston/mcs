@@ -3,14 +3,13 @@ package ru.aston.mcs.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ru.aston.mcs.entity.GenderType;
+import ru.aston.mcs.entity.enums.GenderType;
 import ru.aston.mcs.entity.Resource;
-import ru.aston.mcs.entity.Role;
 
 import java.util.List;
 
 @Data
-@Builder
+//@Builder
 @AllArgsConstructor
 public class UsersDTO {
     private Long id;
