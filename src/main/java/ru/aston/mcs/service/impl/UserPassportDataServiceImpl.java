@@ -8,6 +8,7 @@ import ru.aston.mcs.repository.UserPassportDataRepository;
 import ru.aston.mcs.service.UserPassportDataService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserPassportDataServiceImpl implements UserPassportDataService {
@@ -30,20 +31,19 @@ public class UserPassportDataServiceImpl implements UserPassportDataService {
     @Override
     @Transactional
     public void deleteUserPassportData(String userPassportDataId) {
-        //   userPassportDataRepository.delete(userPassportDataId);
+           userPassportDataRepository.deleteById(userPassportDataId);
     }
 
     @Override
     @Transactional
     public UserPassportData getUserPassportData(String userPassportDataId) {
-//        UserPassportData userPassportData = null;
-//        Optional<UserPassportData> userPassportDataOptional = userPassportDataRepository.findById(userPassportDataId);
-//
-//        if (userPassportDataOptional.isPresent()){
-//            userPassportData = userPassportDataOptional.get();
-//        }
+        UserPassportData userPassportData = null;
+        Optional<UserPassportData> userPassportDataOptional = userPassportDataRepository.findById(userPassportDataId);
 
-        //return userPassportData;
-        return null;
+        if (userPassportDataOptional.isPresent()){
+            userPassportData = userPassportDataOptional.get();
+        }
+
+        return userPassportData;
     }
 }
