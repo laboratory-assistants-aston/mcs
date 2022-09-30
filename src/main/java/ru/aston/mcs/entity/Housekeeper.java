@@ -4,6 +4,7 @@ package ru.aston.mcs.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.aston.mcs.entity.enums.Role;
 
 import javax.persistence.*;
 

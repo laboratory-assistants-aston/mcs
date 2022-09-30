@@ -7,7 +7,7 @@ import ru.aston.mcs.entity.Manager;
 import ru.aston.mcs.entity.Users;
 
 @Data
-@Builder
+//@Builder
 @AllArgsConstructor
 public class NotificationDTO {
     private int notificationId;

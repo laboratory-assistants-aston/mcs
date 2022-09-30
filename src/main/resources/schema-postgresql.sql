@@ -7,10 +7,12 @@ CREATE TABLE "users"
     "address"      VARCHAR(255)   NOT NULL,
     "code"         INTEGER        NOT NULL,
     "email"        VARCHAR(255)   NOT NULL,
-    "gender"       VARCHAR(255)   NOT NULL,
+    "gender"       VARCHAR(255)   CHECK
+        ("gender" IN ('MALE','FEMALE')) NOT NULL,
     "resources_id" INTEGER        NOT NULL,
     "passport_id"  VARCHAR(255)   NOT NULL,
-    "role_id"      INTEGER        NOT NULL,
+    "role"      VARCHAR(255) CHECK
+        ("role" IN ('HOUSEKEEPER','MANAGER','USER')) NOT NULL,
     "balance"      NUMERIC(10, 2) NOT NULL
 );
 ALTER TABLE
@@ -24,7 +26,7 @@ CREATE TABLE "resource"
     "user_id"     INTEGER  NOT NULL,
     "details_id"  INTEGER  NOT NULL,
     "status"      VARCHAR(255) CHECK
-        ("status" IN ('')) NOT NULL
+        ("status" IN ('LOCKED','BOOKED','READY_TO_USE')) NOT NULL
 );
 ALTER TABLE
     "resource"
@@ -64,7 +66,8 @@ CREATE TABLE "managers"
     "manager_id"   INTEGER      NOT NULL,
     "name"         VARCHAR(255) NOT NULL,
     "surname"      VARCHAR(255) NOT NULL,
-    "role_id"      INTEGER      NOT NULL,
+    "role"      VARCHAR(255) CHECK
+        ("role" IN ('HOUSEKEEPER','MANAGER','USER')) NOT NULL,
     "resources_id" INTEGER      NOT NULL,
     "users_id"     INTEGER      NOT NULL,
     "email"        VARCHAR(255) NOT NULL
@@ -72,18 +75,11 @@ CREATE TABLE "managers"
 ALTER TABLE
     "managers"
     ADD PRIMARY KEY ("manager_id");
-CREATE TABLE "roles"
-(
-    "role_id" INTEGER      NOT NULL,
-    "name"    VARCHAR(255) NOT NULL
-);
-ALTER TABLE
-    "roles"
-    ADD PRIMARY KEY ("role_id");
 CREATE TABLE "housekeeper"
 (
     "housekeeper_id" INTEGER      NOT NULL,
-    "role_id"        INTEGER      NOT NULL,
+    "role"      VARCHAR(255) CHECK
+        ("role" IN ('HOUSEKEEPER','MANAGER','USER')) NOT NULL,
     "name"           VARCHAR(255) NOT NULL,
     "surname"        VARCHAR(255) NOT NULL,
     "email"          VARCHAR(255) NOT NULL
@@ -107,9 +103,6 @@ ALTER TABLE
     "users"
     ADD CONSTRAINT "users_passport_id_foreign" FOREIGN KEY ("passport_id") REFERENCES "user_passport_data" ("passport_number");
 ALTER TABLE
-    "users"
-    ADD CONSTRAINT "users_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
-ALTER TABLE
     "resource"
     ADD CONSTRAINT "resource_name_id_foreign" FOREIGN KEY ("name_id") REFERENCES "type_resources" ("name_id");
 ALTER TABLE
@@ -118,9 +111,6 @@ ALTER TABLE
 ALTER TABLE
     "resource"
     ADD CONSTRAINT "resource_details_id_foreign" FOREIGN KEY ("details_id") REFERENCES "resource_details" ("details_id");
-ALTER TABLE
-    "managers"
-    ADD CONSTRAINT "managers_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
 ALTER TABLE
     "managers"
     ADD CONSTRAINT "managers_resources_id_foreign" FOREIGN KEY ("resources_id") REFERENCES "resource" ("resource_id");
@@ -133,9 +123,6 @@ ALTER TABLE
 ALTER TABLE
     "notifications"
     ADD CONSTRAINT "notifications_user_id_foreign" FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
-ALTER TABLE
-    "housekeeper"
-    ADD CONSTRAINT "housekeeper_role_id_foreign" FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
 ALTER TABLE
     "notifications"
     ADD CONSTRAINT "notifications_user_id_foreign" FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");

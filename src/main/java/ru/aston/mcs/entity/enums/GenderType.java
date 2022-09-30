@@ -1,4 +1,4 @@
-package ru.aston.mcs.entity;
+package ru.aston.mcs.entity.enums;
 
 public enum GenderType {
     MALE,

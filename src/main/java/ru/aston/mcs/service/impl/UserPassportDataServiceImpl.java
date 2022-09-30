@@ -1,4 +1,4 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

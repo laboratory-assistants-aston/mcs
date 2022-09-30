@@ -3,10 +3,10 @@ package ru.aston.mcs.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ru.aston.mcs.entity.Status;
+import ru.aston.mcs.entity.enums.Status;
 
 @Data
-@Builder
+//@Builder
 @AllArgsConstructor
 public class ResourcesDTO {
     private Long id;

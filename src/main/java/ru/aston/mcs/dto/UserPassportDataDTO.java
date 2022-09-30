@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@Builder
+//@Builder
 @AllArgsConstructor
 public class UserPassportDataDTO {
     private String passportNumber;

@@ -1,23 +1,41 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.ResourcesDTO;
+import ru.aston.mcs.entity.Resource;
 import ru.aston.mcs.mapper.ResourcesMapper;
 import ru.aston.mcs.repository.ResourcesRepository;
 import ru.aston.mcs.service.ResourcesServices;
 
 @Service
 public class ResourcesServicesImpl implements ResourcesServices {
-
     @Autowired
     ResourcesRepository resourcesRepository;
-    @Autowired
+
+    @Override
+    public Resource getResource(Long id) {
+        return resourcesRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void addAndSaveResource(Resource user) {
+        resourcesRepository.save(user);
+    }
+
+    @Override
+    public void deleteResource(Long id) {
+        resourcesRepository.deleteById(id);
+    }
+
+
+
+    /*@Autowired
     private ResourcesMapper resourcesMapper;
 
     @Override
     public ResourcesDTO getResource(Long id) {
-        return resourcesMapper.ResourceInResourceDto(resourcesRepository.findById(id).orElseThrow(RuntimeException::new));
+        return resourcesMapper.resourceInResourceDto(resourcesRepository.findById(id).orElseThrow(RuntimeException::new));
     }
 
 
@@ -29,5 +47,5 @@ public class ResourcesServicesImpl implements ResourcesServices {
     @Override
     public void deleteResource(Long id) {
         resourcesRepository.deleteById(id);
-    }
+    }*/
 }

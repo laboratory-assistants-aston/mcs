@@ -3,6 +3,7 @@ package ru.aston.mcs.entity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.aston.mcs.entity.enums.Status;
 
 import javax.persistence.*;
 
@@ -28,7 +29,7 @@ public class Resource {
     @OneToOne
     @JoinColumn(name = "details_id", nullable = false)
     private ResourceDetails detailsId;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Users usersId;
 }
