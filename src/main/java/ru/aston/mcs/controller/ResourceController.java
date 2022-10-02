@@ -1,15 +1,8 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import ru.aston.mcs.dto.ResourcesDTO;
-import ru.aston.mcs.service.ResourcesServices;
+import org.springframework.web.bind.annotation.*;
+import ru.aston.mcs.dto.ResourceDTO;
+import ru.aston.mcs.service.ResourceServices;
 
 import java.util.List;
 
@@ -17,34 +10,34 @@ import java.util.List;
 @RequestMapping("/api/resource")
 public class ResourceController {
     final
-    ResourcesServices resourcesServices;
+    ResourceServices resourceServices;
 
-    public ResourceController(ResourcesServices resourcesServices) {
-        this.resourcesServices = resourcesServices;
+    public ResourceController(ResourceServices resourceServices) {
+        this.resourceServices = resourceServices;
     }
 
     @GetMapping("/")
-    public List<ResourcesDTO> getAllTypeResources() {
-        return resourcesServices.getAllResources();
+    public List<ResourceDTO> getAllTypeResources() {
+        return resourceServices.getAllResources();
     }
 
     @GetMapping("/{id}")
-    public ResourcesDTO getUser(@PathVariable Long id) {
-        return resourcesServices.getResource(id);
+    public ResourceDTO getUser(@PathVariable Long id) {
+        return resourceServices.getResource(id);
     }
 
     @PostMapping("/")
-    public void saveUser(@RequestBody ResourcesDTO resourcesDto) {
-        resourcesServices.addAndSaveResource(resourcesDto);
+    public void saveUser(@RequestBody ResourceDTO resourceDto) {
+        resourceServices.addAndSaveResource(resourceDto);
     }
 
     @PutMapping("/")
-    public void updateUser(@RequestBody ResourcesDTO resourcesDto) {
-        resourcesServices.addAndSaveResource(resourcesDto);
+    public void updateUser(@RequestBody ResourceDTO resourceDto) {
+        resourceServices.addAndSaveResource(resourceDto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
-        resourcesServices.deleteResource(id);
+        resourceServices.deleteResource(id);
     }
 }

@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ResidentMapper {
 
-    Resident toModel(ResidentDTO userDto);
+    Resident toModel(ResidentDTO residentDTO);
 
-    ResidentDTO toDTO(Resident user);
+    ResidentDTO toDTO(Resident resident);
 
     List<Resident> toModelList(List<ResidentDTO> residentDTO);
 
-    List<ResidentDTO> toDTOList(List<Resident> users);
+    List<ResidentDTO> toDTOList(List<Resident> residentList);
 }
