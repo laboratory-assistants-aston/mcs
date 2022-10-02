@@ -10,29 +10,6 @@ import ru.aston.mcs.service.UsersService;
 import java.util.List;
 
 @Service
-/*
-public class UsersServiceImpl implements UsersService {
-    @Autowired
-    UsersRepository usersRepository;
-
-
-    @Override
-    @Transactional
-    public Users getUser(Long id) {
-        return usersRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    @Transactional
-    public void addAndSaveUser(Users user) {
-        usersRepository.save(user);
-    }
-
-    @Override
-    @Transactional
-    public void deleteUser(Long id) {
-        usersRepository.deleteById(id);
-*/
 @Transactional
 public class UsersServiceImpl implements UsersService {
 

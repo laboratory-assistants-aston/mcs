@@ -16,8 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/resource")
 public class ResourceController {
-    final
-    ResourcesServices resourcesServices;
+    private final ResourcesServices resourcesServices;
 
     public ResourceController(ResourcesServices resourcesServices) {
         this.resourcesServices = resourcesServices;

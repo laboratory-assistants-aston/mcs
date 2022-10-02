@@ -15,6 +15,5 @@ public class ResourcesDTO {
     private Integer duringTime;
     private Status status;
     private TypeResourcesDTO nameId;
-    private ResourceDetailsDTO detailsId;
     private UsersDTO usersId;
 }
