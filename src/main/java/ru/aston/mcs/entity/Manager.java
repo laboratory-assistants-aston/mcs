@@ -1,55 +1,76 @@
 package ru.aston.mcs.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import ru.aston.mcs.entity.enums.Role;
+import javax.persistence.*;
 
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import java.util.List;
-
-@Getter
-@Setter
-@NoArgsConstructor
 @Table(name = "managers")
 @Entity
-@AllArgsConstructor
 public class Manager {
     @Id
     @Column(name = "manager_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
+
     @Column(name = "name")
     private String name;
+
+    @Column(name = "job_title")
+    private String jobTitle;
 
     @Column(name = "surname")
     private String surname;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
+    public Manager() {
+    }
 
-    @Column(name = "resources_id")
-    @OneToMany
-    @JoinColumn(name = "manager_id")
-    private List<Resource> resourceList;
+    public Manager(Long id, Person person, String name, String jobTitle, String surname) {
+        this.id = id;
+        this.person = person;
+        this.name = name;
+        this.jobTitle = jobTitle;
+        this.surname = surname;
+    }
 
-    @Column(name = "users_id")
-    @OneToMany
-    @JoinColumn(name = "manager_id")
-    private List<Users> userList;
+    public Long getId() {
+        return id;
+    }
 
-    @Column(name = "email")
-    private String email;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 }

@@ -10,27 +10,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-/*
-public class ResourcesServicesImpl implements ResourcesServices {
-    @Autowired
-    ResourcesRepository resourcesRepository;
-
-    @Override
-    public Resource getResource(Long id) {
-        return resourcesRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void addAndSaveResource(Resource user) {
-        resourcesRepository.save(user);
-    }
-
-    @Override
-    public void deleteResource(Long id) {
-        resourcesRepository.deleteById(id);
-    }
-*/
-
 @Transactional
 public class ResourcesServicesImpl implements ResourcesServices {
 
