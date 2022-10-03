@@ -25,21 +25,17 @@ public class NotificationController {
 
     @GetMapping("/")
     public List<NotificationDTO> showAllNotifications() {
-
         return notificationService.getAllNotifications();
     }
 
     @GetMapping("/{id}")
     public NotificationDTO getNotification(@PathVariable Long id) {
-
         return notificationService.getNotification(id);
     }
 
     @PostMapping("/")
     public void addNewNotification(@RequestBody NotificationDTO notificationDTO) {
-
         notificationService.addAndSaveNotification(notificationDTO);
-        ;
     }
 
     @PutMapping("/")
@@ -49,7 +45,6 @@ public class NotificationController {
 
     @DeleteMapping("/{id}")
     public void deleteNotification(@PathVariable Long id) {
-
         notificationService.deleteNotification(id);
     }
 }
