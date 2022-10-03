@@ -2,11 +2,8 @@ package ru.aston.mcs.entity;
 
 import ru.aston.mcs.entity.enums.Operation;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -14,9 +11,11 @@ import java.util.Date;
 public class BalanceHistory {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(name = "resident_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private Resident residentId;
 
     @Column(name = "operation_sum")
