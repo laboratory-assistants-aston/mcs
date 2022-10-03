@@ -44,6 +44,5 @@ public class UserPassportDataServiceImpl implements UserPassportDataService {
         return userPassportDataMapper.toDTO(
                 userPassportDataRepository.findById(userPassportDataId)
                         .orElseThrow(RuntimeException::new));
-
     }
 }

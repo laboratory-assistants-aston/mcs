@@ -1,41 +1,69 @@
 package ru.aston.mcs.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import javax.persistence.Table;
 import javax.persistence.Entity;
-import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
+import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "notifications")
-@AllArgsConstructor
 public class Notification {
 
     @Id
-    @Column(name = "notification_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
-    @Column
+    @Column(name = "notification_text")
     private String text;
 
-    @JoinColumn(name = "user_id")
-    @OneToOne
-    private Users user;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "managerId")
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
     private Manager manager;
 
+    @ManyToMany
+    @JoinTable(name = "sending_notifications",
+            joinColumns = @JoinColumn(name = "notification_id"),
+            inverseJoinColumns = @JoinColumn(name = "resident_id"))
+    private List<Resident> residents;
 
+    public Notification() {
+    }
+
+    public Notification(Long notificationId, String text, Manager manager) {
+        this.notificationId = notificationId;
+        this.text = text;
+        this.manager = manager;
+    }
+
+    public Long getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(Long notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
 }

@@ -25,19 +25,16 @@ public class UserPassportDataController {
 
     @GetMapping("/")
     public List<UserPassportDataDTO> getAllUserPassportDatas() {
-
         return userPassportDataService.getAllUserPassportDatas();
     }
 
     @GetMapping("/{id}")
     public UserPassportDataDTO getUserPassportData(@PathVariable Long id) {
-
         return userPassportDataService.getUserPassportData(String.valueOf(id));
     }
 
     @PostMapping("/")
     public void addNewUserPassportData(@RequestBody UserPassportDataDTO userPassportDataDTO) {
-
         userPassportDataService.addAndSaveUserPassportData(userPassportDataDTO);
     }
 
@@ -48,7 +45,6 @@ public class UserPassportDataController {
 
     @DeleteMapping("/{id}")
     public void deleteUserPassportData(@PathVariable Long id) {
-
         userPassportDataService.deleteUserPassportData(String.valueOf(id));
     }
 }
