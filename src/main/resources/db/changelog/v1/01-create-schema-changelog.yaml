@@ -1,0 +1,573 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1664752786108-1
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: balance_history_pkey
+                  name: balance_history_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resident_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: operation_sum
+                  type: FLOAT8
+              - column:
+                  constraints:
+                    nullable: false
+                  name: operation
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: modification_date
+                  type: date
+            tableName: balance_history
+  - changeSet:
+      id: 1664752786108-2
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: passports_pkey
+                  name: passport_number
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resident_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: surname
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: gender
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nationality
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: registration_address
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: birth_date
+                  type: date
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expire_date
+                  type: date
+            tableName: passports
+  - changeSet:
+      id: 1664752786108-3
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resident_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resource_id
+                  type: INTEGER
+            tableName: booking_resources
+  - changeSet:
+      id: 1664752786108-4
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_housekeeper
+                  name: housekeeper_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: surname
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+            tableName: housekeeper
+  - changeSet:
+      id: 1664752786108-5
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: managers_pkey
+                  name: manager_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: surname
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: job_title
+                  type: VARCHAR(255)
+            tableName: managers
+  - changeSet:
+      id: 1664752786108-6
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: notifications_pkey
+                  name: notification_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: manager_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: notification_text
+                  type: VARCHAR(255)
+            tableName: notifications
+  - changeSet:
+      id: 1664752786108-7
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: recource_type_pkey
+                  name: recource_type_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: recource_type_name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: recource_type_cost
+                  type: FLOAT8
+            tableName: recource_type
+  - changeSet:
+      id: 1664752786108-8
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: residents_pkey
+                  name: resident_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: residential_address
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: phone
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: balance
+                  type: FLOAT8
+            tableName: residents
+  - changeSet:
+      id: 1664752786108-9
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: resources_pkey
+                  name: resource_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resource_type_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: status_id
+                  type: INTEGER
+              - column:
+                  name: duration_time
+                  type: INTEGER
+              - column:
+                  name: start_booking
+                  type: date
+              - column:
+                  name: end_booking
+                  type: date
+            tableName: resources
+  - changeSet:
+      id: 1664752786108-10
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: roles_pkey
+                  name: role_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role_name
+                  type: CHAR(255)
+            tableName: roles
+  - changeSet:
+      id: 1664752786108-11
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resident_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: notification_id
+                  type: INTEGER
+            tableName: sending_notifications
+  - changeSet:
+      id: 1664752786108-12
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: status_pkey
+                  name: status_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: status_name
+                  type: INTEGER
+            tableName: status
+  - changeSet:
+      id: 1664752786108-13
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: users_pkey
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: access_code
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: login
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: email
+                  type: VARCHAR(255)
+            tableName: users
+  - changeSet:
+      id: 1664752786108-14
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role_id
+                  type: INTEGER
+            tableName: users_roles
+  - changeSet:
+      id: 1664752786108-15
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: resident_id
+            baseTableName: balance_history
+            constraintName: balance_history_resident_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: resident_id
+            referencedTableName: residents
+  - changeSet:
+      id: 1664752786108-16
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: resident_id
+            baseTableName: booking_resources
+            constraintName: booking_resources_resident_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: resident_id
+            referencedTableName: residents
+  - changeSet:
+      id: 1664752786108-17
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: resource_id
+            baseTableName: booking_resources
+            constraintName: booking_resources_resource_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: resource_id
+            referencedTableName: resources
+  - changeSet:
+      id: 1664752786108-18
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: managers
+            constraintName: managers_user_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: user_id
+            referencedTableName: users
+  - changeSet:
+      id: 1664752786108-19
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: manager_id
+            baseTableName: notifications
+            constraintName: notifications_manager_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: manager_id
+            referencedTableName: managers
+  - changeSet:
+      id: 1664752786108-20
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: resident_id
+            baseTableName: passports
+            constraintName: passports_resident_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: resident_id
+            referencedTableName: residents
+  - changeSet:
+      id: 1664752786108-21
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: residents
+            constraintName: residents_user_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: user_id
+            referencedTableName: users
+  - changeSet:
+      id: 1664752786108-22
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: resource_type_id
+            baseTableName: resources
+            constraintName: resources_resource_type_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: recource_type_id
+            referencedTableName: recource_type
+  - changeSet:
+      id: 1664752786108-23
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: status_id
+            baseTableName: resources
+            constraintName: resources_status_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: status_id
+            referencedTableName: status
+  - changeSet:
+      id: 1664752786108-24
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: notification_id
+            baseTableName: sending_notifications
+            constraintName: sending_notifications_notification_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: notification_id
+            referencedTableName: notifications
+  - changeSet:
+      id: 1664752786108-25
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: resident_id
+            baseTableName: sending_notifications
+            constraintName: sending_notifications_resident_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: resident_id
+            referencedTableName: residents
+  - changeSet:
+      id: 1664752786108-26
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: users_roles
+            constraintName: users_roles_role_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: role_id
+            referencedTableName: roles
+  - changeSet:
+      id: 1664752786108-27
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: users_roles
+            constraintName: users_roles_user_id_foreign
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: user_id
+            referencedTableName: users

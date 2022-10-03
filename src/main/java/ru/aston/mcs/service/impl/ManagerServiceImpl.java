@@ -6,13 +6,11 @@ import ru.aston.mcs.dto.ManagerDTO;
 import ru.aston.mcs.mapper.ManagerMapper;
 import ru.aston.mcs.repository.ManagerRepository;
 import ru.aston.mcs.service.ManagerService;
-
 import java.util.List;
 
 @Service
 @Transactional
 public class ManagerServiceImpl implements ManagerService {
-
 
     private final ManagerRepository managerRepository;
     private final ManagerMapper managerMapper;
@@ -21,7 +19,6 @@ public class ManagerServiceImpl implements ManagerService {
         this.managerRepository = managerRepository;
         this.managerMapper = managerMapper;
     }
-
 
     @Override
     public List<ManagerDTO> getAllManagers() {

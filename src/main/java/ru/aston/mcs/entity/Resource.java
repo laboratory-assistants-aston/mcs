@@ -7,7 +7,6 @@ import ru.aston.mcs.entity.enums.Status;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Enumerated;
@@ -40,10 +39,6 @@ public class Resource {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "name_id")
     private TypeResources nameId;
-
-    @OneToOne
-    @JoinColumn(name = "details_id", nullable = false)
-    private ResourceDetails detailsId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
