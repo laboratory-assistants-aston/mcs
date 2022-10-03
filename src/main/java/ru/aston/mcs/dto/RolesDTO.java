@@ -1,18 +1,18 @@
 package ru.aston.mcs.dto;
 
-import ru.aston.mcs.entity.Person;
+import ru.aston.mcs.entity.User;
 
 import java.util.List;
 
 public class RolesDTO {
     private Long id;
     private String roleName;
-    private List<Person> persons;
+    private List<User> persons;
 
     public RolesDTO() {
     }
 
-    public RolesDTO(Long id, String roleName, List<Person> persons) {
+    public RolesDTO(Long id, String roleName, List<User> persons) {
         this.id = id;
         this.roleName = roleName;
         this.persons = persons;
@@ -34,11 +34,11 @@ public class RolesDTO {
         this.roleName = roleName;
     }
 
-    public List<Person> getPersons() {
+    public List<User> getPersons() {
         return persons;
     }
 
-    public void setPersons(List<Person> persons) {
+    public void setPersons(List<User> persons) {
         this.persons = persons;
     }
 }

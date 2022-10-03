@@ -8,7 +8,7 @@ import java.util.Date;
 public class BalanceHistoryDTO {
     private Long id;
     private Resident residentId;
-    private float operationSum;
+    private Double operationSum;
     private Operation operation;
     private String description;
     private Date modificationDate;
@@ -16,7 +16,7 @@ public class BalanceHistoryDTO {
     public BalanceHistoryDTO() {
     }
 
-    public BalanceHistoryDTO(Long id, Resident residentId, float operationSum, Operation operation, String description, Date modificationDate) {
+    public BalanceHistoryDTO(Long id, Resident residentId, Double operationSum, Operation operation, String description, Date modificationDate) {
         this.id = id;
         this.residentId = residentId;
         this.operationSum = operationSum;
@@ -41,11 +41,11 @@ public class BalanceHistoryDTO {
         this.residentId = residentId;
     }
 
-    public float getOperationSum() {
+    public Double getOperationSum() {
         return operationSum;
     }
 
-    public void setOperationSum(float operationSum) {
+    public void setOperationSum(Double operationSum) {
         this.operationSum = operationSum;
     }
 

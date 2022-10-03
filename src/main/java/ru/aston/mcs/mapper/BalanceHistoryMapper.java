@@ -14,5 +14,5 @@ public interface BalanceHistoryMapper {
 
     List<BalanceHistory> toModelList(List<BalanceHistoryDTO> balanceHistoryDTOList);
 
-    List<BalanceHistoryDTO> toDTOList(List<BalanceHistory> modelList);
+    List<BalanceHistoryDTO> toDTOList(List<BalanceHistory> balanceHistoryList);
 }

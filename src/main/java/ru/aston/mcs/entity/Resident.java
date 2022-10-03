@@ -1,15 +1,28 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.*;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import java.util.List;
 
-@Entity(name = "residents")
+@Entity
+@Table(name = "residents")
 public class Resident {
+
     @Id
     @Column(name = "resident_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long residentId;
 
+    @MapsId
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
@@ -20,25 +33,27 @@ public class Resident {
     @Column(name = "resident_address", length = 40, nullable = false)
     private String address;
 
-    @Column(name = "balance", nullable = false)
-    private Float balance;
+    @Column(name = "balance", nullable = false, precision = 10, scale = 2)
+    private Double balance;
 
     @ManyToMany
-    @JoinTable(name = "sending_notifications"
-            , joinColumns = @JoinColumn(name = "resident_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
+    @JoinTable(name = "sending_notifications",
+            joinColumns = @JoinColumn(name = "resident_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id"))
     private List<Notification> notifications;
 
     @ManyToMany
-    @JoinTable(name = "booking_resources"
-            , joinColumns = @JoinColumn(name = "resident_id"), inverseJoinColumns = @JoinColumn(name = "resource_id"))
-    private List<Resource> resources;
+    @JoinTable(name = "booking_resources_residents",
+            joinColumns = @JoinColumn(name = "resident_id"),
+            inverseJoinColumns = @JoinColumn(name = "resource_id"))
+    private List<BookingResource> resources;
 
     public Resident() {
 
     }
 
-    public Resident(Long id, User userId, String phone, String address, Float balance) {
-        this.id = id;
+    public Resident(Long residentId, User userId, String phone, String address, Double balance) {
+        this.residentId = residentId;
         this.userId = userId;
         this.phone = phone;
         this.address = address;
@@ -46,7 +61,7 @@ public class Resident {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.residentId = residentId;
     }
 
     public void setUserId(User userId) {
@@ -61,12 +76,12 @@ public class Resident {
         this.address = address;
     }
 
-    public void setBalance(Float balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
     public Long getId() {
-        return id;
+        return residentId;
     }
 
     public User getUserId() {
@@ -81,7 +96,7 @@ public class Resident {
         return address;
     }
 
-    public Float getBalance() {
+    public Double getBalance() {
         return balance;
     }
 }

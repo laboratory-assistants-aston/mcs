@@ -4,11 +4,11 @@ import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.StatusDTO;
 import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
-import ru.aston.mcs.service.StatusServiceI;
+import ru.aston.mcs.service.StatusService;
 import java.util.List;
 
 @Service
-public class StatusServiceImpl implements StatusServiceI {
+public class StatusServiceImpl implements StatusService {
 
     private final StatusMapper statusMapper;
     private final StatusRepository statusRepository;

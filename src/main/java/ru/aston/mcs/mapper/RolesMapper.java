@@ -14,5 +14,5 @@ public interface RolesMapper {
 
     List<Role> toModelList(List<RolesDTO> rolesDtoList);
 
-    List<RolesDTO> toDTOList(List<Role> roleDtoList);
+    List<RolesDTO> toDTOList(List<Role> roleList);
 }

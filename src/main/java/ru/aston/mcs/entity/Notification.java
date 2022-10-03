@@ -1,14 +1,15 @@
 package ru.aston.mcs.entity;
 
+import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.JoinTable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class Notification {
     @Column(name = "notification_text")
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "manager_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", nullable = false)
     private Manager manager;
 
     @ManyToMany

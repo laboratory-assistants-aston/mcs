@@ -2,48 +2,49 @@ package ru.aston.mcs.entity;
 
 import ru.aston.mcs.entity.enums.GenderType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "passports")
-public class UserPassportData {
+public class ResidentPassport {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "passport_number")
     private String passportNumber;
 
-    @Column(name = "resident_id")
-    private int residentId;
+    //@MapsId
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resident_id")
+    private Resident residentId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false)
     private GenderType gender;
 
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
-    @Column(name = "registration_address")
+    @Column(name = "registration_address", nullable = false)
     private String registrationAddress;
 
-    @Column(name = "nationality")
+    @Column(name = "nationality", nullable = false)
     private String nationality;
 
-    @Column(name = "expire_date")
+    @Column(name = "expire_date", nullable = false)
     private Date expireDate;
 
-    public UserPassportData() {
+    public ResidentPassport() {
     }
 
-    public UserPassportData(String passportNumber, int residentId, String name,
+    public ResidentPassport(String passportNumber, Resident residentId, String name,
                             String surname, GenderType gender, Date birthDate,
                             String registrationAddress, String nationality, Date expireDate) {
         this.passportNumber = passportNumber;
@@ -65,11 +66,11 @@ public class UserPassportData {
         this.passportNumber = passportNumber;
     }
 
-    public int getResidentId() {
+    public Resident getResidentId() {
         return residentId;
     }
 
-    public void setResidentId(int residentId) {
+    public void setResidentId(Resident residentId) {
         this.residentId = residentId;
     }
 

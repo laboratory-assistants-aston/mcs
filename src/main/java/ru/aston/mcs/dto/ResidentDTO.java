@@ -1,11 +1,13 @@
 package ru.aston.mcs.dto;
 
+import ru.aston.mcs.entity.BookingResource;
 import ru.aston.mcs.entity.Notification;
-import ru.aston.mcs.entity.Resource;
+import ru.aston.mcs.entity.User;
 
 import java.util.List;
 
 public class ResidentDTO {
+
     private Long id;
 
     private User userId;
@@ -14,17 +16,17 @@ public class ResidentDTO {
 
     private String address;
 
-    private Float balance;
+    private Double balance;
 
     private List<Notification> notifications;
 
-    private List<Resource> resources;
+    private List<BookingResource> resources;
 
     public ResidentDTO() {
     }
 
-    public ResidentDTO(Long id, User userId, String phone, String address, Float balance,
-                       List<Notification> notifications, List<Resource> resources) {
+    public ResidentDTO(Long id, User userId, String phone, String address, Double balance,
+                       List<Notification> notifications, List<BookingResource> resources) {
         this.id = id;
         this.userId = userId;
         this.phone = phone;
@@ -50,7 +52,7 @@ public class ResidentDTO {
         this.address = address;
     }
 
-    public void setBalance(Float balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -58,7 +60,7 @@ public class ResidentDTO {
         this.notifications = notifications;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setResources(List<BookingResource> resources) {
         this.resources = resources;
     }
 
@@ -78,7 +80,7 @@ public class ResidentDTO {
         return address;
     }
 
-    public Float getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
@@ -86,7 +88,7 @@ public class ResidentDTO {
         return notifications;
     }
 
-    public List<Resource> getResources() {
+    public List<BookingResource> getResources() {
         return resources;
     }
 }

@@ -1,44 +1,25 @@
-package ru.aston.mcs.entity;
+package ru.aston.mcs.dto;
 
-import ru.aston.mcs.entity.enums.Status;
+import  ru.aston.mcs.entity.Resident;
+import ru.aston.mcs.entity.ResourceType;
+import ru.aston.mcs.entity.Status;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "resources")
-public class Resource {
-    @Id
-    @Column(name = "resources_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookingResourceDTO {
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "resource_type_id", nullable = false)
     private ResourceType resourceType;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
     private Status status;
-
-    @Column(name = "duration_time", nullable = false)
     private Integer durationTime;
-
-    @Column(name = "start_booking", nullable = false)
     private Date startBooking;
-
-    @Column(name = "end_booking", nullable = false)
     private Date endBooking;
-
-    @ManyToMany
-    @JoinTable(name = "booking_resources"
-            , joinColumns = @JoinColumn(name = "resource_id"), inverseJoinColumns = @JoinColumn(name = "resident_id"))
     private List<Resident> residentList;
 
-    public Resource() {
+    public BookingResourceDTO() {
     }
 
-    public Resource(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
+    public BookingResourceDTO(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
         this.id = id;
         this.resourceType = resourceType;
         this.status = status;

@@ -17,10 +17,11 @@ mvnw
 
 ### IntelliJ IDEA ###
 .idea
+.jpb
 *.iws
 *.ipr
 *.iml
-*.jpb
+
 
 ### NetBeans ###
 /nbproject/private/

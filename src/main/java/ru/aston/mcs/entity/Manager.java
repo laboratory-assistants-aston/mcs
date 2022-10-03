@@ -4,38 +4,42 @@ import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 
-@Table(name = "managers")
+
 @Entity
+@Table(name = "managers")
 public class Manager {
+
     @Id
     @Column(name = "manager_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @MapsId
     @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "job_title")
+    @Column(name = "job_title", nullable = false)
     private String jobTitle;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
     public Manager() {
     }
 
-    public Manager(Long id, Person person, String name, String jobTitle, String surname) {
+    public Manager(Long id, User user, String name, String jobTitle, String surname) {
         this.id = id;
-        this.person = person;
+        this.user = user;
         this.name = name;
         this.jobTitle = jobTitle;
         this.surname = surname;
@@ -49,12 +53,12 @@ public class Manager {
         this.id = id;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getPerson() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(User person) {
+        this.user = user;
     }
 
     public String getName() {

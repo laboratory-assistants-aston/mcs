@@ -1,6 +1,5 @@
 package ru.aston.mcs.entity;
 
-
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -17,27 +16,27 @@ import java.util.List;
 public class Role {
     @Id
     @Column(name="role_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="role_name")
+    @Column(name="role_name", nullable = false)
     private String roleName;
 
     @ManyToMany
     @JoinTable(
             name = "persons_roles",
             joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id")
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<Person> persons;
+    private List<User> users;
 
     public Role() {
     }
 
-    public Role(Long id, String roleName, List<Person> persons) {
+    public Role(Long id, String roleName, List<User> persons) {
         this.id = id;
         this.roleName = roleName;
-        this.persons = persons;
+        this.users = persons;
     }
 
     public Long getId() {
@@ -56,11 +55,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

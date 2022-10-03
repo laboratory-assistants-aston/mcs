@@ -1,10 +1,10 @@
 package ru.aston.mcs.dto;
 
-import ru.aston.mcs.entity.Person;
+import ru.aston.mcs.entity.User;
 
 public class ManagerDTO {
     private Long id;
-    private Person person;
+    private User person;
     private String name;
     private String surname;
     private String jobTitle;
@@ -12,7 +12,7 @@ public class ManagerDTO {
     public ManagerDTO() {
     }
 
-    public ManagerDTO(Long id, Person person, String name, String surname, String jobTitle) {
+    public ManagerDTO(Long id, User person, String name, String surname, String jobTitle) {
         this.id = id;
         this.person = person;
         this.name = name;
@@ -28,11 +28,11 @@ public class ManagerDTO {
         this.id = id;
     }
 
-    public Person getPerson() {
+    public User getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(User person) {
         this.person = person;
     }
 
