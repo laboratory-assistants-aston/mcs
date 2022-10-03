@@ -12,7 +12,7 @@ public interface NotificationMapper {
 
     NotificationDTO toDTO(Notification notification);
 
-    List<Notification> toModelList(List<NotificationDTO> resourceDetailsDTOList);
+    List<Notification> toModelList(List<NotificationDTO> notificationDTOList);
 
     List<NotificationDTO> toDTOList(List<Notification> modelList);
 }

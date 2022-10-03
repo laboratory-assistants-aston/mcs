@@ -22,7 +22,6 @@ public class HousekeeperController {
         this.housekeeperService = housekeeperService;
     }
 
-
     @GetMapping("/")
     public List<HousekeeperDTO> getAllHousekeepers() {
         return housekeeperService.getAllHousekeepers();
@@ -37,7 +36,6 @@ public class HousekeeperController {
     public void addNewHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO) {
         housekeeperService.addAndSaveHousekeeper(housekeeperDTO);
     }
-
 
     @PutMapping("/")
     public void updateHousekeeper(@RequestBody HousekeeperDTO housekeeperDTO) {
