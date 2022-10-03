@@ -18,8 +18,8 @@ mvnw
 ### IntelliJ IDEA ###
 .idea
 *.iws
-*.iml
 *.ipr
+*.iml
 *.jpb
 
 ### NetBeans ###
