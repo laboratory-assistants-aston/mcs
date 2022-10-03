@@ -1,45 +1,38 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import ru.aston.mcs.dto.ResourcesDTO;
-import ru.aston.mcs.service.ResourcesServices;
+import org.springframework.web.bind.annotation.*;
+import ru.aston.mcs.dto.ResourceDTO;
+import ru.aston.mcs.service.ResourceServices;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/resource")
 public class ResourceController {
-    private final ResourcesServices resourcesServices;
+    private final ResourceServices resourcesServices;
 
-    public ResourceController(ResourcesServices resourcesServices) {
+    public ResourceController(ResourceServices resourcesServices) {
         this.resourcesServices = resourcesServices;
     }
 
     @GetMapping("/")
-    public List<ResourcesDTO> getAllTypeResources() {
+    public List<ResourceDTO> getAllTypeResources() {
         return resourcesServices.getAllResources();
     }
 
     @GetMapping("/{id}")
-    public ResourcesDTO getUser(@PathVariable Long id) {
+    public ResourceDTO getUser(@PathVariable Long id) {
         return resourcesServices.getResource(id);
     }
 
     @PostMapping("/")
-    public void saveUser(@RequestBody ResourcesDTO resourcesDto) {
+    public void saveUser(@RequestBody ResourceDTO resourcesDto) {
         resourcesServices.addAndSaveResource(resourcesDto);
     }
 
     @PutMapping("/")
-    public void updateUser(@RequestBody ResourcesDTO resourcesDto) {
-        resourcesServices.addAndSaveResource(resourcesDto);
+    public void updateUser(@RequestBody ResourceDTO resourceDto) {
+        resourcesServices.addAndSaveResource(resourceDto);
     }
 
     @DeleteMapping("/{id}")
