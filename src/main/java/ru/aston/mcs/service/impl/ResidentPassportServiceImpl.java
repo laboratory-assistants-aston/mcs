@@ -2,34 +2,34 @@ package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.aston.mcs.dto.UserPassportDataDTO;
-import ru.aston.mcs.mapper.UserPassportDataMapper;
-import ru.aston.mcs.repository.UserPassportDataRepository;
-import ru.aston.mcs.service.UserPassportDataService;
+import ru.aston.mcs.dto.ResidentPassportDTO;
+import ru.aston.mcs.mapper.ResidentPassportMapper;
+import ru.aston.mcs.repository.ResidentPassportRepository;
+import ru.aston.mcs.service.ResidentPassportService;
 
 import java.util.List;
 
 @Service
 @Transactional
-public class UserPassportDataServiceImpl implements UserPassportDataService {
+public class ResidentPassportServiceImpl implements ResidentPassportService {
 
-    private final UserPassportDataRepository userPassportDataRepository;
+    private final ResidentPassportRepository userPassportDataRepository;
 
-    private final UserPassportDataMapper userPassportDataMapper;
+    private final ResidentPassportMapper userPassportDataMapper;
 
-    public UserPassportDataServiceImpl(UserPassportDataRepository userPassportDataRepository, UserPassportDataMapper userPassportDataMapper) {
+    public ResidentPassportServiceImpl(ResidentPassportRepository userPassportDataRepository, ResidentPassportMapper userPassportDataMapper) {
         this.userPassportDataRepository = userPassportDataRepository;
         this.userPassportDataMapper = userPassportDataMapper;
     }
 
     @Override
-    public List<UserPassportDataDTO> getAllUserPassportDatas() {
+    public List<ResidentPassportDTO> getAllUserPassportDatas() {
         return userPassportDataMapper.toDTOList(
                 userPassportDataRepository.findAll());
     }
 
     @Override
-    public void addAndSaveUserPassportData(UserPassportDataDTO userPassportDataDTO) {
+    public void addAndSaveUserPassportData(ResidentPassportDTO userPassportDataDTO) {
         userPassportDataRepository.save(
                 userPassportDataMapper.toModel(userPassportDataDTO));
     }
@@ -40,7 +40,7 @@ public class UserPassportDataServiceImpl implements UserPassportDataService {
     }
 
     @Override
-    public UserPassportDataDTO getUserPassportData(String userPassportDataId) {
+    public ResidentPassportDTO getUserPassportData(String userPassportDataId) {
         return userPassportDataMapper.toDTO(
                 userPassportDataRepository.findById(userPassportDataId)
                         .orElseThrow(RuntimeException::new));

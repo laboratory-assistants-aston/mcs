@@ -1,24 +1,54 @@
-package ru.aston.mcs.dto;
+package ru.aston.mcs.entity;
 
-import ru.aston.mcs.entity.Resident;
-import ru.aston.mcs.entity.enums.Status;
-
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import java.util.Date;
 import java.util.List;
 
-public class ResourceDTO {
+@Entity
+@Table(name = "booking_resources")
+public class BookingResource {
+    @Id
+    @Column(name = "resources_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resource_type_id", nullable = false)
     private ResourceType resourceType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    @Column(name = "duration_time", nullable = false)
     private Integer durationTime;
+
+    @Column(name = "start_booking", nullable = false)
     private Date startBooking;
+
+    @Column(name = "end_booking", nullable = false)
     private Date endBooking;
+
+    @ManyToMany
+    @JoinTable(name = "booking_resources_residents",
+            joinColumns = @JoinColumn(name = "resource_id"),
+            inverseJoinColumns = @JoinColumn(name = "resident_id"))
     private List<Resident> residentList;
 
-    public ResourceDTO() {
+    public BookingResource() {
     }
 
-    public ResourceDTO(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
+    public BookingResource(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
         this.id = id;
         this.resourceType = resourceType;
         this.status = status;

@@ -12,7 +12,7 @@ public interface ManagerMapper {
 
     ManagerDTO toDTO(Manager manager);
 
-    List<Manager> toModelList(List<ManagerDTO> resourceDetailsDTOList);
+    List<Manager> toModelList(List<ManagerDTO> managerDTOList);
 
-    List<ManagerDTO> toDTOList(List<Manager> modelList);
+    List<ManagerDTO> toDTOList(List<Manager> managerList);
 }

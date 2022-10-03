@@ -4,7 +4,7 @@ import ru.aston.mcs.dto.StatusDTO;
 import java.util.List;
 
 
-public interface StatusServiceI {
+public interface StatusService {
     List<StatusDTO> getAllStatus();
 
    StatusDTO getStatus(Long id);

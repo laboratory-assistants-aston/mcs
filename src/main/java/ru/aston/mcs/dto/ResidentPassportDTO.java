@@ -2,17 +2,17 @@ package ru.aston.mcs.dto;
 
 import java.util.Date;
 
-public class UserPassportDataDTO {
+public class ResidentPassportDTO {
     private String passportNumber;
     private String series;
     private Date expireDate;
     private String nationality;
     private Date birthDate;
 
-    public UserPassportDataDTO() {
+    public ResidentPassportDTO() {
     }
 
-    public UserPassportDataDTO(String passportNumber, String series, Date expireDate, String nationality, Date birthDate) {
+    public ResidentPassportDTO(String passportNumber, String series, Date expireDate, String nationality, Date birthDate) {
         this.passportNumber = passportNumber;
         this.series = series;
         this.expireDate = expireDate;

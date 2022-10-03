@@ -2,11 +2,6 @@ package ru.aston.mcs.dto;
 
 import java.util.Objects;
 
-/**
- * @author Victoria Zhirnova
- * @project mcs
- */
-
 public class StatusDTO {
     private Long statusId;
     private String name;

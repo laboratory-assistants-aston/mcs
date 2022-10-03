@@ -10,29 +10,29 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
-@Table(name="persons")
-public class Person {
+@Table(name="users")
+public class User {
     @Id
-    @Column(name = "person_id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "access_code")
+    @Column(name = "access_code", nullable = false)
     private Integer accessCode;
 
-    @Column(name = "login")
+    @Column(name = "login", nullable = false)
     private String login;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @ManyToMany(mappedBy = "persons")
+    @ManyToMany(mappedBy = "users")
     private List<Role> roles;
 
-    public Person() {
+    public User() {
     }
 
-    public Person(Long id, Integer accessCode, String login, String email, List<Role> roles) {
+    public User(Long id, Integer accessCode, String login, String email, List<Role> roles) {
         this.id = id;
         this.accessCode = accessCode;
         this.login = login;

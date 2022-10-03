@@ -1,9 +1,17 @@
 package ru.aston.mcs.entity;
 
 import ru.aston.mcs.entity.enums.Operation;
-
-import javax.persistence.*;
-
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import java.util.Date;
 
 @Entity
@@ -12,31 +20,33 @@ public class BalanceHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "balance_history_id")
+    private Long balance_history_id;
 
-    @ManyToOne
-    @JoinColumn(name = "resident_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resident_id", nullable = false)
     private Resident residentId;
 
-    @Column(name = "operation_sum")
-    private float operationSum;
+    @Column(name = "operation_sum", nullable = false, precision = 10, scale = 2)
+    private Double operationSum;
 
-    @Column(name = "operation")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "operation", nullable = false)
     private Operation operation;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "modification_date")
+    @Column(name = "modification_date", nullable = false)
     private Date modificationDate;
 
     public BalanceHistory() {
     }
 
     public BalanceHistory(Long id, Resident residentId,
-                          float operationSum, Operation operation,
+                          Double operationSum, Operation operation,
                           String description, Date modificationDate) {
-        this.id = id;
+        this.balance_history_id = id;
         this.residentId = residentId;
         this.operationSum = operationSum;
         this.operation = operation;
@@ -44,12 +54,12 @@ public class BalanceHistory {
         this.modificationDate = modificationDate;
     }
 
-    public Long getId() {
-        return id;
+    public Long getBalance_history_id() {
+        return balance_history_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBalance_history_id(Long balance_history_id) {
+        this.balance_history_id = balance_history_id;
     }
 
     public Resident getResidentId() {
@@ -60,11 +70,11 @@ public class BalanceHistory {
         this.residentId = residentId;
     }
 
-    public float getOperationSum() {
+    public Double getOperationSum() {
         return operationSum;
     }
 
-    public void setOperationSum(float operationSum) {
+    public void setOperationSum(Double operationSum) {
         this.operationSum = operationSum;
     }
 

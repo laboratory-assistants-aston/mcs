@@ -4,17 +4,17 @@ import ru.aston.mcs.entity.Role;
 
 import java.util.List;
 
-public class PersonsDTO {
+public class UserDTO {
     private Long id;
     private Integer accessCode;
     private String login;
     private String email;
     private List<Role> roles;
 
-    public PersonsDTO() {
+    public UserDTO() {
     }
 
-    public PersonsDTO(Long id, Integer accessCode, String login, String email, List<Role> roles) {
+    public UserDTO(Long id, Integer accessCode, String login, String email, List<Role> roles) {
         this.id = id;
         this.accessCode = accessCode;
         this.login = login;

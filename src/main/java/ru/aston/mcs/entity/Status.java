@@ -16,7 +16,7 @@ public class Status {
 
 
     @NotNull
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String statusName;
 
     public Status() {
