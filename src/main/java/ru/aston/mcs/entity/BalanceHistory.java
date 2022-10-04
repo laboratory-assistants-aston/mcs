@@ -27,7 +27,7 @@ public class BalanceHistory {
     @JoinColumn(name = "resident_id", nullable = false)
     private Resident residentId;
 
-    @Column(name = "operation_sum", nullable = false, precision = 10, scale = 2)
+    @Column(name = "operation_sum", columnDefinition="Decimal(10,2) default '0.00'")
     private Double operationSum;
 
     @Enumerated(EnumType.STRING)

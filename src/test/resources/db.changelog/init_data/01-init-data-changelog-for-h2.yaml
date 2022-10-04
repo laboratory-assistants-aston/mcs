@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1664833576388-2
+      author: vikaz (generated)
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: name
+                  name: name
+                  type: VARCHAR(255)
+            commentLineStartsWith: '#'
+            encoding: UTF-8
+            file: data/status.csv
+            quotchar: '"'
+            separator: ','
+            relativeToChangelogFile: true
+            tableName: status
