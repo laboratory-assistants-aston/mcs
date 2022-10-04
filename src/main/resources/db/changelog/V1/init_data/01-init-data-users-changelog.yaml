@@ -1,0 +1,35 @@
+databaseChangeLog:
+    - changeSet:
+          id: 1664833576388-2
+          author: vikaz (generated)
+          changes:
+              - insert:
+                    tableName: users
+                    columns:
+                        - column:
+                              name: user_id
+                              value: 1
+                        - column:
+                              name: access_code
+                              value: 11444
+                        - column:
+                              name: login
+                              value: damir
+                        - column:
+                              name: email
+                              value: damir@aston.ru
+              - insert:
+                    tableName: users
+                    columns:
+                        - column:
+                              name: user_id
+                              value: 2
+                        - column:
+                              name: access_code
+                              value: 11111
+                        - column:
+                              name: login
+                              value: vika
+                        - column:
+                              name: email
+                              value: vika@aston.ru
