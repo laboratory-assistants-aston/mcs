@@ -13,19 +13,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
-
-
 @DataJpaTest
 public class StatusRepositoryTest {
 
     @Autowired
     private StatusRepository statusRepository;
-
-    @BeforeEach
-    void setUp() {
-
-    }
 
     @AfterEach
     public void tearDown() {
@@ -81,7 +73,7 @@ public class StatusRepositoryTest {
     }
 
     @Test
-    public void tesDeleteStatus() {
+    public void testDeleteStatus() {
 
         //Arrange
         List<Status> newStatusList = StatusDataUtils.createStatusEntityList();

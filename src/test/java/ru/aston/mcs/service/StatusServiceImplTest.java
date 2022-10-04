@@ -17,15 +17,12 @@ import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
 import ru.aston.mcs.service.impl.StatusServiceImpl;
 import ru.aston.mcs.util.StatusDataUtils;
-
 import java.util.List;
 import java.util.Optional;
 
 
-
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-
 class StatusServiceImplTest {
 
     @Mock
