@@ -19,7 +19,7 @@ public class ResourceType {
     @Column(name = "resource_type_name", nullable = false)
     private String name;
 
-    @Column(name = "resource_type_cost", nullable = false, precision = 10, scale = 2)
+    @Column(name = "resource_type_cost", columnDefinition="Decimal(10,2) default '0.00'")
     private Double cost;
 
     public ResourceType(){}

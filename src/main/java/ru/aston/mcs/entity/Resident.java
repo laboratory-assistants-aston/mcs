@@ -33,7 +33,7 @@ public class Resident {
     @Column(name = "resident_address", length = 40, nullable = false)
     private String address;
 
-    @Column(name = "balance", nullable = false, precision = 10, scale = 2)
+    @Column(name = "balance", columnDefinition="Decimal(10,2) default '0.00'")
     private Double balance;
 
     @ManyToMany
