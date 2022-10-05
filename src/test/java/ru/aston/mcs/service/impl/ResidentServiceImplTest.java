@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ResidentServiceImplTest {
@@ -42,32 +43,25 @@ class ResidentServiceImplTest {
     }
 
     @Test
-    void getAllResidentTest() {
-        List<Resident> residentsActual = residentMapper.toModelList(Arrays.asList(residentDTO, residentDTO));
-        Mockito.when(residentRepository.findAll()).thenReturn(residentsActual);
-        List<ResidentDTO> allResidentExpected = residentService.getAllResident();
+    void getAllBookingResourceTest() {
+        residentService.getAllResident();
         Mockito.verify(residentRepository).findAll();
-        assertEquals(allResidentExpected.size(), residentsActual.size() + 1);
     }
 
     @Test
-    void getResidentByIdTest() {
-        Resident resident = residentMapper.toModel(residentDTO);
-        resident.setId(2L);
-        Mockito.when(residentRepository.findById(2L)).thenReturn(Optional.of(resident));
-        ResidentDTO residentActual = residentService.getResident(2L);
-        Mockito.verify(residentRepository).findById(2L);
-        assertEquals(resident.getId(), residentActual.getId());
+    void getBookingResourceByIdTest() {
+        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> residentService.getResident(1L));
+        Mockito.verify(residentRepository).findById(1L);
     }
 
     @Test
-    void createResidentFromDtoTest() {
+    void createBookingResourceFromDtoTest() {
         residentService.createResident(residentDTO);
         Mockito.verify(residentRepository).save(residentMapper.toModel(residentDTO));
     }
 
     @Test
-    void deleteResidentByIdTest() {
+    void deleteBookingResourceByIdTest() {
         residentService.deleteResident(1L);
         Mockito.verify(residentRepository).deleteById(1L);
     }
