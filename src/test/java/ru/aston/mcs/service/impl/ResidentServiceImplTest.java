@@ -8,15 +8,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.ResidentDTO;
-import ru.aston.mcs.entity.Resident;
 import ru.aston.mcs.mapper.ResidentMapper;
 import ru.aston.mcs.repository.ResidentRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,25 +37,25 @@ class ResidentServiceImplTest {
     }
 
     @Test
-    void getAllBookingResourceTest() {
+    void getAllResidentTest() {
         residentService.getAllResident();
         Mockito.verify(residentRepository).findAll();
     }
 
     @Test
-    void getBookingResourceByIdTest() {
+    void getResidentByIdTest() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> residentService.getResident(1L));
         Mockito.verify(residentRepository).findById(1L);
     }
 
     @Test
-    void createBookingResourceFromDtoTest() {
+    void createResidentFromDtoTest() {
         residentService.createResident(residentDTO);
         Mockito.verify(residentRepository).save(residentMapper.toModel(residentDTO));
     }
 
     @Test
-    void deleteBookingResourceByIdTest() {
+    void deleteResidentByIdTest() {
         residentService.deleteResident(1L);
         Mockito.verify(residentRepository).deleteById(1L);
     }
