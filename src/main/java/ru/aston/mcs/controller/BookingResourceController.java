@@ -1,13 +1,7 @@
 package ru.aston.mcs.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.BookingResourceDTO;
 import ru.aston.mcs.service.BookingResourceServices;
 
@@ -15,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/resource-booking")
-public class ResourceBookingController {
+public class BookingResourceController {
     private final BookingResourceServices resourcesServices;
 
-    public ResourceBookingController(BookingResourceServices resourcesServices) {
+    public BookingResourceController(BookingResourceServices resourcesServices) {
         this.resourcesServices = resourcesServices;
     }
 
@@ -33,17 +27,20 @@ public class ResourceBookingController {
     }
 
     @PostMapping("/")
-    public void saveUser(@RequestBody BookingResourceDTO resourcesDto) {
+    public ResponseEntity<Void> saveUser(@RequestBody BookingResourceDTO resourcesDto) {
         resourcesServices.addAndSaveBookingResource(resourcesDto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/")
-    public void updateUser(@RequestBody BookingResourceDTO resourceDto) {
+    public ResponseEntity<Void> updateUser(@RequestBody BookingResourceDTO resourceDto) {
         resourcesServices.addAndSaveBookingResource(resourceDto);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         resourcesServices.deleteBookingResource(id);
+        return ResponseEntity.ok().build();
     }
 }
