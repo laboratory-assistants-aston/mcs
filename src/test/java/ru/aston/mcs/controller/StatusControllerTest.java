@@ -110,6 +110,18 @@ class StatusControllerTest {
     }
 
     @Test
+    public void updateTypeResourcesBadRequest() throws Exception {
+
+        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/api/status/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(null));
+
+        mockMvc.perform(mockRequest)
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void deleteStatus() throws Exception {
 
         StatusDTO dto = StatusDataUtils.createStatusDTO();

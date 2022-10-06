@@ -11,11 +11,14 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.dto.StatusDTO;
+import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
 import ru.aston.mcs.service.impl.StatusServiceImpl;
+import ru.aston.mcs.util.ResourceTypeDataUtils;
 import ru.aston.mcs.util.StatusDataUtils;
 import java.util.List;
 import java.util.Optional;
@@ -86,7 +89,7 @@ class StatusServiceImplTest {
         Mockito.when(statusRepository.save(entity)).thenReturn(entity);
 
         //Action
-        statusService.addAndSaveStatus(dto);
+        statusService.saveStatus(dto);
 
         //Assert
         Mockito.verify(statusMapper).toModel(dto);
@@ -98,12 +101,17 @@ class StatusServiceImplTest {
     void deleteStatus() {
 
         //Arrange
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        List<StatusDTO> dto = StatusDataUtils.createStatusDTOList();
+        List<Status> entity = StatusDataUtils.createStatusEntityList();
+        Mockito.when(statusRepository.findById(entity.get(0).getStatusId())).thenReturn(Optional.of(entity.get(0)));
+        Mockito.doNothing().when(statusRepository).deleteById(entity.get(0).getStatusId());
 
         //Action
-        statusService.deleteStatus(dto.getStatusId());
+        statusService.deleteStatus(dto.get(0).getStatusId());
 
         //Assert
-        Mockito.verify(statusRepository).deleteById(dto.getStatusId());
+        Mockito.verify(statusRepository).findById(dto.get(0).getStatusId());
+        Mockito.verify(statusRepository).deleteById(dto.get(0).getStatusId());
+
     }
 }

@@ -32,19 +32,19 @@ public class ResourceTypeController {
 
     @GetMapping("/{id}")
     public ResourceTypeDTO getTypeResources(@PathVariable Long id) {
+
         return typeResourcesService.getResourceType(id);
     }
 
     @PostMapping("/")
     public void addTypeResources(@RequestBody ResourceTypeDTO typeResourcesDto) {
 
-        typeResourcesService.addAndSaveResourceType(typeResourcesDto);
+        typeResourcesService.saveResourceType(typeResourcesDto);
     }
-
     @PutMapping("/")
     public void updateTypeResources(@RequestBody ResourceTypeDTO typeResourcesDto) {
 
-        typeResourcesService.addAndSaveResourceType(typeResourcesDto);
+        typeResourcesService.saveResourceType(typeResourcesDto);
     }
 
     @DeleteMapping("/{id}")

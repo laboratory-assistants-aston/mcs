@@ -1,6 +1,8 @@
 package ru.aston.mcs.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -9,6 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import ru.aston.mcs.controller.StatusController;
 import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.mapper.ResourceTypeMapper;
@@ -85,7 +89,7 @@ class ResourceTypeServicesImplTest {
         Mockito.when(resourceTypeRepository.save(entity)).thenReturn(entity);
 
         //Action
-        resourceTypeServices.addAndSaveResourceType(dto);
+        resourceTypeServices.saveResourceType(dto);
 
         //Assert
         Mockito.verify(resourceTypeMapper).toModel(dto);
@@ -97,12 +101,16 @@ class ResourceTypeServicesImplTest {
     void testDeleteResourceType() {
 
         //Arrange
-        ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
+        List<ResourceTypeDTO> dto = ResourceTypeDataUtils.createResourceTypeDTOList();
+        List<ResourceType> entity = ResourceTypeDataUtils.createResourceTypeEntityList();
+        Mockito.when(resourceTypeRepository.findById(entity.get(0).getNameId())).thenReturn(Optional.of(entity.get(0)));
+        Mockito.doNothing().when(resourceTypeRepository).deleteById(entity.get(0).getNameId());
 
         //Action
-        resourceTypeServices.deleteResourceType(dto.getNameId());
+        resourceTypeServices.deleteResourceType(dto.get(0).getNameId());
 
         //Assert
-        Mockito.verify(resourceTypeRepository).deleteById(dto.getNameId());
+        Mockito.verify(resourceTypeRepository).findById(dto.get(0).getNameId());
+        Mockito.verify(resourceTypeRepository).deleteById(dto.get(0).getNameId());
     }
 }
