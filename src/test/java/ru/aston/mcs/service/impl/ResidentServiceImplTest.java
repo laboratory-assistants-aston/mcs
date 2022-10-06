@@ -8,15 +8,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.ResidentDTO;
-import ru.aston.mcs.entity.Resident;
 import ru.aston.mcs.mapper.ResidentMapper;
 import ru.aston.mcs.repository.ResidentRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 class ResidentServiceImplTest {
@@ -43,21 +38,14 @@ class ResidentServiceImplTest {
 
     @Test
     void getAllResidentTest() {
-        List<Resident> residentsActual = residentMapper.toModelList(Arrays.asList(residentDTO, residentDTO));
-        Mockito.when(residentRepository.findAll()).thenReturn(residentsActual);
-        List<ResidentDTO> allResidentExpected = residentService.getAllResident();
+        residentService.getAllResident();
         Mockito.verify(residentRepository).findAll();
-        assertEquals(allResidentExpected.size(), residentsActual.size() + 1);
     }
 
     @Test
     void getResidentByIdTest() {
-        Resident resident = residentMapper.toModel(residentDTO);
-        resident.setId(2L);
-        Mockito.when(residentRepository.findById(2L)).thenReturn(Optional.of(resident));
-        ResidentDTO residentActual = residentService.getResident(2L);
-        Mockito.verify(residentRepository).findById(2L);
-        assertEquals(resident.getId(), residentActual.getId());
+        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> residentService.getResident(1L));
+        Mockito.verify(residentRepository).findById(1L);
     }
 
     @Test
