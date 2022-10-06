@@ -1,78 +1,60 @@
 package ru.aston.mcs.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.RolesDTO;
-import ru.aston.mcs.dto.UserDTO;
-import ru.aston.mcs.entity.Role;
 import ru.aston.mcs.mapper.RolesMapper;
 import ru.aston.mcs.repository.RolesRepository;
-import ru.aston.mcs.service.RolesService;
+import ru.aston.mcs.service.impl.RolesServiceImpl;
 
-import java.util.List;
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class RolesServiceImplTest {
-    @SpyBean
-    private RolesService rolesService;
-    @MockBean
+@ExtendWith(MockitoExtension.class)
+class RolesServiceImplTest {
+    @Mock
     private RolesRepository rolesRepository;
+    @Mock
+    private RolesMapper rolesMapper;
 
-    @Before
-    public void setUp() {
-        Role role = new Role(1L, "name", null);
-        Role role2 = new Role(2L, "name2", null);
-        Role role3 = new Role(3L, "name3", null);
-        Mockito.when(rolesRepository.findById(role.getId())).thenReturn(Optional.of(role));
-        Mockito.when(rolesRepository.findAll()).thenReturn(List.of(role, role2, role3));
+    @InjectMocks
+    private RolesServiceImpl rolesService;
+
+    private RolesDTO rolesDTO;
+
+    @BeforeEach
+    void createDto() {
+        rolesDTO = new RolesDTO();
+        rolesDTO.setRoleName("roleName");
+        rolesDTO.setPersons(null);
     }
 
     @Test
-    public void whenValidId_thenRoleShouldBeFound() {
-        Long id = 1L;
-        RolesDTO found = rolesService.getRole(1L);
-
-        assertThat(found.getId()).isEqualTo(id);
+    void getAllRolesTest() {
+        rolesService.getAllRoles();
+        Mockito.verify(rolesRepository).findAll();
     }
 
     @Test
-    public void whenFindAll_then3RolesShouldBeFound() {
-        List<RolesDTO> rolesList = rolesService.getAllRoles();
-
-        assertThat(rolesList).isNotNull();
-        assertThat(rolesList.size()).isEqualTo(3);
+    void getRoleByIdTest() {
+        RuntimeException runtimeException =
+                assertThrows(RuntimeException.class, () -> rolesService.getRole(1L));
+        Mockito.verify(rolesRepository).findById(1L);
     }
 
     @Test
-    public void whenDeleteById_thenNothingShouldReturn() {
-        long id = 1L;
-
-        willDoNothing().given(rolesRepository).deleteById(id);
-
-        rolesService.deleteRole(id);
-
-        verify(rolesRepository, times(1)).deleteById(id);
+    void createRoleFromDtoTest() {
+        rolesService.addAndSaveRole(rolesDTO);
+        Mockito.verify(rolesRepository).save(rolesMapper.toModel(rolesDTO));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void whenInvalidId_thenThrowException() {
-        Long id = 0L;
-        Mockito.when(rolesRepository.findById(id)).thenReturn(Optional.empty());
-        RolesDTO found = rolesService.getRole(0L);
-        verify(rolesRepository, times(1)).findById(id);
+    @Test
+    void deleteRoleByIdTest() {
+        rolesService.deleteRole(1L);
+        Mockito.verify(rolesRepository).deleteById(1L);
     }
 }

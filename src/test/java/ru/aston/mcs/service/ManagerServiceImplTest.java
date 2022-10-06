@@ -1,79 +1,62 @@
 package ru.aston.mcs.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.ManagerDTO;
-import ru.aston.mcs.dto.RolesDTO;
-import ru.aston.mcs.entity.Manager;
+import ru.aston.mcs.mapper.ManagerMapper;
 import ru.aston.mcs.repository.ManagerRepository;
-import ru.aston.mcs.service.ManagerService;
+import ru.aston.mcs.service.impl.ManagerServiceImpl;
 
-import java.util.List;
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ManagerServiceImplTest {
-    @SpyBean
-    private ManagerService managerService;
-    @MockBean
+@ExtendWith(MockitoExtension.class)
+class ManagerServiceImplTest {
+    @Mock
     private ManagerRepository managerRepository;
+    @Mock
+    private ManagerMapper managerMapper;
 
-    @Before
-    public void setUp() {
-        Manager manager = new Manager(1L,null ,
-                "Alex", "Worker", "Surname");
-        Manager manager2 = new Manager(2L,null ,
-                "Alex2", "Worker2", "Surname2");
-        Manager manager3 = new Manager(3L,null ,
-                "Alex3", "Worker3", "Surname3");
-        Mockito.when(managerRepository.findById(manager.getId())).thenReturn(Optional.of(manager));
-        Mockito.when(managerRepository.findAll()).thenReturn(List.of(manager, manager2, manager3));
+    @InjectMocks
+    private ManagerServiceImpl managerService;
+
+    private ManagerDTO managerDTO;
+
+    @BeforeEach
+    void createDto() {
+        managerDTO = new ManagerDTO();
+        managerDTO.setJobTitle("jobTitle");
+        managerDTO.setName("name");
+        managerDTO.setPerson(null);
+        managerDTO.setSurname("surname");
     }
 
     @Test
-    public void whenValidId_thenManagerShouldBeFound() {
-        Long id = 1L;
-        ManagerDTO found = managerService.getManager(1L);
-
-        assertThat(found.getId()).isEqualTo(id);
+    public void getAllManagersTest() {
+        managerService.getAllManagers();
+        Mockito.verify(managerRepository).findAll();
     }
 
     @Test
-    public void whenFindAll_then3ManagersShouldBeFound() {
-        List<ManagerDTO> managerList = managerService.getAllManagers();
-
-        assertThat(managerList).isNotNull();
-        assertThat(managerList.size()).isEqualTo(3);
+    public void getManagerByIdTest() {
+        RuntimeException runtimeException =
+                assertThrows(RuntimeException.class, () -> managerService.getManager(2L));
+        Mockito.verify(managerRepository).findById(2L);
     }
 
     @Test
-    public void whenDeleteById_thenNothingShouldReturn() {
-        long id = 1L;
-
-        willDoNothing().given(managerRepository).deleteById(id);
-
-        managerService.deleteManager(id);
-
-        verify(managerRepository, times(1)).deleteById(id);
+    public void createManagerFromDtoTest() {
+        managerService.addAndSaveManager(managerDTO);
+        Mockito.verify(managerRepository).save(managerMapper.toModel(managerDTO));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void whenInvalidId_thenThrowException() {
-        Long id = 0L;
-        Mockito.when(managerRepository.findById(id)).thenReturn(Optional.empty());
-        ManagerDTO found = managerService.getManager(0L);
-        verify(managerRepository, times(1)).findById(id);
+    @Test
+    public void deleteManagerByIdTest() {
+        managerService.deleteManager(1L);
+        Mockito.verify(managerRepository).deleteById(1L);
     }
 }
