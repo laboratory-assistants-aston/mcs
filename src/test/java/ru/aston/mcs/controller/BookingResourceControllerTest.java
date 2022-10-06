@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import ru.aston.mcs.dto.BookingResourceDTO;
 import ru.aston.mcs.service.BookingResourceServices;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
