@@ -1,4 +1,4 @@
-package ru.aston.mcs.service.impl;
+package ru.aston.mcs.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,7 @@ import org.mockito.quality.Strictness;
 import ru.aston.mcs.dto.BookingResourceDTO;
 import ru.aston.mcs.mapper.BookingResourceMapper;
 import ru.aston.mcs.repository.BookingResourceRepository;
+import ru.aston.mcs.service.impl.BookingResourceServicesImpl;
 
 import java.util.Date;
 

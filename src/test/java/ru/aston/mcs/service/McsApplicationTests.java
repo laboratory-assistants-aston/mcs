@@ -1,4 +1,4 @@
-package ru.aston.mcs;
+package ru.aston.mcs.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
