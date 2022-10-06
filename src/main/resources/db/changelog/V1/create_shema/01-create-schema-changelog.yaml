@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1664833576388-1
+      id: 1665054174911-1
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -20,10 +20,9 @@ databaseChangeLog:
                   name: resident_id
                   type: BIGINT
               - column:
-                  constraints:
-                    nullable: false
+                  defaultValueComputed: '0.00'
                   name: operation_sum
-                  type: DOUBLE
+                  type: Decimal(10,2)
               - column:
                   constraints:
                     nullable: false
@@ -39,7 +38,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: balance_history
   - changeSet:
-      id: 1664833576388-2
+      id: 1665054174911-2
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -80,7 +79,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: booking_resources
   - changeSet:
-      id: 1664833576388-3
+      id: 1665054174911-3
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -98,7 +97,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: booking_resources_residents
   - changeSet:
-      id: 1664833576388-4
+      id: 1665054174911-4
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -128,7 +127,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: managers
   - changeSet:
-      id: 1664833576388-5
+      id: 1665054174911-5
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -151,60 +150,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: notifications
   - changeSet:
-      id: 1664833576388-6
-      author: vikaz (generated)
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: pk_passports
-                  name: passport_number
-                  type: VARCHAR(255)
-              - column:
-                  name: resident_id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: name
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: surname
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: gender
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: birth_date
-                  type: DATETIME
-              - column:
-                  constraints:
-                    nullable: false
-                  name: registration_address
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: nationality
-                  type: VARCHAR(255)
-              - column:
-                  constraints:
-                    nullable: false
-                  name: expire_date
-                  type: DATETIME
-            tableName: passports
-  - changeSet:
-      id: 1664833576388-7
+      id: 1665054174911-6
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -222,7 +168,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: persons_roles
   - changeSet:
-      id: 1664833576388-8
+      id: 1665054174911-7
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -246,13 +192,12 @@ databaseChangeLog:
                   name: resident_address
                   type: VARCHAR(40)
               - column:
-                  constraints:
-                    nullable: false
+                  defaultValueComputed: '0.00'
                   name: balance
-                  type: DOUBLE
+                  type: Decimal(10,2)
             tableName: residents
   - changeSet:
-      id: 1664833576388-9
+      id: 1665054174911-8
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -272,13 +217,12 @@ databaseChangeLog:
                   name: resource_type_name
                   type: VARCHAR(255)
               - column:
-                  constraints:
-                    nullable: false
+                  defaultValueComputed: '0.00'
                   name: resource_type_cost
-                  type: DOUBLE
+                  type: Decimal(10,2)
             tableName: resource_types
   - changeSet:
-      id: 1664833576388-10
+      id: 1665054174911-9
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -299,7 +243,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: roles
   - changeSet:
-      id: 1664833576388-11
+      id: 1665054174911-10
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -317,7 +261,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: sending_notifications
   - changeSet:
-      id: 1664833576388-12
+      id: 1665054174911-11
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -338,7 +282,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: status
   - changeSet:
-      id: 1664833576388-13
+      id: 1665054174911-12
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -369,7 +313,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: users
   - changeSet:
-      id: 1664833576388-14
+      id: 1665054174911-13
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -380,7 +324,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: residents
   - changeSet:
-      id: 1664833576388-15
+      id: 1665054174911-14
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -391,7 +335,7 @@ databaseChangeLog:
             referencedColumnNames: resource_type_id
             referencedTableName: resource_types
   - changeSet:
-      id: 1664833576388-16
+      id: 1665054174911-15
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -402,7 +346,7 @@ databaseChangeLog:
             referencedColumnNames: name_id
             referencedTableName: status
   - changeSet:
-      id: 1664833576388-17
+      id: 1665054174911-16
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -413,7 +357,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1664833576388-18
+      id: 1665054174911-17
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -424,18 +368,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: managers
   - changeSet:
-      id: 1664833576388-19
-      author: vikaz (generated)
-      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: resident_id
-            baseTableName: passports
-            constraintName: FK_PASSPORTS_ON_RESIDENT
-            referencedColumnNames: user_id
-            referencedTableName: residents
-  - changeSet:
-      id: 1664833576388-20
+      id: 1665054174911-18
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -446,7 +379,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1664833576388-21
+      id: 1665054174911-19
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -457,7 +390,7 @@ databaseChangeLog:
             referencedColumnNames: resources_id
             referencedTableName: booking_resources
   - changeSet:
-      id: 1664833576388-22
+      id: 1665054174911-20
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -468,7 +401,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: residents
   - changeSet:
-      id: 1664833576388-23
+      id: 1665054174911-21
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -479,7 +412,7 @@ databaseChangeLog:
             referencedColumnNames: role_id
             referencedTableName: roles
   - changeSet:
-      id: 1664833576388-24
+      id: 1665054174911-22
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -490,7 +423,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1664833576388-25
+      id: 1665054174911-23
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -501,7 +434,7 @@ databaseChangeLog:
             referencedColumnNames: notification_id
             referencedTableName: notifications
   - changeSet:
-      id: 1664833576388-26
+      id: 1665054174911-24
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -511,4 +444,3 @@ databaseChangeLog:
             constraintName: fk_sennot_on_resident
             referencedColumnNames: user_id
             referencedTableName: residents
-
