@@ -11,7 +11,7 @@ public class ResourceTypeDataUtils {
     }
 
     public static ResourceType createResourceTypeEntity() {
-        return new ResourceType(1L, "parking",100.00);
+        return new ResourceType(3L, "parking",100.00);
     }
 
     public static List<ResourceType> createResourceTypeEntityList() {

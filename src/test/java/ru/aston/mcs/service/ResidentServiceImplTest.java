@@ -1,4 +1,4 @@
-package ru.aston.mcs.service.impl;
+package ru.aston.mcs.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.ResidentDTO;
 import ru.aston.mcs.mapper.ResidentMapper;
 import ru.aston.mcs.repository.ResidentRepository;
+import ru.aston.mcs.service.impl.ResidentServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
