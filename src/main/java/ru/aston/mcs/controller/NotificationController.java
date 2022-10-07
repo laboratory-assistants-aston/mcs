@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/notifications")
 public class NotificationController {
 
-    private NotificationService notificationService;
+    private final NotificationService notificationService;
 
     public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
