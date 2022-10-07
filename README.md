@@ -2,7 +2,8 @@
 
 
 # Обзор
-Система предоставляет сервис по автоматизации процессов, связанных с бронироанием общедомовых ресурсов.
+
+Система предоставляет сервис по автоматизации процессов, связанных с бронированием общедомовых ресурсов.
 
 
 # Разработчики
@@ -36,11 +37,9 @@ git clone https://github.com/laboratory-assistants-aston/mcs.git
 
 *3. Обновите конфигурационные поля в application.properties*
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/{your_name_for_DB}
-
-spring.datasource.username={your_username}
-
-spring.datasource.password={your_password}
+*spring.datasource.url=jdbc:postgresql://localhost:5432/{your_name_for_DB}
+*spring.datasource.username={your_username}
+*spring.datasource.password={your_password}
 
 
 *3. Запустите приложение с использованием Maven*
