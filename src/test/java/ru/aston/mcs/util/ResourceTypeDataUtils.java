@@ -7,17 +7,17 @@ import java.util.List;
 
 public class ResourceTypeDataUtils {
     public static ResourceTypeDTO createResourceTypeDTO() {
-        return new ResourceTypeDTO(1L, "parking",100.00);
+        return new ResourceTypeDTO(1L, "parking",100.00,null);
     }
 
     public static ResourceType createResourceTypeEntity() {
-        return new ResourceType(1L, "parking",100.00);
+        return new ResourceType(1L, "parking",100.00,null);
     }
 
     public static List<ResourceType> createResourceTypeEntityList() {
-        return  List.of(new ResourceType(1L, "parking",100.00), new ResourceType(2L, "co-working",50.00));
+        return  List.of(new ResourceType(1L, "parking",100.00,null), new ResourceType(2L, "co-working",50.00,null));
     }
     public static List<ResourceTypeDTO> createResourceTypeDTOList() {
-        return  List.of(new ResourceTypeDTO(1L, "parking",100.00), new ResourceTypeDTO(2L, "co-working",50.00));
+        return  List.of(new ResourceTypeDTO(1L, "parking",100.00,null), new ResourceTypeDTO(2L, "co-working",50.00,null));
     }
 }

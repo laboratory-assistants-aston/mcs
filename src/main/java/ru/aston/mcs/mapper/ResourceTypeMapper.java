@@ -7,9 +7,7 @@ import ru.aston.mcs.entity.ResourceType;
 
 import java.util.List;
 
-@Mapper(
-        componentModel = "spring"
-)
+@Mapper(componentModel = "spring")
 public interface ResourceTypeMapper {
     ResourceTypeDTO toDTO(ResourceType resourceType);
 

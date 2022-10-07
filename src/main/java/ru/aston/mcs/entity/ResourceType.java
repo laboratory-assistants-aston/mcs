@@ -1,11 +1,7 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "resource_types")
@@ -19,23 +15,28 @@ public class ResourceType {
     @Column(name = "resource_type_name", nullable = false)
     private String name;
 
-    @Column(name = "resource_type_cost", columnDefinition="Decimal(10,2) default '0.00'")
+    @Column(name = "resource_type_cost", columnDefinition = "Decimal(10,2) default '0.00'")
     private Double cost;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resource_type_id")
+    private List<Resource> resourceList;
 
-    public ResourceType(){}
+    public ResourceType() {
+    }
 
-    public ResourceType(Long resourceTypeId, String name, Double cost) {
+    public ResourceType(Long resourceTypeId, String name, Double cost, List<Resource> resourceList) {
         this.resourceTypeId = resourceTypeId;
         this.name = name;
         this.cost = cost;
+        this.resourceList = resourceList;
     }
 
-    public Long getNameId() {
+    public Long getResourceTypeId() {
         return resourceTypeId;
     }
 
-    public void setNameId(Long nameId) {
-        this.resourceTypeId = nameId;
+    public void setResourceTypeId(Long resourceTypeId) {
+        this.resourceTypeId = resourceTypeId;
     }
 
     public String getName() {
@@ -52,5 +53,13 @@ public class ResourceType {
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    public List<Resource> getResourceList() {
+        return resourceList;
+    }
+
+    public void setResourceList(List<Resource> resourceList) {
+        this.resourceList = resourceList;
     }
 }
