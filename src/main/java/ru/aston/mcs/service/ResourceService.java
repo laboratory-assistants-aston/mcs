@@ -7,9 +7,11 @@ import java.util.List;
 public interface ResourceService {
     List<ResourceDTO> getAllResource();
 
-    void addAndSaveResource(ResourceDTO resource);
-
     void deleteResource(Long id);
 
     ResourceDTO getResource(Long id);
+
+    ResourceDTO updateResource(Long id, ResourceDTO resourcesDto);
+
+    ResourceDTO create(ResourceDTO resourcesDto);
 }

@@ -10,7 +10,9 @@ public interface BookingResourceServices {
 
     BookingResourceDTO getBookingResource(Long id);
 
-    void addAndSaveBookingResource(BookingResourceDTO resourceDTO);
+    BookingResourceDTO createBookingResource(BookingResourceDTO resourceDto);
+
+    BookingResourceDTO updateBookingResource(Long id, BookingResourceDTO resourceDTO);
 
     void deleteBookingResource(Long id);
 }

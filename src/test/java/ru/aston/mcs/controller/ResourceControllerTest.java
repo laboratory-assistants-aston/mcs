@@ -68,9 +68,10 @@ class ResourceControllerTest {
 
     @Test
     void updateResourceByDtoTest() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(put("/api/resources/")
+        MvcResult mvcResult = mockMvc.perform(put("/api/resources/1")
                         .characterEncoding("utf-8")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(1))
                         .content(asJsonString(resourceDTO)))
                 .andExpect(status().isOk())
                 .andReturn();

@@ -3,6 +3,9 @@ package ru.aston.mcs.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.ResourceDTO;
+import ru.aston.mcs.entity.Resource;
+import ru.aston.mcs.exception.EntityNotFoundException;
+import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.ResourceMapper;
 import ru.aston.mcs.repository.ResourceRepository;
 import ru.aston.mcs.service.ResourceService;
@@ -27,10 +30,6 @@ public class ResourceServiceImpl implements ResourceService {
         return resourceMapper.toDTOList(resourceRepository.findAll());
     }
 
-    @Override
-    public void addAndSaveResource(ResourceDTO resourceDTO) {
-        resourceRepository.save(resourceMapper.toModel(resourceDTO));
-    }
 
     @Override
     public void deleteResource(Long id) {
@@ -42,5 +41,24 @@ public class ResourceServiceImpl implements ResourceService {
         return resourceMapper.toDTO(
                 resourceRepository.findById(id)
                         .orElseThrow(RuntimeException::new));
+    }
+
+    @Override
+    public ResourceDTO updateResource(Long id, ResourceDTO resourcesDto) {
+        if (resourcesDto == null || id == null) {
+            throw new InvalidRequestException();
+        }
+        Resource bookingResource = resourceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id));
+        bookingResource.setId(resourcesDto.getId());
+        return resourceMapper.toDTO(resourceRepository.save(bookingResource));
+    }
+
+    @Override
+    public ResourceDTO create(ResourceDTO resourcesDto) {
+        if (resourcesDto == null) {
+            throw new InvalidRequestException();
+        }
+        return resourceMapper.toDTO(resourceRepository.save(resourceMapper.toModel(resourcesDto)));
     }
 }

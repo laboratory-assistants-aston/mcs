@@ -50,7 +50,7 @@ class ResourceServiceImplTest {
 
     @Test
     void createResourceFromDtoTest() {
-        resourceServiceImpl.addAndSaveResource(resourceDTO);
+        resourceServiceImpl.create(resourceDTO);
         Mockito.verify(resourceRepository).save(resourceMapper.toModel(resourceDTO));
     }
 
