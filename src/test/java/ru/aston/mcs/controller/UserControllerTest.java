@@ -38,9 +38,9 @@ public class UserControllerTest {
     @Test
     void shouldReturnListOfUsers() throws Exception {
         List<UserDTO> users = new ArrayList<>(
-                Arrays.asList(new UserDTO(1L, 123, "login1", "email1", null),
-                        new UserDTO(2L, 1234, "login2", "email2", null),
-                        new UserDTO(3L, 1235, "login3", "email3", null))
+                Arrays.asList(new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null),
+                        new UserDTO(2L, 123, "login2", "email2", "phone2", "address2", 2.2F, null),
+                        new UserDTO(3L, 123, "login3", "email3", "phone3", "address3", 2.2F, null))
         );
 
         when(userService.getAllUsers()).thenReturn(users);
@@ -52,7 +52,7 @@ public class UserControllerTest {
 
     @Test
     void shouldCreateUser() throws Exception {
-        UserDTO userDTO = new UserDTO(1L, 123, "login", "email", null);
+        UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
 
         mockMvc.perform(post("/api/users/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDTO)))
@@ -63,7 +63,7 @@ public class UserControllerTest {
     @Test
     void shouldReturnUser() throws Exception {
         long id = 1L;
-        UserDTO userDTO = new UserDTO(1L, 123, "login", "email", null);
+        UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
         when(userService.getUser(id)).thenReturn(userDTO);
         mockMvc.perform(get("/api/users/{id}", id)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
@@ -72,7 +72,7 @@ public class UserControllerTest {
 
     @Test
     void shouldUpdateUser() throws Exception {
-        UserDTO userDTO = new UserDTO(1L, 123, "login", "email", null);
+        UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
 
         mockMvc.perform(put("/api/users/").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userDTO)))
