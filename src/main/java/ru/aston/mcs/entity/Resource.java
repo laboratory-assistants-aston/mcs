@@ -10,11 +10,14 @@ public class Resource {
     @Column(name = "resources_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "resource_identifier")
     private int resourceIdentifier;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_type_id", nullable = false)
     private ResourceType resourceType;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_id")
     private List<BookingResource> bookingResourceList;

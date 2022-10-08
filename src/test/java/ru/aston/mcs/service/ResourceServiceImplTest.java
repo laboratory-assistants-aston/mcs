@@ -45,7 +45,7 @@ class ResourceServiceImplTest {
     void getResourceByIdTest() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class,
                 () -> resourceServiceImpl.getResource(0L));
-        Mockito.verify(resourceRepository).findById(1L);
+        Mockito.verify(resourceRepository).findById(0L);
     }
 
     @Test

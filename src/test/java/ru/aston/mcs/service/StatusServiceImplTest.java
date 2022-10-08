@@ -1,3 +1,4 @@
+
 package ru.aston.mcs.service;
 
 
@@ -70,7 +71,7 @@ class StatusServiceImplTest {
         //Assert
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.getStatusId(), entity.getStatusId());
-        Assertions.assertEquals(fromDb.getName(), entity.getStatusName());
+        Assertions.assertEquals(fromDb.getName(), entity.getName());
 
         Mockito.verify(statusRepository).findById(entity.getStatusId());
         Mockito.verify(statusMapper).toDTO(entity);

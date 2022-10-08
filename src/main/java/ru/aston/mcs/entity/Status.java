@@ -17,7 +17,7 @@ public class Status {
 
     @NotNull
     @Column(name = "name", nullable = false)
-    private String statusName;
+    private String name;
 
     public Status() {
 
@@ -25,7 +25,7 @@ public class Status {
 
     public Status(Long statusId, String name) {
         this.statusId = statusId;
-        this.statusName = name;
+        this.name = name;
     }
 
     public Long getStatusId() {
@@ -36,12 +36,12 @@ public class Status {
         this.statusId = statusId;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public String getName() {
+        return name;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setName(String statusName) {
+        this.name = statusName;
     }
 
     @Override
@@ -49,11 +49,11 @@ public class Status {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Status status = (Status) o;
-        return Objects.equals(statusId, status.statusId) && Objects.equals(statusName, status.statusName);
+        return Objects.equals(statusId, status.statusId) && Objects.equals(name, status.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(statusId, statusName);
+        return Objects.hash(statusId, name);
     }
 }
