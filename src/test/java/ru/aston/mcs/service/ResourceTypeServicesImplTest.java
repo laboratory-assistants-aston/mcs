@@ -1,8 +1,6 @@
 package ru.aston.mcs.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,8 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import ru.aston.mcs.controller.StatusController;
 import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.mapper.ResourceTypeMapper;

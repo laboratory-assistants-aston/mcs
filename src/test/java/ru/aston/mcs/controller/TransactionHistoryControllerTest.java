@@ -7,9 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.aston.mcs.dto.BalanceHistoryDTO;
+import ru.aston.mcs.dto.TransactionHistoryDTO;
 import ru.aston.mcs.entity.enums.Operation;
-import ru.aston.mcs.service.BalanceHistoryService;
+import ru.aston.mcs.service.TransactionHistoryService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,11 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BalanceHistoryController.class)
-class BalanceHistoryControllerTest {
+@WebMvcTest(TransactionHistoryController.class)
+class TransactionHistoryControllerTest {
 
     @MockBean
-    private BalanceHistoryService balanceHistoryService;
+    private TransactionHistoryService transactionHistoryService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,35 +40,35 @@ class BalanceHistoryControllerTest {
 
     @Test
     void createBalanceHistory() throws Exception {
-        BalanceHistoryDTO balanceHistoryDTO = new BalanceHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
+        TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
 
-        mockMvc.perform(post("/api/balance-histories/").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(balanceHistoryDTO)))
+        mockMvc.perform(post("/api/transaction-histories/").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(transactionHistoryDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
 
     @Test
     void returnListOfBalanceHistories() throws Exception {
-        List<BalanceHistoryDTO> balanceHistories = new ArrayList<>(
-                Arrays.asList(new BalanceHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date()),
-                        new BalanceHistoryDTO(2L, null, 200.0, Operation.INCREASE, "something2", new Date()),
-                        new BalanceHistoryDTO(3L, null, 300.0, Operation.DECREASE, "something3", new Date()))
+        List<TransactionHistoryDTO> transactionHistories = new ArrayList<>(
+                Arrays.asList(new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date()),
+                        new TransactionHistoryDTO(2L, null, 200.0, Operation.INCREASE, "something2", new Date()),
+                        new TransactionHistoryDTO(3L, null, 300.0, Operation.DECREASE, "something3", new Date()))
         );
 
-        when(balanceHistoryService.getAllBalanceHistories()).thenReturn(balanceHistories);
-        mockMvc.perform(get("/api/balance-histories/"))
+        when(transactionHistoryService.getAllTransactionHistories()).thenReturn(transactionHistories);
+        mockMvc.perform(get("/api/transaction-histories/"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(balanceHistories.size()))
+                .andExpect(jsonPath("$.size()").value(transactionHistories.size()))
                 .andDo(print());
     }
 
     @Test
     void returnBalanceHistory() throws Exception {
         long id = 1L;
-        BalanceHistoryDTO balanceHistoryDTO = new BalanceHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
-        when(balanceHistoryService.getBalanceHistory(id)).thenReturn(balanceHistoryDTO);
-        mockMvc.perform(get("/api/balance-histories/{id}", id))
+        TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
+        when(transactionHistoryService.getTransactionHistory(id)).thenReturn(transactionHistoryDTO);
+        mockMvc.perform(get("/api/transaction-histories/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andDo(print());
@@ -76,10 +76,10 @@ class BalanceHistoryControllerTest {
 
     @Test
     void updateBalanceHistory() throws Exception {
-        BalanceHistoryDTO balanceHistoryDTO = new BalanceHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
+        TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
 
-        mockMvc.perform(put("/api/balance-histories/").contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(balanceHistoryDTO)))
+        mockMvc.perform(put("/api/transaction-histories/").contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(transactionHistoryDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -88,8 +88,8 @@ class BalanceHistoryControllerTest {
     void deleteBalanceHistory() throws Exception {
         long id = 1L;
 
-        doNothing().when(balanceHistoryService).deleteBalanceHistory(id);
-        mockMvc.perform(delete("/api/balance-histories/{id}", id))
+        doNothing().when(transactionHistoryService).deleteTransactionHistory(id);
+        mockMvc.perform(delete("/api/transaction-histories/{id}", id))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

@@ -1,22 +1,26 @@
 package ru.aston.mcs.dto;
 
+import liquibase.pro.packaged.D;
 import ru.aston.mcs.entity.Manager;
 import ru.aston.mcs.entity.Resident;
+import ru.aston.mcs.entity.User;
+
+import java.util.Date;
 
 public class NotificationDTO {
     private Long notificationId;
     private String text;
-    private Resident resident;
-    private Manager manager;
+    private User user;
+    private Date date;
 
     public NotificationDTO() {
     }
 
-    public NotificationDTO(Long notificationId, String text, Resident user, Manager manager) {
+    public NotificationDTO(Long notificationId, String text, User user, Date date) {
         this.notificationId = notificationId;
         this.text = text;
-        this.resident = user;
-        this.manager = manager;
+        this.user = user;
+        this.date = date;
     }
 
     public Long getNotificationId() {
@@ -35,19 +39,19 @@ public class NotificationDTO {
         this.text = text;
     }
 
-    public Resident getResident() {
-        return resident;
+    public User getUser() {
+        return user;
     }
 
-    public void setResident(Resident resident) {
-        this.resident = resident;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Manager getManager() {
-        return manager;
+    public Date getDate() {
+        return date;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
