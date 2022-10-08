@@ -30,12 +30,12 @@ public class BookingResource {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     public BookingResource() {
     }
 
-    public BookingResource(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, Users user) {
+    public BookingResource(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
         this.id = id;
         this.resource = resource;
         this.status = status;
@@ -69,7 +69,7 @@ public class BookingResource {
         this.endBooking = endBooking;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -97,7 +97,7 @@ public class BookingResource {
         return endBooking;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 }

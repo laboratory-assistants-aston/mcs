@@ -1,8 +1,5 @@
 package ru.aston.mcs.dto;
 
-import liquibase.pro.packaged.D;
-import ru.aston.mcs.entity.Manager;
-import ru.aston.mcs.entity.Resident;
 import ru.aston.mcs.entity.User;
 
 import java.util.Date;

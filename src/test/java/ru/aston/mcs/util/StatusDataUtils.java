@@ -5,11 +5,6 @@ import ru.aston.mcs.entity.Status;
 
 import java.util.List;
 
-/**
- * @author Victoria Zhirnova
- * @project mcs
- */
-
 public class StatusDataUtils {
     public static StatusDTO createStatusDTO() {
          return new StatusDTO(1L, "BOOKING");

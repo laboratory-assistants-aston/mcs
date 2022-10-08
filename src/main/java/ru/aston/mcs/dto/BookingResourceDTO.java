@@ -2,6 +2,7 @@ package ru.aston.mcs.dto;
 
 import ru.aston.mcs.entity.Resource;
 import ru.aston.mcs.entity.Status;
+import ru.aston.mcs.entity.User;
 
 import java.util.Date;
 
@@ -12,12 +13,12 @@ public class BookingResourceDTO {
     private Integer durationTime;
     private Date startBooking;
     private Date endBooking;
-    private Users user;
+    private User user;
 
     public BookingResourceDTO() {
     }
 
-    public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, Users user) {
+    public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
         this.id = id;
         this.resource = resource;
         this.status = status;
@@ -51,7 +52,7 @@ public class BookingResourceDTO {
         this.endBooking = endBooking;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -79,7 +80,7 @@ public class BookingResourceDTO {
         return endBooking;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 }
