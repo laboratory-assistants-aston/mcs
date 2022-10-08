@@ -40,6 +40,10 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
     @Override
     public ResourceTypeDTO createResourceType(ResourceTypeDTO resourceTypeDTO) {
 
+        if (resourceTypeDTO == null ) {
+            throw new InvalidRequestException();
+        }
+
         ResourceType resourceTypeFromDb = typeResourcesRepository.save(typeResourcesMapper.toModel(resourceTypeDTO));
         return typeResourcesMapper.toDTO(typeResourcesRepository.save(resourceTypeFromDb));
     }

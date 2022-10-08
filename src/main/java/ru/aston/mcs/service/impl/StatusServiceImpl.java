@@ -36,12 +36,12 @@ public class StatusServiceImpl implements StatusService {
     @Override
     public StatusDTO createStatus(StatusDTO statusDTO) {
 
-       if (statusDTO == null ) {
+        if (statusDTO == null ) {
             throw new InvalidRequestException();
         }
 
-       statusRepository.save(statusMapper.toModel(statusDTO));
-       return statusDTO;
+        Status statusFromDb = statusRepository.save(statusMapper.toModel(statusDTO));
+        return statusMapper.toDTO(statusRepository.save(statusFromDb));
     }
 
     @Override
