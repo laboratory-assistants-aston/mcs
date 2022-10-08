@@ -37,18 +37,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) {
         userRepository.save(userMapper.toModel(userDTO));
+        return userDTO;
     }
 
     @Override
-    public UserDTO updateUser(UserDTO userDTO) {
-        if (userDTO == null || userDTO.getId() == null) {
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        if (userDTO == null || id == null) {
             throw new InvalidRequestException();
         }
 
-        Long userId = userDTO.getId();
-        User userFromDb = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        User userFromDb = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
         userFromDb.setAccessCode(userDTO.getAccessCode());
         userFromDb.setAddress(userDTO.getAddress());
@@ -58,7 +58,10 @@ public class UserServiceImpl implements UserService {
         userFromDb.setRoles(userDTO.getRoles());
         userFromDb.setEmail(userDTO.getEmail());
 
-        return userMapper.toDTO(userRepository.save(userFromDb));
+        User user = userRepository.save(userFromDb);
+        UserDTO userDTOResult = userMapper.toDTO(user);
+
+        return userDTOResult;
     }
 
     @Override

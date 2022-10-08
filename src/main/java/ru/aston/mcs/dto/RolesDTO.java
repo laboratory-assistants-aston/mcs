@@ -1,21 +1,28 @@
 package ru.aston.mcs.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.aston.mcs.entity.User;
 
 import java.util.List;
 
+@ApiModel(value = "model for adding data in Roles table")
 public class RolesDTO {
     private Long id;
+
+    @ApiModelProperty(value = "name of role", example = "admin", required = true)
     private String roleName;
-    private List<User> persons;
+
+    @ApiModelProperty(value = "list of users with this role")
+    private List<User> users;
 
     public RolesDTO() {
     }
 
-    public RolesDTO(Long id, String roleName, List<User> persons) {
+    public RolesDTO(Long id, String roleName, List<User> users) {
         this.id = id;
         this.roleName = roleName;
-        this.persons = persons;
+        this.users = users;
     }
 
     public Long getId() {
@@ -34,11 +41,11 @@ public class RolesDTO {
         this.roleName = roleName;
     }
 
-    public List<User> getPersons() {
-        return persons;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setPersons(List<User> persons) {
-        this.persons = persons;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

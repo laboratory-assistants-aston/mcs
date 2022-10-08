@@ -36,17 +36,6 @@ public class RolesControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    void shouldCreateRole() throws Exception {
-        RolesDTO rolesDTO = new RolesDTO(1L, "name", null);
-
-        mockMvc.perform(post("/api/roles/")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(rolesDTO)))
-                .andExpect(status().isOk())
-                .andDo(print());
-    }
-
-    @Test
     void shouldReturnListOfRoles() throws Exception {
         List<RolesDTO> roles = new ArrayList<>(
                 Arrays.asList(new RolesDTO(1L, "name", null),
@@ -56,6 +45,17 @@ public class RolesControllerTest {
         mockMvc.perform(get("/api/roles/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(roles.size()))
+                .andDo(print());
+    }
+
+    @Test
+    void shouldCreateRole() throws Exception {
+        RolesDTO rolesDTO = new RolesDTO(1L, "name", null);
+
+        mockMvc.perform(post("/api/roles/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(rolesDTO)))
+                .andExpect(status().isOk())
                 .andDo(print());
     }
 
@@ -71,9 +71,11 @@ public class RolesControllerTest {
 
     @Test
     void shouldUpdateRole() throws Exception {
+        Long id = 1L;
         RolesDTO rolesDTO = new RolesDTO(1L, "name", null);
-
-        mockMvc.perform(put("/api/roles/").contentType(MediaType.APPLICATION_JSON)
+        RolesDTO updatedRolesDTO = new RolesDTO(1L, "updated", null);
+        when(rolesService.updateRole(id, rolesDTO)).thenReturn(updatedRolesDTO);
+        mockMvc.perform(put("/api/roles/{id}", id).contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(rolesDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());

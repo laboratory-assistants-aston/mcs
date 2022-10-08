@@ -3,10 +3,13 @@ package ru.aston.mcs.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.RolesDTO;
+import ru.aston.mcs.entity.Role;
+import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.RolesMapper;
 import ru.aston.mcs.repository.RolesRepository;
 import ru.aston.mcs.service.RolesService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -35,8 +38,26 @@ public class RolesServiceImpl implements RolesService {
     }
 
     @Override
-    public void addAndSaveRole(RolesDTO rolesDTO) {
+    public RolesDTO createRole(RolesDTO rolesDTO) {
         rolesRepository.save(rolesMapper.toModel(rolesDTO));
+        return rolesDTO;
+    }
+
+    @Override
+    public RolesDTO updateRole(Long id, RolesDTO rolesDTO) {
+        if (rolesDTO == null || id == null) {
+            throw new InvalidRequestException();
+        }
+
+        Role rolesFromDb = rolesRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+
+        rolesFromDb.setRoleName(rolesDTO.getRoleName());
+        rolesFromDb.setUsers(rolesDTO.getUsers());
+
+        Role role = rolesRepository.save(rolesFromDb);
+        RolesDTO rolesDTOResult = rolesMapper.toDTO(role);
+
+        return rolesDTOResult;
     }
 
     @Override

@@ -9,7 +9,9 @@ public interface RolesService {
 
     RolesDTO getRole(Long roleId);
 
-    void addAndSaveRole(RolesDTO rolesDTO);
+    RolesDTO createRole(RolesDTO rolesDTO);
+
+    RolesDTO updateRole(Long id, RolesDTO rolesDTO);
 
     void deleteRole(Long roleId);
 }

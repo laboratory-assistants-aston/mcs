@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -74,18 +73,12 @@ public class UserControllerTest {
     @Test
     void shouldUpdateUser() throws Exception {
         Long id = 1L;
-
         UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
         UserDTO updatedUserDTO = new UserDTO(1L, 123, "updated", "updated", "phone", "address", 2.2F, null);
-
-        when(userService.getUser(id)).thenReturn(userDTO);
-        when(userService.updateUser(any(UserDTO.class))).thenReturn(updatedUserDTO);
-
-        mockMvc.perform(put("/api/users/").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(updatedUserDTO)))
+        when(userService.updateUser(id, userDTO)).thenReturn(updatedUserDTO);
+        mockMvc.perform(put("/api/users/{id}", id).contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.login").value(updatedUserDTO.getLogin()))
-                .andExpect(jsonPath("$.email").value(updatedUserDTO.getEmail()))
                 .andDo(print());
     }
 

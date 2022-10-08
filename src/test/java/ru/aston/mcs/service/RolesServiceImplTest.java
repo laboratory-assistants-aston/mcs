@@ -1,5 +1,6 @@
 package ru.aston.mcs.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,11 +9,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.RolesDTO;
+import ru.aston.mcs.entity.Role;
 import ru.aston.mcs.mapper.RolesMapper;
 import ru.aston.mcs.repository.RolesRepository;
 import ru.aston.mcs.service.impl.RolesServiceImpl;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 @ExtendWith(MockitoExtension.class)
 class RolesServiceImplTest {
@@ -30,7 +36,7 @@ class RolesServiceImplTest {
     void createDto() {
         rolesDTO = new RolesDTO();
         rolesDTO.setRoleName("roleName");
-        rolesDTO.setPersons(null);
+        rolesDTO.setUsers(null);
     }
 
     @Test
@@ -48,8 +54,23 @@ class RolesServiceImplTest {
 
     @Test
     void createRoleFromDtoTest() {
-        rolesService.addAndSaveRole(rolesDTO);
+        rolesService.createRole(rolesDTO);
         Mockito.verify(rolesRepository).save(rolesMapper.toModel(rolesDTO));
+    }
+
+    @Test
+    void updateRoleFromDtoTest() {
+        Role roleFromDb = new Role(1L, "rolename1", null);
+        RolesDTO result = new RolesDTO(1L, "upd", null);
+
+        Mockito.when(rolesRepository.findById(anyLong())).thenReturn(Optional.of(roleFromDb));
+        Mockito.when(rolesRepository.save(any(Role.class))).thenReturn(roleFromDb);
+
+        rolesService.updateRole(1L, result);
+        Assertions.assertEquals(roleFromDb.getRoleName(), result.getRoleName());
+        Assertions.assertEquals(roleFromDb.getId(), result.getId());
+
+        Mockito.verify(rolesRepository).save(any(Role.class));
     }
 
     @Test
