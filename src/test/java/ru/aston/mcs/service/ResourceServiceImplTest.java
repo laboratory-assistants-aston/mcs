@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.ResourceDTO;
 import ru.aston.mcs.mapper.ResourceMapper;
 import ru.aston.mcs.repository.ResourceRepository;
-import ru.aston.mcs.service.Impl.ResourceServiceImpl;
+import ru.aston.mcs.service.impl.ResourceServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

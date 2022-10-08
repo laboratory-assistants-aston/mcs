@@ -1,10 +1,9 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.NotificationDTO;
 import ru.aston.mcs.entity.Notification;
-import ru.aston.mcs.entity.TransactionHistory;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.repository.NotificationRepository;

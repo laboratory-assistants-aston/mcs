@@ -11,7 +11,7 @@ import ru.aston.mcs.dto.TransactionHistoryDTO;
 import ru.aston.mcs.entity.enums.Operation;
 import ru.aston.mcs.mapper.TransactionHistoryMapper;
 import ru.aston.mcs.repository.TransactionHistoryRepository;
-import ru.aston.mcs.service.Impl.TransactionHistoryServiceImpl;
+import ru.aston.mcs.service.impl.TransactionHistoryServiceImpl;
 
 import java.util.Date;
 

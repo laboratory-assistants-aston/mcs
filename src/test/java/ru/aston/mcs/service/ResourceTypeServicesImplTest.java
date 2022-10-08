@@ -13,7 +13,7 @@ import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.mapper.ResourceTypeMapper;
 import ru.aston.mcs.repository.ResourceTypeRepository;
-import ru.aston.mcs.service.Impl.ResourceTypeServicesImpl;
+import ru.aston.mcs.service.impl.ResourceTypeServicesImpl;
 import ru.aston.mcs.util.ResourceTypeDataUtils;
 import java.util.List;
 import java.util.Optional;

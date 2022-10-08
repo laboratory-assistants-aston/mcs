@@ -1,4 +1,4 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.BookingResourceDTO;

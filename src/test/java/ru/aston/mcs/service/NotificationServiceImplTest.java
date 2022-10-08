@@ -24,7 +24,7 @@ class NotificationServiceImplTest {
     private NotificationMapper notificationMapper;
 
     @InjectMocks
-    private ru.aston.mcs.service.Impl.NotificationServiceImpl notificationService;
+    private ru.aston.mcs.service.impl.NotificationServiceImpl notificationService;
 
     private NotificationDTO notificationDTO;
 

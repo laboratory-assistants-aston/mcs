@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.RolesDTO;
 import ru.aston.mcs.mapper.RolesMapper;
 import ru.aston.mcs.repository.RolesRepository;
-import ru.aston.mcs.service.Impl.RolesServiceImpl;
+import ru.aston.mcs.service.impl.RolesServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

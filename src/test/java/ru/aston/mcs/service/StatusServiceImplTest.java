@@ -16,7 +16,7 @@ import ru.aston.mcs.dto.StatusDTO;
 import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
-import ru.aston.mcs.service.Impl.StatusServiceImpl;
+import ru.aston.mcs.service.impl.StatusServiceImpl;
 import ru.aston.mcs.util.StatusDataUtils;
 import java.util.List;
 import java.util.Optional;
