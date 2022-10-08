@@ -1,5 +1,6 @@
 package ru.aston.mcs.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,11 +9,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.UserDTO;
+import ru.aston.mcs.entity.User;
 import ru.aston.mcs.mapper.UserMapper;
 import ru.aston.mcs.repository.UserRepository;
 import ru.aston.mcs.service.impl.UserServiceImpl;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -28,11 +34,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void createDto() {
-        userDTO = new UserDTO();
-        userDTO.setAccessCode(123);
-        userDTO.setEmail("email@mail.ru");
-        userDTO.setLogin("login");
-        userDTO.setRoles(null);
+        userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
     }
 
 
@@ -51,8 +53,18 @@ class UserServiceImplTest {
 
     @Test
     void createUserFromDtoTest() {
-        userService.addAndSaveUser(userDTO);
+        userService.saveUser(userDTO);
         Mockito.verify(userRepository).save(userMapper.toModel(userDTO));
+    }
+
+    @Test
+    void updateUserFromDtoTest() {
+        User userFromDb = new User(1L, 123, "login3", "email3", "phone", "address", 2.2F, null);
+        Mockito.when(userRepository.findById(anyLong())).thenReturn(Optional.of(userFromDb));
+        userService.updateUser(userDTO);
+        Assertions.assertEquals(userFromDb.getLogin(), userDTO.getLogin());
+        Assertions.assertEquals(userFromDb.getEmail(), userDTO.getEmail());
+        Mockito.verify(userRepository).save(any(User.class));
     }
 
     @Test

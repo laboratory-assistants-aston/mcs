@@ -3,10 +3,13 @@ package ru.aston.mcs.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.UserDTO;
+import ru.aston.mcs.entity.User;
+import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.UserMapper;
 import ru.aston.mcs.repository.UserRepository;
 import ru.aston.mcs.service.UserService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -34,8 +37,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addAndSaveUser(UserDTO userDTO) {
+    public void saveUser(UserDTO userDTO) {
         userRepository.save(userMapper.toModel(userDTO));
+    }
+
+    @Override
+    public UserDTO updateUser(UserDTO userDTO) {
+        if (userDTO == null || userDTO.getId() == null) {
+            throw new InvalidRequestException();
+        }
+
+        Long userId = userDTO.getId();
+        User userFromDb = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+
+        userFromDb.setAccessCode(userDTO.getAccessCode());
+        userFromDb.setAddress(userDTO.getAddress());
+        userFromDb.setPhone(userDTO.getPhone());
+        userFromDb.setBalance(userDTO.getBalance());
+        userFromDb.setLogin(userDTO.getLogin());
+        userFromDb.setRoles(userDTO.getRoles());
+        userFromDb.setEmail(userDTO.getEmail());
+
+        return userMapper.toDTO(userRepository.save(userFromDb));
     }
 
     @Override
