@@ -30,9 +30,14 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
     }
 
     @Override
-    public void saveTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
-        transactionHistoryRepository.save(
-                transactionHistoryMapper.toModel(transactionHistoryDTO));
+    public TransactionHistoryDTO createTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
+
+        if (transactionHistoryDTO == null ) {
+            throw new InvalidRequestException();
+        }
+
+        transactionHistoryRepository.save(transactionHistoryMapper.toModel(transactionHistoryDTO));
+        return transactionHistoryDTO;
     }
 
     @Override

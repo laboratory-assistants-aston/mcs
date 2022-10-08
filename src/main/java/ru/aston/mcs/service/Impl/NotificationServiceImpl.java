@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.NotificationDTO;
 import ru.aston.mcs.entity.Notification;
+import ru.aston.mcs.entity.TransactionHistory;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.repository.NotificationRepository;
@@ -47,9 +48,14 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void saveNotification(NotificationDTO notificationDTO) {
-        notificationRepository.save(
-                notificationMapper.toModel(notificationDTO));
+    public NotificationDTO createNotification(NotificationDTO notificationDTO) {
+
+        if (notificationDTO == null ) {
+            throw new InvalidRequestException();
+        }
+
+        notificationRepository.save(notificationMapper.toModel(notificationDTO));
+        return notificationDTO;
     }
 
     @Override

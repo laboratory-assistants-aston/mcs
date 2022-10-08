@@ -7,7 +7,7 @@ import java.util.List;
 public interface TransactionHistoryService {
     List<TransactionHistoryDTO> getAllTransactionHistories();
 
-    void saveTransactionHistory(TransactionHistoryDTO TransactionHistoryDTO);
+    TransactionHistoryDTO createTransactionHistory(TransactionHistoryDTO TransactionHistoryDTO);
 
     TransactionHistoryDTO updateTransactionHistory(TransactionHistoryDTO TransactionHistoryDTO);
 

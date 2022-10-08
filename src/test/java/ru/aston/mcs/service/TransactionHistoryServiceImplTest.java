@@ -54,7 +54,7 @@ class TransactionHistoryServiceImplTest {
 
     @Test
     void createTransactionHistoryFromDtoTest() {
-        transactionHistoryService.saveTransactionHistory(transactionHistoryDTO);
+        transactionHistoryService.createTransactionHistory(transactionHistoryDTO);
         Mockito.verify(transactionHistoryRepository).save(transactionHistoryMapper.toModel(transactionHistoryDTO));
     }
 

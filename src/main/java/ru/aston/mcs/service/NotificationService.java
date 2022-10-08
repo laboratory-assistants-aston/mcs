@@ -9,7 +9,7 @@ public interface NotificationService {
 
     NotificationDTO updateNotification(NotificationDTO notification);
 
-    void saveNotification(NotificationDTO notification);
+    NotificationDTO createNotification(NotificationDTO notification);
 
     void deleteNotification(Long notificationId);
 

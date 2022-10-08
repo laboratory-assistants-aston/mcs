@@ -50,8 +50,8 @@ class NotificationServiceImplTest {
     }
 
     @Test
-    void addNotificationFromDtoTest() {
-        notificationService.saveNotification(notificationDTO);
+    void createNotificationFromDtoTest() {
+        notificationService.createNotification(notificationDTO);
         Mockito.verify(notificationRepository).save(notificationMapper.toModel(notificationDTO));
     }
 
