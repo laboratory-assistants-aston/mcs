@@ -11,7 +11,7 @@ import ru.aston.mcs.dto.TransactionHistoryDTO;
 import ru.aston.mcs.entity.enums.Operation;
 import ru.aston.mcs.mapper.TransactionHistoryMapper;
 import ru.aston.mcs.repository.TransactionHistoryRepository;
-import ru.aston.mcs.service.Impl.TransactionHistoryServiceImpl;
+import ru.aston.mcs.service.impl.TransactionHistoryServiceImpl;
 
 import java.util.Date;
 
@@ -26,7 +26,7 @@ class TransactionHistoryServiceImplTest {
     private TransactionHistoryMapper transactionHistoryMapper;
 
     @InjectMocks
-    private TransactionHistoryServiceImpl balanceHistoryService;
+    private TransactionHistoryServiceImpl transactionHistoryService;
 
     private TransactionHistoryDTO transactionHistoryDTO;
 
@@ -41,26 +41,26 @@ class TransactionHistoryServiceImplTest {
 
     @Test
     void getAllTransactionHistories() {
-        balanceHistoryService.getAllTransactionHistories();
+        transactionHistoryService.getAllTransactionHistories();
         Mockito.verify(transactionHistoryRepository).findAll();
     }
 
     @Test
-    void getBalanceHistoryByIdTest() {
+    void getTransactionHistoryByIdTest() {
         RuntimeException runtimeException =
-                assertThrows(RuntimeException.class, () -> balanceHistoryService.getTransactionHistory(1L));
+                assertThrows(RuntimeException.class, () -> transactionHistoryService.getTransactionHistory(1L));
         Mockito.verify(transactionHistoryRepository).findById(1L);
     }
 
     @Test
-    void createBalanceHistoryFromDtoTest() {
-        balanceHistoryService.addAndSaveTransactionHistory(transactionHistoryDTO);
+    void createTransactionHistoryFromDtoTest() {
+        transactionHistoryService.createTransactionHistory(transactionHistoryDTO);
         Mockito.verify(transactionHistoryRepository).save(transactionHistoryMapper.toModel(transactionHistoryDTO));
     }
 
     @Test
-    void deleteBalanceHistoryByIdTest() {
-        balanceHistoryService.deleteTransactionHistory(1L);
+    void deleteTransactionHistoryByIdTest() {
+        transactionHistoryService.deleteTransactionHistory(1L);
         Mockito.verify(transactionHistoryRepository).deleteById(1L);
     }
 }

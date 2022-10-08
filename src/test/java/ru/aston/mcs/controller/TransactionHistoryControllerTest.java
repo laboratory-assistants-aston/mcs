@@ -39,7 +39,7 @@ class TransactionHistoryControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    void createBalanceHistory() throws Exception {
+    void createTransactionHistory() throws Exception {
         TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
 
         mockMvc.perform(post("/api/transaction-histories/").contentType(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ class TransactionHistoryControllerTest {
     }
 
     @Test
-    void returnListOfBalanceHistories() throws Exception {
+    void returnListOfTransactionHistories() throws Exception {
         List<TransactionHistoryDTO> transactionHistories = new ArrayList<>(
                 Arrays.asList(new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date()),
                         new TransactionHistoryDTO(2L, null, 200.0, Operation.INCREASE, "something2", new Date()),
@@ -64,7 +64,7 @@ class TransactionHistoryControllerTest {
     }
 
     @Test
-    void returnBalanceHistory() throws Exception {
+    void returnTransactionHistory() throws Exception {
         long id = 1L;
         TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
         when(transactionHistoryService.getTransactionHistory(id)).thenReturn(transactionHistoryDTO);
@@ -75,7 +75,7 @@ class TransactionHistoryControllerTest {
     }
 
     @Test
-    void updateBalanceHistory() throws Exception {
+    void updateTransactionHistory() throws Exception {
         TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
 
         mockMvc.perform(put("/api/transaction-histories/").contentType(MediaType.APPLICATION_JSON)
@@ -85,7 +85,7 @@ class TransactionHistoryControllerTest {
     }
 
     @Test
-    void deleteBalanceHistory() throws Exception {
+    void deleteTransactionHistory() throws Exception {
         long id = 1L;
 
         doNothing().when(transactionHistoryService).deleteTransactionHistory(id);

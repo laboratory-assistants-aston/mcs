@@ -1,12 +1,15 @@
-package ru.aston.mcs.service.Impl;
+package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.TransactionHistoryDTO;
+import ru.aston.mcs.entity.TransactionHistory;
+import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.TransactionHistoryMapper;
 import ru.aston.mcs.repository.TransactionHistoryRepository;
 import ru.aston.mcs.service.TransactionHistoryService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -27,9 +30,32 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
     }
 
     @Override
-    public void addAndSaveTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
-        transactionHistoryRepository.save(
-                transactionHistoryMapper.toModel(transactionHistoryDTO));
+    public TransactionHistoryDTO createTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
+
+        if (transactionHistoryDTO == null ) {
+            throw new InvalidRequestException();
+        }
+
+        transactionHistoryRepository.save(transactionHistoryMapper.toModel(transactionHistoryDTO));
+        return transactionHistoryDTO;
+    }
+
+    @Override
+    public TransactionHistoryDTO updateTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
+        if (transactionHistoryDTO == null || transactionHistoryDTO.getId() == null) {
+            throw new InvalidRequestException();
+        }
+
+        Long transactionHistoryId = transactionHistoryDTO.getId();
+        TransactionHistory transactionHistoryFromDb = transactionHistoryRepository.findById(transactionHistoryId).orElseThrow(EntityNotFoundException::new);
+
+        transactionHistoryFromDb.setDescription(transactionHistoryDTO.getDescription());
+        transactionHistoryFromDb.setModificationDate(transactionHistoryDTO.getModificationDate());
+        transactionHistoryFromDb.setOperation(transactionHistoryDTO.getOperation());
+        transactionHistoryFromDb.setUserId(transactionHistoryDTO.getUserId());
+        transactionHistoryFromDb.setOperationSum(transactionHistoryDTO.getOperationSum());
+
+        return  transactionHistoryMapper.toDTO( transactionHistoryRepository.save(transactionHistoryFromDb));
     }
 
     @Override

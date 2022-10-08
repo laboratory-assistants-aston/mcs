@@ -1,13 +1,23 @@
 package ru.aston.mcs.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import ru.aston.mcs.entity.User;
 
 import java.util.Date;
 
+@ApiModel(value = "Table which shows information about notification")
 public class NotificationDTO {
+
     private Long notificationId;
+
+    @ApiModelProperty(value = "Notification's text")
     private String text;
+
+    @ApiModelProperty(value = "User who get notifications")
     private User user;
+
+    @ApiModelProperty(value = "Date when notification sends")
     private Date date;
 
     public NotificationDTO() {

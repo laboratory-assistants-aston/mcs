@@ -7,7 +7,9 @@ import java.util.List;
 public interface NotificationService {
     List<NotificationDTO> getAllNotifications();
 
-    void addAndSaveNotification(NotificationDTO notification);
+    NotificationDTO updateNotification(NotificationDTO notification);
+
+    NotificationDTO createNotification(NotificationDTO notification);
 
     void deleteNotification(Long notificationId);
 
