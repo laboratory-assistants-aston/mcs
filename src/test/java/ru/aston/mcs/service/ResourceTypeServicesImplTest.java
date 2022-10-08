@@ -85,7 +85,7 @@ class ResourceTypeServicesImplTest {
         Mockito.when(resourceTypeRepository.save(entity)).thenReturn(entity);
 
         //Action
-        resourceTypeServices.saveResourceType(dto);
+        resourceTypeServices.createResourceType(dto);
 
         //Assert
         Mockito.verify(resourceTypeMapper).toModel(dto);

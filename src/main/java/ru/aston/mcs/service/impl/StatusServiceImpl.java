@@ -27,29 +27,29 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
-    public StatusDTO getStatus(Long id) {
+    public StatusDTO getStatus(Long statusId) {
         return statusMapper.toDTO(
-                statusRepository.findById(id)
-                        .orElseThrow( () -> new EntityNotFoundException(id)));
+                statusRepository.findById(statusId)
+                        .orElseThrow( () -> new EntityNotFoundException(statusId)));
     }
 
     @Override
-    public void saveStatus(StatusDTO statusDTO) {
+    public StatusDTO createStatus(StatusDTO statusDTO) {
 
-/*        if (statusDTO == null || statusDTO.getStatusId() == null) {
-            throw new InvalidRequestException();
-        }*/
-
-        statusRepository.save(statusMapper.toModel(statusDTO));
-    }
-
-    @Override
-    public StatusDTO updateStatus(StatusDTO statusDTO){
-
-        if (statusDTO == null || statusDTO.getStatusId() == null) {
+       if (statusDTO == null ) {
             throw new InvalidRequestException();
         }
-        Long statusId = statusDTO.getStatusId();
+
+       statusRepository.save(statusMapper.toModel(statusDTO));
+       return statusDTO;
+    }
+
+    @Override
+    public StatusDTO updateStatus(Long statusId, StatusDTO statusDTO){
+
+        if (statusDTO == null ||statusId == null) {
+            throw new InvalidRequestException();
+        }
         Status statusFromDb =  statusRepository.findById(statusId)
                 .orElseThrow( () -> new EntityNotFoundException(statusId));
 

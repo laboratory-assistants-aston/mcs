@@ -14,10 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.dto.StatusDTO;
-import ru.aston.mcs.exception.EntityNotFoundException;
-import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.service.ResourceTypeService;
-import ru.aston.mcs.service.StatusService;
 import ru.aston.mcs.util.ResourceTypeDataUtils;
 import ru.aston.mcs.util.StatusDataUtils;
 
@@ -26,7 +23,6 @@ import java.util.List;
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -88,7 +84,7 @@ class ResourceTypeControllerTest {
 
       //  Mockito.when(resourceTypeService.saveResourceType(dto)).thenReturn(dto);
 
-        Mockito.doNothing().when(resourceTypeService).saveResourceType(dto);
+        Mockito.doNothing().when(resourceTypeService).createResourceType(dto);
 
 
         MockHttpServletRequestBuilder mockRequest =
