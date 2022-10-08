@@ -29,12 +29,10 @@ public class BookingResourceServicesImpl implements BookingResourceServices {
 
     @Override
     public BookingResourceDTO getBookingResource(Long id) {
-
         return resourceMapper.toDTO(
                 resourceRepository.findById(id)
                         .orElseThrow(RuntimeException::new));
     }
-
 
     @Override
     public void addAndSaveBookingResource(BookingResourceDTO resourceDto) {
@@ -46,5 +44,4 @@ public class BookingResourceServicesImpl implements BookingResourceServices {
     public void deleteBookingResource(Long id) {
         resourceRepository.deleteById(id);
     }
-
 }

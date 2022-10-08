@@ -1,40 +1,38 @@
 package ru.aston.mcs.dto;
 
-import  ru.aston.mcs.entity.Resident;
-import ru.aston.mcs.entity.ResourceType;
+import ru.aston.mcs.entity.Resource;
 import ru.aston.mcs.entity.Status;
 
 import java.util.Date;
-import java.util.List;
 
 public class BookingResourceDTO {
     private Long id;
-    private ResourceType resourceType;
+    private Resource resource;
     private Status status;
     private Integer durationTime;
     private Date startBooking;
     private Date endBooking;
-    private List<Resident> residentList;
+    private Users user;
 
     public BookingResourceDTO() {
     }
 
-    public BookingResourceDTO(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
+    public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, Users user) {
         this.id = id;
-        this.resourceType = resourceType;
+        this.resource = resource;
         this.status = status;
         this.durationTime = durationTime;
         this.startBooking = startBooking;
         this.endBooking = endBooking;
-        this.residentList = residentList;
+        this.user = user;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setResourceType(ResourceType resourceType) {
-        this.resourceType = resourceType;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public void setStatus(Status status) {
@@ -53,16 +51,16 @@ public class BookingResourceDTO {
         this.endBooking = endBooking;
     }
 
-    public void setResidentList(List<Resident> residentList) {
-        this.residentList = residentList;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
+    public Resource getResource() {
+        return resource;
     }
 
     public Status getStatus() {
@@ -81,7 +79,7 @@ public class BookingResourceDTO {
         return endBooking;
     }
 
-    public List<Resident> getResidentList() {
-        return residentList;
+    public Users getUser() {
+        return user;
     }
 }
