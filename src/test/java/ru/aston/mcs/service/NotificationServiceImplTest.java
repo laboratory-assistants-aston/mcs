@@ -7,9 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.aston.mcs.dto.BalanceHistoryDTO;
 import ru.aston.mcs.dto.NotificationDTO;
-import ru.aston.mcs.entity.enums.Operation;
 import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.repository.NotificationRepository;
 
@@ -33,9 +31,9 @@ class NotificationServiceImplTest {
     @BeforeEach
     void createDto() {
         notificationDTO = new NotificationDTO();
-        notificationDTO.setManager(null);
+        notificationDTO.setDate(new Date());
         notificationDTO.setText(null);
-        notificationDTO.setResident(null);
+        notificationDTO.setUser(null);
     }
 
     @Test

@@ -1,24 +1,24 @@
 package ru.aston.mcs.dto;
 
-import ru.aston.mcs.entity.Resident;
+import ru.aston.mcs.entity.User;
 import ru.aston.mcs.entity.enums.Operation;
 
 import java.util.Date;
 
-public class BalanceHistoryDTO {
+public class TransactionHistoryDTO {
     private Long id;
-    private Resident residentId;
+    private User userId;
     private Double operationSum;
     private Operation operation;
     private String description;
     private Date modificationDate;
 
-    public BalanceHistoryDTO() {
+    public TransactionHistoryDTO() {
     }
 
-    public BalanceHistoryDTO(Long id, Resident residentId, Double operationSum, Operation operation, String description, Date modificationDate) {
+    public TransactionHistoryDTO(Long id, User userId, Double operationSum, Operation operation, String description, Date modificationDate) {
         this.id = id;
-        this.residentId = residentId;
+        this.userId = userId;
         this.operationSum = operationSum;
         this.operation = operation;
         this.description = description;
@@ -33,12 +33,12 @@ public class BalanceHistoryDTO {
         this.id = id;
     }
 
-    public Resident getResidentId() {
-        return residentId;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setResidentId(Resident residentId) {
-        this.residentId = residentId;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public Double getOperationSum() {

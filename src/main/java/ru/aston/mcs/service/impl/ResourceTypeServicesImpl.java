@@ -2,9 +2,7 @@ package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.ResourceTypeDTO;
-import ru.aston.mcs.dto.StatusDTO;
 import ru.aston.mcs.entity.ResourceType;
-import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.exception.EntityNotFoundException;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.ResourceTypeMapper;

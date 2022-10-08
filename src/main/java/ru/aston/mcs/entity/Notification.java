@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,22 +27,20 @@ public class Notification {
     private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id", nullable = false)
-    private Manager manager;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @ManyToMany
-    @JoinTable(name = "sending_notifications",
-            joinColumns = @JoinColumn(name = "notification_id"),
-            inverseJoinColumns = @JoinColumn(name = "resident_id"))
-    private List<Resident> residents;
+    @Column(name = "date")
+    private Date date;
 
     public Notification() {
     }
 
-    public Notification(Long notificationId, String text, Manager manager) {
+    public Notification(Long notificationId, String text, User user, Date date) {
         this.notificationId = notificationId;
         this.text = text;
-        this.manager = manager;
+        this.user = user;
+        this.date = date;
     }
 
     public Long getNotificationId() {
@@ -60,11 +59,19 @@ public class Notification {
         this.text = text;
     }
 
-    public Manager getManager() {
-        return manager;
+    public User getUser() {
+        return user;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
