@@ -1,12 +1,15 @@
-package ru.aston.mcs.service.impl;
+package ru.aston.mcs.service.Impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.entity.Notification;
+import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.repository.NotificationRepository;
 import ru.aston.mcs.service.NotificationService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -28,8 +31,23 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void addAndSaveNotification(NotificationDTO notificationDTO) {
+    public NotificationDTO updateNotification(NotificationDTO notificationDTO) {
+        if (notificationDTO == null || notificationDTO.getNotificationId() == null) {
+            throw new InvalidRequestException();
+        }
 
+        Long notificationId = notificationDTO.getNotificationId();
+        Notification notificationFromDb = notificationRepository.findById(notificationId).orElseThrow(EntityNotFoundException::new);
+
+        notificationFromDb.setUser(notificationDTO.getUser());
+        notificationFromDb.setText(notificationDTO.getText());
+        notificationFromDb.setDate(notificationDTO.getDate());
+
+        return notificationMapper.toDTO(notificationRepository.save(notificationFromDb));
+    }
+
+    @Override
+    public void saveNotification(NotificationDTO notificationDTO) {
         notificationRepository.save(
                 notificationMapper.toModel(notificationDTO));
     }

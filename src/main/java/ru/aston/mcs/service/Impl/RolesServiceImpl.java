@@ -1,4 +1,4 @@
-package ru.aston.mcs.service.impl;
+package ru.aston.mcs.service.Impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

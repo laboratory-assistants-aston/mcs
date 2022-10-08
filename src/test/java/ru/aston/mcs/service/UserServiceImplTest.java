@@ -12,7 +12,7 @@ import ru.aston.mcs.dto.UserDTO;
 import ru.aston.mcs.entity.User;
 import ru.aston.mcs.mapper.UserMapper;
 import ru.aston.mcs.repository.UserRepository;
-import ru.aston.mcs.service.impl.UserServiceImpl;
+import ru.aston.mcs.service.Impl.UserServiceImpl;
 
 import java.util.Optional;
 

@@ -24,7 +24,7 @@ class NotificationServiceImplTest {
     private NotificationMapper notificationMapper;
 
     @InjectMocks
-    private ru.aston.mcs.service.impl.NotificationServiceImpl notificationService;
+    private ru.aston.mcs.service.Impl.NotificationServiceImpl notificationService;
 
     private NotificationDTO notificationDTO;
 
@@ -37,26 +37,26 @@ class NotificationServiceImplTest {
     }
 
     @Test
-    void getAllBalanceHistories() {
+    void getAllNotifications() {
         notificationService.getAllNotifications();
         Mockito.verify(notificationRepository).findAll();
     }
 
     @Test
-    void getBalanceHistoryByIdTest() {
+    void getNotificationByIdTest() {
         RuntimeException runtimeException =
                 assertThrows(RuntimeException.class, () -> notificationService.getNotification(1L));
         Mockito.verify(notificationRepository).findById(1L);
     }
 
     @Test
-    void createBalanceHistoryFromDtoTest() {
-        notificationService.addAndSaveNotification(notificationDTO);
+    void addNotificationFromDtoTest() {
+        notificationService.saveNotification(notificationDTO);
         Mockito.verify(notificationRepository).save(notificationMapper.toModel(notificationDTO));
     }
 
     @Test
-    void deleteBalanceHistoryByIdTest() {
+    void deleteNotificationByIdTest() {
         notificationService.deleteNotification(1L);
         Mockito.verify(notificationRepository).deleteById(1L);
     }
