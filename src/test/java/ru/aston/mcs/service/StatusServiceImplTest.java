@@ -87,7 +87,7 @@ class StatusServiceImplTest {
         Mockito.when(statusRepository.save(entity)).thenReturn(entity);
 
         //Action
-        statusService.saveStatus(dto);
+        statusService.createStatus(dto);
 
         //Assert
         Mockito.verify(statusMapper).toModel(dto);

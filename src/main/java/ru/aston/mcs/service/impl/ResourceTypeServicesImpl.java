@@ -38,19 +38,23 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
     }
 
     @Override
-    public void saveResourceType(ResourceTypeDTO resourceTypeDTO) {
+    public ResourceTypeDTO createResourceType(ResourceTypeDTO resourceTypeDTO) {
 
-        typeResourcesRepository.save(typeResourcesMapper.toModel(resourceTypeDTO));
-    }
-
-    @Override
-    public ResourceTypeDTO updateResourceType(ResourceTypeDTO resourceTypeDTO) {
-
-        if (resourceTypeDTO == null || resourceTypeDTO.getNameId() == null) {
+        if (resourceTypeDTO == null ) {
             throw new InvalidRequestException();
         }
 
-        Long resourceTypeId = resourceTypeDTO.getNameId();
+        ResourceType resourceTypeFromDb = typeResourcesRepository.save(typeResourcesMapper.toModel(resourceTypeDTO));
+        return typeResourcesMapper.toDTO(typeResourcesRepository.save(resourceTypeFromDb));
+    }
+
+    @Override
+    public ResourceTypeDTO updateResourceType(Long resourceTypeId, ResourceTypeDTO resourceTypeDTO) {
+
+        if (resourceTypeDTO == null || resourceTypeId == null) {
+            throw new InvalidRequestException();
+        }
+
         ResourceType resourceTypeFromDb =  typeResourcesRepository.findById(resourceTypeId)
                 .orElseThrow( () -> new EntityNotFoundException(resourceTypeId));
 

@@ -1,9 +1,16 @@
 package ru.aston.mcs.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Objects;
 
+@ApiModel(value = "model for adding data in Status table")
 public class StatusDTO {
+
     private Long statusId;
+
+    @ApiModelProperty(value = "name of status", example = "BOOKED", required = true)
     private String name;
 
     public StatusDTO() {

@@ -1,7 +1,6 @@
 package ru.aston.mcs.service;
 
 import ru.aston.mcs.dto.ResourceTypeDTO;
-import ru.aston.mcs.dto.StatusDTO;
 
 import java.util.List;
 
@@ -11,9 +10,9 @@ public interface ResourceTypeService {
 
     ResourceTypeDTO getResourceType(Long nameId);
 
-    void saveResourceType(ResourceTypeDTO resourceTypeDTO);
+    ResourceTypeDTO createResourceType(ResourceTypeDTO resourceTypeDTO);
 
-    ResourceTypeDTO updateResourceType(ResourceTypeDTO resourceTypeDTO);
+    ResourceTypeDTO updateResourceType(Long resourceTypeId, ResourceTypeDTO resourceTypeDTO);
 
     void deleteResourceType(Long nameId);
 
