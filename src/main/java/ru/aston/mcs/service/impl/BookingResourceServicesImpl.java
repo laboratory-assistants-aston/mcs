@@ -2,6 +2,9 @@ package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.BookingResourceDTO;
+import ru.aston.mcs.entity.BookingResource;
+import ru.aston.mcs.exception.EntityNotFoundException;
+import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.BookingResourceMapper;
 import ru.aston.mcs.repository.BookingResourceRepository;
 import ru.aston.mcs.service.BookingResourceServices;
@@ -13,35 +16,50 @@ import java.util.List;
 @Transactional
 public class BookingResourceServicesImpl implements BookingResourceServices {
 
-    private final BookingResourceRepository resourceRepository;
+    private final BookingResourceRepository bookingResourceRepository;
 
-    private final BookingResourceMapper resourceMapper;
+    private final BookingResourceMapper bookingResourceMapper;
 
-    public BookingResourceServicesImpl(BookingResourceRepository resourceRepository, BookingResourceMapper resourceMapper) {
-        this.resourceRepository = resourceRepository;
-        this.resourceMapper = resourceMapper;
+    public BookingResourceServicesImpl(BookingResourceRepository bookingResourceRepository, BookingResourceMapper bookingResourceMapper) {
+        this.bookingResourceRepository = bookingResourceRepository;
+        this.bookingResourceMapper = bookingResourceMapper;
     }
 
     @Override
     public List<BookingResourceDTO> getAllBookingResources() {
-        return resourceMapper.toDTOList(resourceRepository.findAll());
+        return bookingResourceMapper.toDTOList(bookingResourceRepository.findAll());
     }
 
     @Override
     public BookingResourceDTO getBookingResource(Long id) {
-        return resourceMapper.toDTO(
-                resourceRepository.findById(id)
+
+        return bookingResourceMapper.toDTO(
+                bookingResourceRepository.findById(id)
                         .orElseThrow(RuntimeException::new));
     }
 
     @Override
-    public void addAndSaveBookingResource(BookingResourceDTO resourceDto) {
-        resourceRepository.save(
-                resourceMapper.toModel(resourceDto));
+    public BookingResourceDTO createBookingResource(BookingResourceDTO resourceDto) {
+        if (resourceDto == null) {
+            throw new InvalidRequestException();
+        }
+        return bookingResourceMapper.toDTO(bookingResourceRepository.save(bookingResourceMapper.toModel(resourceDto)));
+    }
+
+    @Override
+    public BookingResourceDTO updateBookingResource(Long id, BookingResourceDTO resourceDto) {
+        if (resourceDto == null || id == null) {
+            throw new InvalidRequestException();
+        }
+        BookingResource bookingResource = bookingResourceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id));
+        bookingResource.setId(resourceDto.getId());
+        return bookingResourceMapper.toDTO(bookingResourceRepository.save(bookingResource));
     }
 
     @Override
     public void deleteBookingResource(Long id) {
-        resourceRepository.deleteById(id);
+        bookingResourceRepository.deleteById(id);
     }
+
 }

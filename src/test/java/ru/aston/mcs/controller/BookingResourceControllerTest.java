@@ -72,9 +72,10 @@ class BookingResourceControllerTest {
 
     @Test
     void updateBookingResourceByDtoTest() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(put("/api/resource-booking/")
+        MvcResult mvcResult = mockMvc.perform(put("/api/resource-booking/1")
                         .characterEncoding("utf-8")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(1))
                         .content(asJsonString(bookingResourceDTO)))
                 .andExpect(status().isOk())
                 .andReturn();
