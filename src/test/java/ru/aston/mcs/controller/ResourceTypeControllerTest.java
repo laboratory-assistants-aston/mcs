@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.dto.StatusDTO;
+import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.service.ResourceTypeService;
 import ru.aston.mcs.util.ResourceTypeDataUtils;
 import ru.aston.mcs.util.StatusDataUtils;
@@ -82,10 +83,7 @@ class ResourceTypeControllerTest {
 
         ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
 
-      //  Mockito.when(resourceTypeService.saveResourceType(dto)).thenReturn(dto);
-
-        Mockito.doNothing().when(resourceTypeService).createResourceType(dto);
-
+        Mockito.when(resourceTypeService.createResourceType(dto)).thenReturn(dto);
 
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.post("/api/resource-types/")
@@ -102,9 +100,9 @@ class ResourceTypeControllerTest {
     void updateTypeResources() throws Exception {
 
         ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
+        ResourceType entity = ResourceTypeDataUtils.createResourceTypeEntity();
 
-        Mockito.when(resourceTypeService.updateResourceType(dto)).thenReturn(dto);
-
+        Mockito.when(resourceTypeService.updateResourceType(entity.getNameId(), dto)).thenReturn(dto);
 
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put("/api/resource-types/")
@@ -120,6 +118,10 @@ class ResourceTypeControllerTest {
     @Test
     public void updateTypeResourcesBadRequest() throws Exception {
 
+        ResourceTypeDTO dto =ResourceTypeDataUtils.createResourceTypeDTO();
+
+        Mockito.when(resourceTypeService.updateResourceType(1L, dto)).thenReturn(dto);
+
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/api/resource-types/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -132,12 +134,12 @@ class ResourceTypeControllerTest {
     @Test
     void deleteTypeResources() throws Exception {
 
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        ResourceTypeDTO dto =ResourceTypeDataUtils.createResourceTypeDTO();
 
-        Mockito.doNothing().when(resourceTypeService).deleteResourceType(dto.getStatusId());
+        Mockito.doNothing().when(resourceTypeService).deleteResourceType(dto.getNameId());
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.delete("/api/resource-types/{id}", dto.getStatusId()))
+                        MockMvcRequestBuilders.delete("/api/resource-types/{id}", dto.getNameId()))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

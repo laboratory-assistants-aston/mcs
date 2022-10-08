@@ -64,9 +64,9 @@ public class ResourceTypeController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Type resources updated") })
-    public ResourceTypeDTO updateTypeResources(@RequestBody ResourceTypeDTO typeResourcesDto) {
+    public ResourceTypeDTO updateTypeResources(@PathVariable Long resourceTypeId, @RequestBody ResourceTypeDTO typeResourcesDto) {
 
-        return typeResourcesService.updateResourceType(typeResourcesDto);
+        return typeResourcesService.updateResourceType(resourceTypeId, typeResourcesDto);
     }
 
     @DeleteMapping("/{id}")

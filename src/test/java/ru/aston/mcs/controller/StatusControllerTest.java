@@ -12,14 +12,21 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.dto.StatusDTO;
+import ru.aston.mcs.dto.UserDTO;
+import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.service.StatusService;
+import ru.aston.mcs.util.ResourceTypeDataUtils;
 import ru.aston.mcs.util.StatusDataUtils;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -82,6 +89,10 @@ class StatusControllerTest {
 
         StatusDTO dto = StatusDataUtils.createStatusDTO();
 
+
+        Mockito.when(statusService.createStatus(dto)).thenReturn(dto);
+
+
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.post("/api/status/")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -96,17 +107,22 @@ class StatusControllerTest {
     @Test
     void updateStatus() throws Exception {
 
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        StatusDTO status = new StatusDTO(1L, "BOOK");
+        StatusDTO updatedStatusDTO = new StatusDTO(1L, "LOCK");
+
+        when(statusService.getStatus(status.getStatusId())).thenReturn(status);
+        when(statusService.updateStatus(status.getStatusId(), updatedStatusDTO)).thenReturn(updatedStatusDTO);
 
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.put("/api/status/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .content(this.objectMapper.writeValueAsString(dto));
+                        .content(this.objectMapper.writeValueAsString(updatedStatusDTO));
 
         mockMvc.perform(mockRequest)
                 .andExpect(status().isOk())
                 .andDo(print());
+
     }
 
     @Test

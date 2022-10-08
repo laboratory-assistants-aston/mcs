@@ -12,7 +12,7 @@ public interface ResourceTypeService {
 
     ResourceTypeDTO createResourceType(ResourceTypeDTO resourceTypeDTO);
 
-    ResourceTypeDTO updateResourceType(ResourceTypeDTO resourceTypeDTO);
+    ResourceTypeDTO updateResourceType(Long resourceTypeId, ResourceTypeDTO resourceTypeDTO);
 
     void deleteResourceType(Long nameId);
 

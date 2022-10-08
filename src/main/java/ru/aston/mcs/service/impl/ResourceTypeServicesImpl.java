@@ -49,13 +49,12 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
     }
 
     @Override
-    public ResourceTypeDTO updateResourceType(ResourceTypeDTO resourceTypeDTO) {
+    public ResourceTypeDTO updateResourceType(Long resourceTypeId, ResourceTypeDTO resourceTypeDTO) {
 
-        if (resourceTypeDTO == null || resourceTypeDTO.getNameId() == null) {
+        if (resourceTypeDTO == null || resourceTypeId == null) {
             throw new InvalidRequestException();
         }
 
-        Long resourceTypeId = resourceTypeDTO.getNameId();
         ResourceType resourceTypeFromDb =  typeResourcesRepository.findById(resourceTypeId)
                 .orElseThrow( () -> new EntityNotFoundException(resourceTypeId));
 

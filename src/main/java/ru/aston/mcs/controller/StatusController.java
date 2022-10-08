@@ -27,47 +27,52 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @GetMapping("/")
+
     @ApiOperation(value = "Get all status by Id", notes = "Get all status by Id")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "All status founded") })
+    @GetMapping("/")
     public List<StatusDTO> getAllStatus() {
         return statusService.getAllStatus();
     }
 
-    @GetMapping("/{id}")
+
     @ApiOperation(value = "Get status by Id", notes = "Gets status by Id")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Status founded") })
+    @GetMapping("/{id}")
     public StatusDTO getStatus(@PathVariable Long id) {
         return statusService.getStatus(id);
     }
 
-    @PostMapping("/")
+
     @ApiOperation(value = "Create new status", notes = "Creates new status by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "New status created") })
+    @PostMapping("/")
     public StatusDTO createStatus(@RequestBody StatusDTO statusDTO) {
         return statusService.createStatus(statusDTO);
     }
 
-    @PutMapping("/")
+
     @ApiOperation(value = "Update status by id", notes = "Updates current status by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Status updated") })
-    public StatusDTO updateStatus(@PathVariable Long id, @RequestBody StatusDTO statusDTO) {
-        return statusService.updateStatus(id, statusDTO);
+    @PutMapping("/")
+    public StatusDTO updateStatus(@PathVariable Long statusId, @RequestBody StatusDTO statusDTO) {
+        return statusService.updateStatus(statusId, statusDTO);
     }
 
-    @DeleteMapping("/{id}")
+
     @ApiOperation(value = "Delete status by id", notes = "Deletes current status by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Status deleted") })
+    @DeleteMapping("/{id}")
     public void deleteStatus(@PathVariable Long id) {
         statusService.deleteStatus(id);
     }
