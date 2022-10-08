@@ -15,17 +15,17 @@ import javax.persistence.JoinColumn;
 import java.util.Date;
 
 @Entity
-@Table(name = "balance_history")
-public class BalanceHistory {
+@Table(name = "transacton_history")
+public class TransactionHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "balance_history_id")
-    private Long balance_history_id;
+    @Column(name = "transaction_history_id")
+    private Long transaction_history_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resident_id", nullable = false)
-    private Resident residentId;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User userId;
 
     @Column(name = "operation_sum", columnDefinition="Decimal(10,2) default '0.00'")
     private Double operationSum;
@@ -40,34 +40,32 @@ public class BalanceHistory {
     @Column(name = "modification_date", nullable = false)
     private Date modificationDate;
 
-    public BalanceHistory() {
+    public TransactionHistory() {
     }
 
-    public BalanceHistory(Long id, Resident residentId,
-                          Double operationSum, Operation operation,
-                          String description, Date modificationDate) {
-        this.balance_history_id = id;
-        this.residentId = residentId;
+    public TransactionHistory(Long transaction_history_id, User userId, Double operationSum, Operation operation, String description, Date modificationDate) {
+        this.transaction_history_id = transaction_history_id;
+        this.userId = userId;
         this.operationSum = operationSum;
         this.operation = operation;
         this.description = description;
         this.modificationDate = modificationDate;
     }
 
-    public Long getBalance_history_id() {
-        return balance_history_id;
+    public Long getTransaction_history_id() {
+        return transaction_history_id;
     }
 
-    public void setBalance_history_id(Long balance_history_id) {
-        this.balance_history_id = balance_history_id;
+    public void setTransaction_history_id(Long transaction_history_id) {
+        this.transaction_history_id = transaction_history_id;
     }
 
-    public Resident getResidentId() {
-        return residentId;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setResidentId(Resident residentId) {
-        this.residentId = residentId;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public Double getOperationSum() {

@@ -9,7 +9,9 @@ public interface StatusService {
 
    StatusDTO getStatus(Long id);
 
-   void addAndSaveStatus(StatusDTO statusDTO);
+    void saveStatus(StatusDTO statusDTO);
 
-   void deleteStatus(Long id);
+    StatusDTO updateStatus(StatusDTO statusDTO);
+
+    void deleteStatus(Long id);
 }

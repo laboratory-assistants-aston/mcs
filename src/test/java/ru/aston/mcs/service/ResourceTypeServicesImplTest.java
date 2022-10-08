@@ -85,7 +85,7 @@ class ResourceTypeServicesImplTest {
         Mockito.when(resourceTypeRepository.save(entity)).thenReturn(entity);
 
         //Action
-        resourceTypeServices.addAndSaveResourceType(dto);
+        resourceTypeServices.saveResourceType(dto);
 
         //Assert
         Mockito.verify(resourceTypeMapper).toModel(dto);
@@ -97,12 +97,16 @@ class ResourceTypeServicesImplTest {
     void testDeleteResourceType() {
 
         //Arrange
-        ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
+        List<ResourceTypeDTO> dto = ResourceTypeDataUtils.createResourceTypeDTOList();
+        List<ResourceType> entity = ResourceTypeDataUtils.createResourceTypeEntityList();
+        Mockito.when(resourceTypeRepository.findById(entity.get(0).getNameId())).thenReturn(Optional.of(entity.get(0)));
+        Mockito.doNothing().when(resourceTypeRepository).deleteById(entity.get(0).getNameId());
 
         //Action
-        resourceTypeServices.deleteResourceType(dto.getNameId());
+        resourceTypeServices.deleteResourceType(dto.get(0).getNameId());
 
         //Assert
-        Mockito.verify(resourceTypeRepository).deleteById(dto.getNameId());
+        Mockito.verify(resourceTypeRepository).findById(dto.get(0).getNameId());
+        Mockito.verify(resourceTypeRepository).deleteById(dto.get(0).getNameId());
     }
 }

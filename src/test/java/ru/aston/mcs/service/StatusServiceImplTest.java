@@ -1,3 +1,4 @@
+
 package ru.aston.mcs.service;
 
 
@@ -70,7 +71,7 @@ class StatusServiceImplTest {
         //Assert
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.getStatusId(), entity.getStatusId());
-        Assertions.assertEquals(fromDb.getName(), entity.getStatusName());
+        Assertions.assertEquals(fromDb.getName(), entity.getName());
 
         Mockito.verify(statusRepository).findById(entity.getStatusId());
         Mockito.verify(statusMapper).toDTO(entity);
@@ -86,7 +87,7 @@ class StatusServiceImplTest {
         Mockito.when(statusRepository.save(entity)).thenReturn(entity);
 
         //Action
-        statusService.addAndSaveStatus(dto);
+        statusService.saveStatus(dto);
 
         //Assert
         Mockito.verify(statusMapper).toModel(dto);
@@ -98,12 +99,17 @@ class StatusServiceImplTest {
     void deleteStatus() {
 
         //Arrange
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        List<StatusDTO> dto = StatusDataUtils.createStatusDTOList();
+        List<Status> entity = StatusDataUtils.createStatusEntityList();
+        Mockito.when(statusRepository.findById(entity.get(0).getStatusId())).thenReturn(Optional.of(entity.get(0)));
+        Mockito.doNothing().when(statusRepository).deleteById(entity.get(0).getStatusId());
 
         //Action
-        statusService.deleteStatus(dto.getStatusId());
+        statusService.deleteStatus(dto.get(0).getStatusId());
 
         //Assert
-        Mockito.verify(statusRepository).deleteById(dto.getStatusId());
+        Mockito.verify(statusRepository).findById(dto.get(0).getStatusId());
+        Mockito.verify(statusRepository).deleteById(dto.get(0).getStatusId());
+
     }
 }

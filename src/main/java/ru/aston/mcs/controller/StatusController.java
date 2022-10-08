@@ -34,12 +34,12 @@ public class StatusController {
 
     @PostMapping("/")
     public void saveStatus(@RequestBody StatusDTO statusDTO) {
-        statusService.addAndSaveStatus(statusDTO);
+        statusService.saveStatus(statusDTO);
     }
 
     @PutMapping("/")
-    public void updateStatus(@RequestBody StatusDTO statusDTO) {
-        statusService.addAndSaveStatus(statusDTO);
+    public StatusDTO updateStatus(@RequestBody StatusDTO statusDTO) {
+        return statusService.updateStatus(statusDTO);
     }
 
     @DeleteMapping("/{id}")
