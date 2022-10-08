@@ -53,17 +53,21 @@ class UserServiceImplTest {
 
     @Test
     void createUserFromDtoTest() {
-        userService.saveUser(userDTO);
+        userService.createUser(userDTO);
         Mockito.verify(userRepository).save(userMapper.toModel(userDTO));
     }
 
     @Test
     void updateUserFromDtoTest() {
-        User userFromDb = new User(1L, 123, "login3", "email3", "phone", "address", 2.2F, null);
+        User userFromDb = new User(1L, 123, "none", "none", "phone", "address", 2.2F, null);
+        UserDTO result = new UserDTO(1L, 123, "upd", "upd", "phone", "address", 2.2F, null);
+
         Mockito.when(userRepository.findById(anyLong())).thenReturn(Optional.of(userFromDb));
-        userService.updateUser(userDTO);
-        Assertions.assertEquals(userFromDb.getLogin(), userDTO.getLogin());
-        Assertions.assertEquals(userFromDb.getEmail(), userDTO.getEmail());
+        Mockito.when(userRepository.save(any(User.class))).thenReturn(userFromDb);
+
+        userService.updateUser(1L, result);
+        Assertions.assertEquals(userFromDb.getLogin(), result.getLogin());
+        Assertions.assertEquals(userFromDb.getEmail(), result.getEmail());
         Mockito.verify(userRepository).save(any(User.class));
     }
 
