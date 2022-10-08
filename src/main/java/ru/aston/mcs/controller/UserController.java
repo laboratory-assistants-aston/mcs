@@ -35,12 +35,12 @@ public class UserController {
 
     @PostMapping("/")
     public void addUser(@RequestBody UserDTO userDTO) {
-        userService.addAndSaveUser(userDTO);
+        userService.saveUser(userDTO);
     }
 
     @PutMapping("/")
-    public void updateUser(@RequestBody UserDTO userDTO) {
-        userService.addAndSaveUser(userDTO);
+    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+        return userService.updateUser(userDTO);
     }
 
     @DeleteMapping("/{id}")
