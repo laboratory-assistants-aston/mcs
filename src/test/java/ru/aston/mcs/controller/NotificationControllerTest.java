@@ -2,6 +2,7 @@ package ru.aston.mcs.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -63,10 +64,16 @@ class NotificationControllerTest {
 
     @Test
     void updateNotification() throws Exception {
-        NotificationDTO notificationDTO = new NotificationDTO(1L, "firstText", null, null);
+        NotificationDTO newNotificationDTO = new NotificationDTO(null, "updateText", null, null);
+        NotificationDTO oldNotificationDTO = new NotificationDTO(1L, "firstText", null, null);
+        NotificationDTO updatedNotificationDTO = new NotificationDTO(1L, "updateText", null, null);
 
-        mockMvc.perform(put("/api/notifications/").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(notificationDTO)))
+        Mockito.when(notificationService.updateNotification(oldNotificationDTO.getNotificationId(), newNotificationDTO)).thenReturn(updatedNotificationDTO);
+
+
+        mockMvc.perform(put("/api/notifications/{id}", oldNotificationDTO.getNotificationId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(newNotificationDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

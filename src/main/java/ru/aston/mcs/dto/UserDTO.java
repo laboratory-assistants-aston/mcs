@@ -8,6 +8,7 @@ import java.util.List;
 
 @ApiModel(value = "model for adding data in User table")
 public class UserDTO {
+
     private Long id;
 
     @ApiModelProperty(value = "access code for resources", example = "1234", required = true)

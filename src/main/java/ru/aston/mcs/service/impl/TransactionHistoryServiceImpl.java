@@ -3,13 +3,14 @@ package ru.aston.mcs.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.TransactionHistoryDTO;
+import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.entity.TransactionHistory;
+import ru.aston.mcs.exception.EntityNotFoundException;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.TransactionHistoryMapper;
 import ru.aston.mcs.repository.TransactionHistoryRepository;
 import ru.aston.mcs.service.TransactionHistoryService;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -30,24 +31,31 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
     }
 
     @Override
+    public TransactionHistoryDTO getTransactionHistory(Long balanceHistoryId) {
+        return transactionHistoryMapper.toDTO(
+                transactionHistoryRepository.findById(balanceHistoryId)
+                        .orElseThrow(() -> new EntityNotFoundException(balanceHistoryId)));
+    }
+
+    @Override
     public TransactionHistoryDTO createTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
 
         if (transactionHistoryDTO == null ) {
             throw new InvalidRequestException();
         }
 
-        transactionHistoryRepository.save(transactionHistoryMapper.toModel(transactionHistoryDTO));
-        return transactionHistoryDTO;
+        return transactionHistoryMapper.toDTO(
+                transactionHistoryRepository.save(
+                        transactionHistoryMapper.toModel(transactionHistoryDTO)));
     }
 
     @Override
-    public TransactionHistoryDTO updateTransactionHistory(TransactionHistoryDTO transactionHistoryDTO) {
+    public TransactionHistoryDTO updateTransactionHistory(Long id, TransactionHistoryDTO transactionHistoryDTO) {
         if (transactionHistoryDTO == null || transactionHistoryDTO.getId() == null) {
             throw new InvalidRequestException();
         }
-
-        Long transactionHistoryId = transactionHistoryDTO.getId();
-        TransactionHistory transactionHistoryFromDb = transactionHistoryRepository.findById(transactionHistoryId).orElseThrow(EntityNotFoundException::new);
+        TransactionHistory transactionHistoryFromDb =  transactionHistoryRepository.findById(id)
+                .orElseThrow( () -> new ru.aston.mcs.exception.EntityNotFoundException(id));
 
         transactionHistoryFromDb.setDescription(transactionHistoryDTO.getDescription());
         transactionHistoryFromDb.setModificationDate(transactionHistoryDTO.getModificationDate());
@@ -55,18 +63,15 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
         transactionHistoryFromDb.setUserId(transactionHistoryDTO.getUserId());
         transactionHistoryFromDb.setOperationSum(transactionHistoryDTO.getOperationSum());
 
-        return  transactionHistoryMapper.toDTO( transactionHistoryRepository.save(transactionHistoryFromDb));
+        return  transactionHistoryMapper.toDTO(
+                transactionHistoryRepository.save(transactionHistoryFromDb));
     }
 
     @Override
     public void deleteTransactionHistory(Long balanceHistoryId) {
+
         transactionHistoryRepository.deleteById(balanceHistoryId);
     }
 
-    @Override
-    public TransactionHistoryDTO getTransactionHistory(Long balanceHistoryId) {
-        return transactionHistoryMapper.toDTO(
-                transactionHistoryRepository.findById(balanceHistoryId)
-                        .orElseThrow(RuntimeException::new));
-    }
+
 }

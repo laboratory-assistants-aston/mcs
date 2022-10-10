@@ -39,8 +39,9 @@ public class RolesServiceImpl implements RolesService {
 
     @Override
     public RolesDTO createRole(RolesDTO rolesDTO) {
-        rolesRepository.save(rolesMapper.toModel(rolesDTO));
-        return rolesDTO;
+        return rolesMapper.toDTO(
+                rolesRepository.save(
+                        rolesMapper.toModel(rolesDTO)));
     }
 
     @Override

@@ -31,10 +31,6 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
 
-    @Override
-    public void deleteResource(Long id) {
-        resourceRepository.deleteById(id);
-    }
 
     @Override
     public ResourceDTO getResource(Long id) {
@@ -44,21 +40,31 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public ResourceDTO create(ResourceDTO resourcesDto) {
+        if (resourcesDto == null) {
+            throw new InvalidRequestException();
+        }
+        return resourceMapper.toDTO(
+                resourceRepository.save(
+                        resourceMapper.toModel(resourcesDto)));
+    }
+
+    @Override
     public ResourceDTO updateResource(Long id, ResourceDTO resourcesDto) {
         if (resourcesDto == null || id == null) {
             throw new InvalidRequestException();
         }
         Resource bookingResource = resourceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
-        bookingResource.setId(resourcesDto.getId());
+        bookingResource.setResourceId(resourcesDto.getId());
         return resourceMapper.toDTO(resourceRepository.save(bookingResource));
     }
 
+
     @Override
-    public ResourceDTO create(ResourceDTO resourcesDto) {
-        if (resourcesDto == null) {
-            throw new InvalidRequestException();
-        }
-        return resourceMapper.toDTO(resourceRepository.save(resourceMapper.toModel(resourcesDto)));
+    public void deleteResource(Long id) {
+
+         resourceRepository.deleteById(id);
     }
+
 }

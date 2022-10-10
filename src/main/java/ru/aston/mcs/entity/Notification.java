@@ -23,24 +23,24 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
-    @Column(name = "notification_text")
-    private String text;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "notification_text")
+    private String text;
+
+    @Column(name = "creation_date", nullable = false)
+    private Date creationDate;
 
     public Notification() {
     }
 
-    public Notification(Long notificationId, String text, User user, Date date) {
+    public Notification(Long notificationId, String text, User user, Date creationDate) {
         this.notificationId = notificationId;
         this.text = text;
         this.user = user;
-        this.date = date;
+        this.creationDate = creationDate;
     }
 
     public Long getNotificationId() {
@@ -68,10 +68,10 @@ public class Notification {
     }
 
     public Date getDate() {
-        return date;
+        return creationDate;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.creationDate = date;
     }
 }

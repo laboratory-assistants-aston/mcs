@@ -68,7 +68,7 @@ class RolesServiceImplTest {
 
         rolesService.updateRole(1L, result);
         Assertions.assertEquals(roleFromDb.getRoleName(), result.getRoleName());
-        Assertions.assertEquals(roleFromDb.getId(), result.getId());
+        Assertions.assertEquals(roleFromDb.getRoleId(), result.getId());
 
         Mockito.verify(rolesRepository).save(any(Role.class));
     }

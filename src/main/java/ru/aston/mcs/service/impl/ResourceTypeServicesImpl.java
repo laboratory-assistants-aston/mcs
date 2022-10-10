@@ -3,6 +3,7 @@ package ru.aston.mcs.service.impl;
 import org.springframework.stereotype.Service;
 import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.entity.ResourceType;
+import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.exception.EntityNotFoundException;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.ResourceTypeMapper;
@@ -44,8 +45,9 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
             throw new InvalidRequestException();
         }
 
-        ResourceType resourceTypeFromDb = typeResourcesRepository.save(typeResourcesMapper.toModel(resourceTypeDTO));
-        return typeResourcesMapper.toDTO(typeResourcesRepository.save(resourceTypeFromDb));
+        return typeResourcesMapper.toDTO(
+                typeResourcesRepository.save(
+                        typeResourcesMapper.toModel(resourceTypeDTO)));
     }
 
     @Override
@@ -62,15 +64,14 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
         resourceTypeFromDb.setCost(resourceTypeDTO.getCost());
 
         return typeResourcesMapper.toDTO(typeResourcesRepository.save(resourceTypeFromDb));
+
     }
 
     @Override
     public void deleteResourceType(Long nameId) {
-
-        if (typeResourcesRepository.findById(nameId).isEmpty()) {
+        if (typeResourcesRepository.findById(nameId) != null) {
             throw new EntityNotFoundException( nameId );
         }
-
         typeResourcesRepository.deleteById(nameId);
     }
 

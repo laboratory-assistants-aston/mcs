@@ -13,17 +13,15 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.aston.mcs.dto.ResourceTypeDTO;
-import ru.aston.mcs.dto.StatusDTO;
-import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.service.ResourceTypeService;
-import ru.aston.mcs.util.ResourceTypeDataUtils;
-import ru.aston.mcs.util.StatusDataUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,7 +49,9 @@ class ResourceTypeControllerTest {
     @Test
     void getAllTypeResources() throws Exception {
 
-        List<ResourceTypeDTO> dto = ResourceTypeDataUtils.createResourceTypeDTOList();
+        List<ResourceTypeDTO> dto = new ArrayList<>();
+        dto.add(new ResourceTypeDTO(1L, "parking",100.00));
+        dto.add(new ResourceTypeDTO(2L, "co-working",50.00));
 
         Mockito.when(resourceTypeService.getAllResourceTypes()).thenReturn(dto);
 
@@ -66,7 +66,7 @@ class ResourceTypeControllerTest {
     @Test
     void getTypeResources() throws Exception {
 
-        ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
+        ResourceTypeDTO dto = new ResourceTypeDTO(null, "co-working", 100.00);
 
         Mockito.when(resourceTypeService.getResourceType(dto.getNameId())).thenReturn(dto);
 
@@ -81,7 +81,7 @@ class ResourceTypeControllerTest {
     @Test
     void addTypeResources() throws Exception {
 
-        ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
+        ResourceTypeDTO dto = new ResourceTypeDTO(null, "co-working", 100.00);
 
         Mockito.when(resourceTypeService.createResourceType(dto)).thenReturn(dto);
 
@@ -99,28 +99,22 @@ class ResourceTypeControllerTest {
     @Test
     void updateTypeResources() throws Exception {
 
-        ResourceTypeDTO dto = ResourceTypeDataUtils.createResourceTypeDTO();
-        ResourceType entity = ResourceTypeDataUtils.createResourceTypeEntity();
+        ResourceTypeDTO dto = new ResourceTypeDTO(null, "parking", 400.00);
+        ResourceTypeDTO oldDto = new ResourceTypeDTO(1L,  "co-working", 400.00);
+        ResourceTypeDTO updatedDto = new ResourceTypeDTO(1L,  "parking", 400.00);
 
-        Mockito.when(resourceTypeService.updateResourceType(entity.getNameId(), dto)).thenReturn(dto);
+        Mockito.when(resourceTypeService.updateResourceType(oldDto.getNameId(), dto)).thenReturn(updatedDto);
 
-        MockHttpServletRequestBuilder mockRequest =
-                MockMvcRequestBuilders.put("/api/resource-types/")
+        mockMvc.perform(put("/api/resource-types/{id}", oldDto.getNameId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(this.objectMapper.writeValueAsString(dto));
-
-        mockMvc.perform(mockRequest)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
                 .andDo(print());
+
     }
 
     @Test
     public void updateTypeResourcesBadRequest() throws Exception {
-
-        ResourceTypeDTO dto =ResourceTypeDataUtils.createResourceTypeDTO();
-
-        Mockito.when(resourceTypeService.updateResourceType(1L, dto)).thenReturn(dto);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/api/resource-types/")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -134,7 +128,7 @@ class ResourceTypeControllerTest {
     @Test
     void deleteTypeResources() throws Exception {
 
-        ResourceTypeDTO dto =ResourceTypeDataUtils.createResourceTypeDTO();
+        ResourceTypeDTO dto = new ResourceTypeDTO(1L, "co-working", 100.00);
 
         Mockito.doNothing().when(resourceTypeService).deleteResourceType(dto.getNameId());
 

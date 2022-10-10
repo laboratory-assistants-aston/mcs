@@ -62,9 +62,9 @@ public class StatusController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Status updated") })
-    @PutMapping("/")
-    public StatusDTO updateStatus(@PathVariable Long statusId, @RequestBody StatusDTO statusDTO) {
-        return statusService.updateStatus(statusId, statusDTO);
+    @PutMapping("/{id}")
+    public StatusDTO updateStatus(@PathVariable Long id, @RequestBody StatusDTO statusDTO) {
+        return statusService.updateStatus(id, statusDTO);
     }
 
 

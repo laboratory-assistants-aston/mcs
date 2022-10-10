@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
-      id: 1665227626466-1
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-1
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -27,6 +27,11 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
                   name: duration_time
                   type: INT
               - column:
@@ -39,15 +44,10 @@ databaseChangeLog:
                     nullable: false
                   name: end_booking
                   type: DATETIME
-              - column:
-                  constraints:
-                    nullable: false
-                  name: user_id
-                  type: BIGINT
             tableName: booking_resources
   - changeSet:
-      id: 1665227626466-2
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-2
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -60,20 +60,22 @@ databaseChangeLog:
                   name: notification_id
                   type: BIGINT
               - column:
-                  name: notification_text
-                  type: VARCHAR(255)
-              - column:
                   constraints:
                     nullable: false
                   name: user_id
                   type: BIGINT
               - column:
-                  name: date
+                  name: notification_text
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: creation_date
                   type: DATETIME
             tableName: notifications
   - changeSet:
-      id: 1665227626466-3
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-3
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -89,17 +91,22 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: resource_identifier
-                  type: INT
+                  name: resource_type_id
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: false
-                  name: resource_type_id
+                  name: status_id
                   type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resource_identifier
+                  type: VARCHAR(255)
             tableName: resource
   - changeSet:
-      id: 1665227626466-4
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-4
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -123,8 +130,8 @@ databaseChangeLog:
                   type: Decimal(10,2)
             tableName: resource_types
   - changeSet:
-      id: 1665227626466-5
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-5
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -144,8 +151,8 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: roles
   - changeSet:
-      id: 1665227626466-6
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-6
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -156,17 +163,17 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_status
-                  name: name_id
+                  name: status_id
                   type: BIGINT
               - column:
                   constraints:
                     nullable: false
-                  name: name
+                  name: status_name
                   type: VARCHAR(255)
             tableName: status
   - changeSet:
-      id: 1665227626466-7
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-7
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -203,8 +210,8 @@ databaseChangeLog:
                   type: DATETIME
             tableName: transacton_history
   - changeSet:
-      id: 1665227626466-8
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-8
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -243,14 +250,12 @@ databaseChangeLog:
                   name: address
                   type: VARCHAR(255)
               - column:
-                  constraints:
-                    nullable: false
                   name: balance
                   type: FLOAT
             tableName: users
   - changeSet:
-      id: 1665227626466-9
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-9
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - createTable:
@@ -267,8 +272,8 @@ databaseChangeLog:
                   type: BIGINT
             tableName: users_roles
   - changeSet:
-      id: 1665227626466-10
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-10
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -278,19 +283,19 @@ databaseChangeLog:
             referencedColumnNames: resources_id
             referencedTableName: resource
   - changeSet:
-      id: 1665227626466-11
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-11
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: status_id
             baseTableName: booking_resources
             constraintName: FK_BOOKING_RESOURCES_ON_STATUS
-            referencedColumnNames: name_id
+            referencedColumnNames: status_id
             referencedTableName: status
   - changeSet:
-      id: 1665227626466-12
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-12
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -300,8 +305,8 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1665227626466-13
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-13
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -311,8 +316,8 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1665227626466-14
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-14
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -322,8 +327,19 @@ databaseChangeLog:
             referencedColumnNames: resource_type_id
             referencedTableName: resource_types
   - changeSet:
-      id: 1665227626466-15
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-15
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: status_id
+            baseTableName: resource
+            constraintName: FK_RESOURCE_ON_STATUS
+            referencedColumnNames: status_id
+            referencedTableName: status
+  - changeSet:
+      id: 1665432453045-16
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -333,8 +349,8 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1665227626466-16
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-17
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -344,8 +360,8 @@ databaseChangeLog:
             referencedColumnNames: role_id
             referencedTableName: roles
   - changeSet:
-      id: 1665227626466-17
-      author: Ainur Gilmullin (generated)
+      id: 1665432453045-18
+      author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
@@ -354,4 +370,3 @@ databaseChangeLog:
             constraintName: fk_userol_on_user
             referencedColumnNames: user_id
             referencedTableName: users
-

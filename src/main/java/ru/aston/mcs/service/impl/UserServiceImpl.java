@@ -38,8 +38,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
-        userRepository.save(userMapper.toModel(userDTO));
-        return userDTO;
+
+        if (userDTO == null ) {
+            throw new InvalidRequestException();
+        }
+
+        return  userMapper.toDTO(
+                userRepository.save(
+                        userMapper.toModel(userDTO)));
     }
 
     @Override
@@ -66,6 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
+
         userRepository.deleteById(userId);
     }
 }

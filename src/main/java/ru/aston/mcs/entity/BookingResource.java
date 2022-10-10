@@ -6,6 +6,7 @@ import java.util.Date;
 @Entity
 @Table(name = "booking_resources")
 public class BookingResource {
+
     @Id
     @Column(name = "booking_resources_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +20,10 @@ public class BookingResource {
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @Column(name = "duration_time", nullable = false)
     private Integer durationTime;
 
@@ -27,10 +32,6 @@ public class BookingResource {
 
     @Column(name = "end_booking", nullable = false)
     private Date endBooking;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     public BookingResource() {
     }

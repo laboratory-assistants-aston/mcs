@@ -32,7 +32,7 @@ public class User {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "balance", nullable = false)
+    @Column(name = "balance")
     private Float balance;
 
     @ManyToMany(mappedBy = "users")
