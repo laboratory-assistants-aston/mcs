@@ -25,9 +25,9 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-
     public List<NotificationDTO> getAllNotifications() {
-        return notificationMapper.toDTOList(notificationRepository.findAll());
+        List<NotificationDTO> notificationDTOS = notificationMapper.toDTOList(notificationRepository.findAll());
+        return notificationDTOS;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public NotificationDTO createNotification(NotificationDTO notificationDTO) {
 
-        if (notificationDTO == null ) {
+        if (notificationDTO == null) {
             throw new InvalidRequestException();
         }
 
@@ -67,5 +67,11 @@ public class NotificationServiceImpl implements NotificationService {
         return notificationMapper.toDTO(
                 notificationRepository.findById(notificationId)
                         .orElseThrow(RuntimeException::new));
+    }
+
+    @Override
+    public List<NotificationDTO> getAllNotificationsByUserId(Long id) {
+        List<Notification> notificationsByUserId = notificationRepository.findNotificationsByUserId(id);
+        return notificationMapper.toDTOList(notificationsByUserId);
     }
 }

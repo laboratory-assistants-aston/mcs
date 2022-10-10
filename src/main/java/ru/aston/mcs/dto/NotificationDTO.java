@@ -1,5 +1,6 @@
 package ru.aston.mcs.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import ru.aston.mcs.entity.User;
@@ -15,6 +16,7 @@ public class NotificationDTO {
     private String text;
 
     @ApiModelProperty(value = "User who get notifications")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 
     @ApiModelProperty(value = "Date when notification sends")
