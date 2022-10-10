@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.dto.NotificationsRequestDTO;
 import ru.aston.mcs.service.NotificationService;
 
 import java.util.List;
@@ -68,6 +69,15 @@ public class NotificationController {
         notificationService.createNotification(notificationDTO);
     }
 
+    @ApiOperation(value = "Add new notifications for list of user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 201, message = "Notification added")})
+    @PostMapping("/list")
+    public void addNewNotificationsAsList(@RequestBody NotificationsRequestDTO notificationsRequestDTO) {
+        notificationService.createNotificationAsList(notificationsRequestDTO);
+    }
+
     @ApiOperation(value = "Update  notification")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
@@ -85,4 +95,5 @@ public class NotificationController {
     public void deleteNotification(@PathVariable Long id) {
         notificationService.deleteNotification(id);
     }
+
 }

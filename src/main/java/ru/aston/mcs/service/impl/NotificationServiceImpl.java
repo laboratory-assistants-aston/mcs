@@ -3,6 +3,7 @@ package ru.aston.mcs.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.dto.NotificationsRequestDTO;
 import ru.aston.mcs.entity.Notification;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.NotificationMapper;
@@ -12,6 +13,7 @@ import ru.aston.mcs.service.NotificationService;
 import javax.persistence.EntityNotFoundException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -84,5 +86,18 @@ public class NotificationServiceImpl implements NotificationService {
                 .max(Comparator.comparing(NotificationDTO::getDate))
                 .get();
         return notificationDTO;
+    }
+
+    @Override
+    public List<NotificationDTO> createNotificationAsList(NotificationsRequestDTO notificationsRequestDTO) {
+        List<NotificationDTO> collect = notificationsRequestDTO.getUserIdList().stream().map(user -> {
+            NotificationDTO notificationDTO = new NotificationDTO();
+            notificationDTO.setText(notificationsRequestDTO.getText());
+            notificationDTO.setUser(user);
+            notificationDTO.setDate(notificationsRequestDTO.getDate());
+            createNotification(notificationDTO);
+            return notificationDTO;
+        }).collect(Collectors.toList());
+        return collect;
     }
 }

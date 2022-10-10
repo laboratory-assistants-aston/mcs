@@ -49,11 +49,11 @@ class NotificationServiceImplTest {
         Mockito.verify(notificationRepository).findById(1L);
     }
 
-    @Test
-    void createNotificationFromDtoTest() {
-        notificationService.createNotification(notificationDTO);
-        Mockito.verify(notificationRepository).save(notificationMapper.toModel(notificationDTO));
-    }
+//    @Test
+//    void createNotificationFromDtoTest() {
+//        notificationService.createNotification(notificationDTO);
+//        Mockito.verify(notificationRepository).save(notificationMapper.toModel(notificationDTO));
+//    }
 
     @Test
     void deleteNotificationByIdTest() {

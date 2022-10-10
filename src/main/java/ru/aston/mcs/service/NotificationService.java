@@ -1,6 +1,7 @@
 package ru.aston.mcs.service;
 
 import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.dto.NotificationsRequestDTO;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface NotificationService {
     List<NotificationDTO> getAllNotificationsByUserId(Long id);
 
     NotificationDTO getLastNotificationByUserId(Long id);
+
+    List<NotificationDTO> createNotificationAsList(NotificationsRequestDTO notificationsRequestDTO);
+
 }
