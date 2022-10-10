@@ -69,7 +69,7 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
 
     @Override
     public void deleteResourceType(Long nameId) {
-        if (typeResourcesRepository.findById(nameId).isEmpty()) {
+        if (typeResourcesRepository.findById(nameId) != null) {
             throw new EntityNotFoundException( nameId );
         }
         typeResourcesRepository.deleteById(nameId);

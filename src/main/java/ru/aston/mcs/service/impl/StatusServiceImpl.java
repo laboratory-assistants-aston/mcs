@@ -61,7 +61,7 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     public void deleteStatus(Long id) {
-        if (statusRepository.findById(id).isEmpty()) {
+        if (statusRepository.findById(id) != null) {
             throw new EntityNotFoundException( id );
         }
         statusRepository.deleteById(id);
