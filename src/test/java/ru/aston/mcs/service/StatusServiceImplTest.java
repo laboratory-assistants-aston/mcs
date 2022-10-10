@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import ru.aston.mcs.dto.StatusDTO;
-import ru.aston.mcs.entity.Role;
 import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -76,7 +74,7 @@ class StatusServiceImplTest {
 
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.getStatusId(), entity.getStatusId());
-        Assertions.assertEquals(fromDb.getName(), entity.getName());
+        Assertions.assertEquals(fromDb.getStatusName(), entity.getName());
 
         Mockito.verify(statusRepository).findById(entity.getStatusId());
         Mockito.verify(statusMapper).toDTO(entity);

@@ -56,7 +56,7 @@ public class ResourceServiceImpl implements ResourceService {
         }
         Resource bookingResource = resourceRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
-        bookingResource.setId(resourcesDto.getId());
+        bookingResource.setResourceId(resourcesDto.getId());
         return resourceMapper.toDTO(resourceRepository.save(bookingResource));
     }
 

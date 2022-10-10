@@ -1,8 +1,12 @@
 package ru.aston.mcs.entity;
 
 import com.sun.istack.NotNull;
-
-import javax.persistence.*;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
 import java.util.Objects;
 
 @Entity
@@ -11,13 +15,12 @@ public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "name_id")
+    @Column(name = "status_id")
     private Long statusId;
 
-
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "status_name", nullable = false)
+    private String statusName;
 
     public Status() {
 
@@ -25,7 +28,7 @@ public class Status {
 
     public Status(Long statusId, String name) {
         this.statusId = statusId;
-        this.name = name;
+        this.statusName = name;
     }
 
     public Long getStatusId() {
@@ -37,11 +40,11 @@ public class Status {
     }
 
     public String getName() {
-        return name;
+        return statusName;
     }
 
     public void setName(String statusName) {
-        this.name = statusName;
+        this.statusName = statusName;
     }
 
     @Override
@@ -49,11 +52,11 @@ public class Status {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Status status = (Status) o;
-        return Objects.equals(statusId, status.statusId) && Objects.equals(name, status.name);
+        return Objects.equals(statusId, status.statusId) && Objects.equals(statusName, status.statusName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(statusId, name);
+        return Objects.hash(statusId, statusName);
     }
 }

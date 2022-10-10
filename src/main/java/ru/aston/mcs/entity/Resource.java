@@ -9,10 +9,7 @@ public class Resource {
     @Id
     @Column(name = "resources_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "resource_identifier")
-    private int resourceIdentifier;
+    private Long resourceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_type_id", nullable = false)
@@ -22,30 +19,46 @@ public class Resource {
     @JoinColumn(name = "resource_id")
     private List<BookingResource> bookingResourceList;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", nullable = false)
+    private Status status;
+
+    @Column(name = "resource_identifier", nullable = false)
+    private String resourceIdentifier;
+
+
     public Resource() {
     }
 
-    public Resource(Long id, int resourceIdentifier, ResourceType resourceType, List<BookingResource> bookingResourceList) {
-        this.id = id;
+    public Resource(Long id, String resourceIdentifier, ResourceType resourceType, List<BookingResource> bookingResourceList) {
+        this.resourceId = id;
         this.resourceIdentifier = resourceIdentifier;
         this.resourceType = resourceType;
         this.bookingResourceList = bookingResourceList;
     }
 
-    public Long getId() {
-        return id;
+    public Long getResourceId() {
+        return resourceId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setResourceId(Long id) {
+        this.resourceId = id;
     }
 
-    public int getResourceIdentifier() {
+    public String getResourceIdentifier() {
         return resourceIdentifier;
     }
 
-    public void setResourceIdentifier(int resourceIdentifier) {
+    public void setResourceIdentifier(String resourceIdentifier) {
         this.resourceIdentifier = resourceIdentifier;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public ResourceType getResourceType() {

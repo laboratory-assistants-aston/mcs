@@ -8,6 +8,7 @@ import java.util.List;
 
 @ApiModel(value = "model for adding data in Roles table")
 public class RolesDTO {
+
     private Long id;
 
     @ApiModelProperty(value = "name of role", example = "admin", required = true)

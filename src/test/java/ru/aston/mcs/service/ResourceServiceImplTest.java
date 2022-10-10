@@ -30,7 +30,7 @@ class ResourceServiceImplTest {
     void createDto() {
         resourceDTO = new ResourceDTO();
         resourceDTO.setId(0L);
-        resourceDTO.setResourceIdentifier(0);
+        resourceDTO.setResourceIdentifier("");
         resourceDTO.setResourceType(null);
         resourceDTO.setBookingResourceList(null);
     }

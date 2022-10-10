@@ -54,7 +54,7 @@ public class StatusServiceImpl implements StatusService {
         Status statusFromDb =  statusRepository.findById(statusId)
                 .orElseThrow( () -> new EntityNotFoundException(statusId));
 
-        statusFromDb.setName(statusDTO.getName());
+        statusFromDb.setName(statusDTO.getStatusName());
 
         return statusMapper.toDTO(statusRepository.save(statusFromDb));
     }
