@@ -40,8 +40,9 @@ public class StatusServiceImpl implements StatusService {
             throw new InvalidRequestException();
         }
 
-        Status statusFromDb = statusRepository.save(statusMapper.toModel(statusDTO));
-        return statusMapper.toDTO(statusRepository.save(statusFromDb));
+        return statusMapper.toDTO(
+                statusRepository.save(
+                        (statusMapper.toModel(statusDTO))));
     }
 
     @Override
@@ -64,5 +65,6 @@ public class StatusServiceImpl implements StatusService {
             throw new EntityNotFoundException( id );
         }
         statusRepository.deleteById(id);
+
     }
 }

@@ -39,11 +39,12 @@ public class ResourceTypeController {
 
     }
 
-    @GetMapping("/{id}")
+
     @ApiOperation(value = "Get type resources by id", notes = "Gets current type of resource by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Type resources founded") })
+    @GetMapping("/{id}")
     public ResourceTypeDTO getTypeResources(@PathVariable Long id) {
 
         return typeResourcesService.getResourceType(id);
@@ -59,14 +60,14 @@ public class ResourceTypeController {
         return typeResourcesService.createResourceType(typeResourcesDto);
     }
 
-    @PutMapping("/")
+
     @ApiOperation(value = "Update type resources by id", notes = "Updates current type of resource by ID")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Type resources updated") })
-    public ResourceTypeDTO updateTypeResources(@PathVariable Long resourceTypeId, @RequestBody ResourceTypeDTO typeResourcesDto) {
-
-        return typeResourcesService.updateResourceType(resourceTypeId, typeResourcesDto);
+    @PutMapping("/{id}")
+    public ResourceTypeDTO updateTypeResources(@PathVariable Long id, @RequestBody ResourceTypeDTO typeResourcesDto) {
+        return typeResourcesService.updateResourceType(id, typeResourcesDto);
     }
 
     @DeleteMapping("/{id}")

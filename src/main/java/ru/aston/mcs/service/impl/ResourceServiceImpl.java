@@ -31,16 +31,22 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
 
-    @Override
-    public void deleteResource(Long id) {
-        resourceRepository.deleteById(id);
-    }
 
     @Override
     public ResourceDTO getResource(Long id) {
         return resourceMapper.toDTO(
                 resourceRepository.findById(id)
                         .orElseThrow(RuntimeException::new));
+    }
+
+    @Override
+    public ResourceDTO create(ResourceDTO resourcesDto) {
+        if (resourcesDto == null) {
+            throw new InvalidRequestException();
+        }
+        return resourceMapper.toDTO(
+                resourceRepository.save(
+                        resourceMapper.toModel(resourcesDto)));
     }
 
     @Override
@@ -54,11 +60,11 @@ public class ResourceServiceImpl implements ResourceService {
         return resourceMapper.toDTO(resourceRepository.save(bookingResource));
     }
 
+
     @Override
-    public ResourceDTO create(ResourceDTO resourcesDto) {
-        if (resourcesDto == null) {
-            throw new InvalidRequestException();
-        }
-        return resourceMapper.toDTO(resourceRepository.save(resourceMapper.toModel(resourcesDto)));
+    public void deleteResource(Long id) {
+
+         resourceRepository.deleteById(id);
     }
+
 }

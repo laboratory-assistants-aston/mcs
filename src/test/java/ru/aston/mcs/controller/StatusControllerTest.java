@@ -12,20 +12,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.dto.StatusDTO;
-import ru.aston.mcs.dto.UserDTO;
-import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.service.StatusService;
-import ru.aston.mcs.util.ResourceTypeDataUtils;
-import ru.aston.mcs.util.StatusDataUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -56,7 +51,9 @@ class StatusControllerTest {
     @Test
     void getAllStatus() throws Exception {
 
-        List<StatusDTO> dto = StatusDataUtils.createStatusDTOList();
+        List<StatusDTO> dto = new ArrayList<>();
+        dto.add(new StatusDTO(1L, "BOOKING"));
+        dto.add(new StatusDTO(2L, "READY_TO_USE"));
 
         Mockito.when(statusService.getAllStatus()).thenReturn(dto);
 
@@ -72,7 +69,7 @@ class StatusControllerTest {
     @Test
     void getStatus() throws Exception {
 
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        StatusDTO dto = new StatusDTO(1L, "BOOKING");
 
         Mockito.when(statusService.getStatus(dto.getStatusId())).thenReturn(dto);
 
@@ -87,11 +84,9 @@ class StatusControllerTest {
     @Test
     void saveStatus() throws Exception {
 
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
-
+        StatusDTO dto = new StatusDTO(1L, "BOOKING");
 
         Mockito.when(statusService.createStatus(dto)).thenReturn(dto);
-
 
         MockHttpServletRequestBuilder mockRequest =
                 MockMvcRequestBuilders.post("/api/status/")
@@ -107,19 +102,15 @@ class StatusControllerTest {
     @Test
     void updateStatus() throws Exception {
 
-        StatusDTO status = new StatusDTO(1L, "BOOK");
-        StatusDTO updatedStatusDTO = new StatusDTO(1L, "LOCK");
+        StatusDTO dto = new StatusDTO(null, "LOCK");
+        StatusDTO oldStatus = new StatusDTO(1L, "BOOK");
+        StatusDTO updatedStatus = new StatusDTO(1L, "LOCK");
 
-        when(statusService.getStatus(status.getStatusId())).thenReturn(status);
-        when(statusService.updateStatus(status.getStatusId(), updatedStatusDTO)).thenReturn(updatedStatusDTO);
+        Mockito.when(statusService.updateStatus(oldStatus.getStatusId(), dto)).thenReturn(updatedStatus);
 
-        MockHttpServletRequestBuilder mockRequest =
-                MockMvcRequestBuilders.put("/api/status/")
+        mockMvc.perform(put("/api/status/{id}", oldStatus.getStatusId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(this.objectMapper.writeValueAsString(updatedStatusDTO));
-
-        mockMvc.perform(mockRequest)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
                 .andDo(print());
 
@@ -140,7 +131,7 @@ class StatusControllerTest {
     @Test
     void deleteStatus() throws Exception {
 
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        StatusDTO dto = new StatusDTO(1L, "BOOKING");
 
         Mockito.doNothing().when(statusService).deleteStatus(dto.getStatusId());
         mockMvc.perform(

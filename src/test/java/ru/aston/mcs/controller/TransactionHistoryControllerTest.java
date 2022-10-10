@@ -2,6 +2,7 @@ package ru.aston.mcs.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -76,10 +77,16 @@ class TransactionHistoryControllerTest {
 
     @Test
     void updateTransactionHistory() throws Exception {
-        TransactionHistoryDTO transactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
+        TransactionHistoryDTO newTransactionHistoryDTO = new TransactionHistoryDTO(null, null, 100.0, Operation.INCREASE, "something2", new Date());
+        TransactionHistoryDTO oldTransactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.DECREASE, "something1", new Date());
+        TransactionHistoryDTO updatedTransactionHistoryDTO = new TransactionHistoryDTO(1L, null, 100.0, Operation.INCREASE, "something2", new Date());
 
-        mockMvc.perform(put("/api/transaction-histories/").contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(transactionHistoryDTO)))
+        Mockito.when(transactionHistoryService.updateTransactionHistory(oldTransactionHistoryDTO.getId(), newTransactionHistoryDTO)).thenReturn(updatedTransactionHistoryDTO);
+
+
+        mockMvc.perform(put("/api/transaction-histories/{id}", oldTransactionHistoryDTO.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newTransactionHistoryDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

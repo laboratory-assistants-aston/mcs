@@ -9,7 +9,7 @@ public interface TransactionHistoryService {
 
     TransactionHistoryDTO createTransactionHistory(TransactionHistoryDTO TransactionHistoryDTO);
 
-    TransactionHistoryDTO updateTransactionHistory(TransactionHistoryDTO TransactionHistoryDTO);
+    TransactionHistoryDTO updateTransactionHistory(Long id, TransactionHistoryDTO TransactionHistoryDTO);
 
     void deleteTransactionHistory(Long balanceHistoryId);
 

@@ -59,9 +59,9 @@ public class TransactionHistoryController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Transaction history updated") })
-    @PutMapping("/")
-    public TransactionHistoryDTO updateTransactionHistory(@RequestBody TransactionHistoryDTO transactionHistoryDTO) {
-        return transactionHistoryService.updateTransactionHistory(transactionHistoryDTO);
+    @PutMapping("/{id}")
+    public TransactionHistoryDTO updateTransactionHistory(@PathVariable Long id, @RequestBody TransactionHistoryDTO transactionHistoryDTO) {
+        return transactionHistoryService.updateTransactionHistory(id, transactionHistoryDTO);
     }
 
     @ApiOperation(value = "Delete new transaction history")

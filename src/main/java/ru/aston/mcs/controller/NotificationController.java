@@ -59,9 +59,9 @@ public class NotificationController {
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
             @ApiResponse(code = 201, message = "Notification updated") })
-    @PutMapping("/")
-    public NotificationDTO updateNotification(@RequestBody NotificationDTO notificationDTO) {
-        return notificationService.updateNotification(notificationDTO);
+    @PutMapping("/{id}")
+    public NotificationDTO updateNotification(@PathVariable Long id, @RequestBody NotificationDTO notificationDTO) {
+        return notificationService.updateNotification(id, notificationDTO);
     }
 
     @ApiOperation(value = "Delete notification")
