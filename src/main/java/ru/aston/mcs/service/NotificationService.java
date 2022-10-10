@@ -16,4 +16,6 @@ public interface NotificationService {
     NotificationDTO getNotification(Long notificationId);
 
     List<NotificationDTO> getAllNotificationsByUserId(Long id);
+
+    NotificationDTO getLastNotificationByUserId(Long id);
 }

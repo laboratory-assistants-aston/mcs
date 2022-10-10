@@ -10,6 +10,7 @@ import ru.aston.mcs.repository.NotificationRepository;
 import ru.aston.mcs.service.NotificationService;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -73,5 +74,15 @@ public class NotificationServiceImpl implements NotificationService {
     public List<NotificationDTO> getAllNotificationsByUserId(Long id) {
         List<Notification> notificationsByUserId = notificationRepository.findNotificationsByUserId(id);
         return notificationMapper.toDTOList(notificationsByUserId);
+    }
+
+    @Override
+    public NotificationDTO getLastNotificationByUserId(Long id) {
+        List<NotificationDTO> notificationsByUserIdDto = notificationMapper.toDTOList(notificationRepository
+                .findNotificationsByUserId(id));
+        NotificationDTO notificationDTO = notificationsByUserIdDto.stream()
+                .max(Comparator.comparing(NotificationDTO::getDate))
+                .get();
+        return notificationDTO;
     }
 }

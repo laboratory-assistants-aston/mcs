@@ -50,6 +50,15 @@ public class NotificationController {
         return notificationService.getNotification(id);
     }
 
+    @ApiOperation(value = "Get last notification by user id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 201, message = "Notification founded")})
+    @GetMapping("/last/{id}")
+    public NotificationDTO getLastNotificationByUserId(@PathVariable Long id) {
+        return notificationService.getLastNotificationByUserId(id);
+    }
+
     @ApiOperation(value = "Add new notification")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid Request"),
