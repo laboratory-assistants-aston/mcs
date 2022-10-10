@@ -6,38 +6,30 @@ import io.swagger.annotations.ApiModelProperty;
 import ru.aston.mcs.entity.User;
 
 import java.util.Date;
+import java.util.List;
+
 
 @ApiModel(value = "Table which shows information about notification")
-public class NotificationDTO {
-
-    private Long notificationId;
+public class NotificationsRequestDTO {
 
     @ApiModelProperty(value = "Notification's text")
     private String text;
 
     @ApiModelProperty(value = "User who get notifications")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private User user;
+    private List<User> userIdList;
 
     @ApiModelProperty(value = "Date when notification sends")
     private Date date;
 
-    public NotificationDTO() {
+    public NotificationsRequestDTO() {
     }
 
-    public NotificationDTO(Long notificationId, String text, User user, Date date) {
-        this.notificationId = notificationId;
+    public NotificationsRequestDTO(Long notificationId, String text, List<User> userIdList, Date date) {
+
         this.text = text;
-        this.user = user;
+        this.userIdList = userIdList;
         this.date = date;
-    }
-
-    public Long getNotificationId() {
-        return notificationId;
-    }
-
-    public void setNotificationId(Long notificationId) {
-        this.notificationId = notificationId;
     }
 
     public String getText() {
@@ -48,12 +40,12 @@ public class NotificationDTO {
         this.text = text;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUserIdList() {
+        return userIdList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(List<User> userList) {
+        this.userIdList = userList;
     }
 
     public Date getDate() {
