@@ -56,7 +56,9 @@ class ResourceServiceImplTest {
 
     @Test
     void deleteResourceByIdTest() {
+
         resourceServiceImpl.deleteResource(1L);
         Mockito.verify(resourceRepository).deleteById(1L);
+
     }
 }

@@ -116,22 +116,7 @@ class ResourceTypeServicesImplTest {
     @Test
     void testDeleteResourceType() {
 
-        List<ResourceTypeDTO> dto = new ArrayList<>();
-        dto.add(new ResourceTypeDTO(1L, "parking",100.00));
-        dto.add(new ResourceTypeDTO(2L, "co-working",50.00));
-
-
-        List<ResourceType> entity = new ArrayList<>();
-        entity.add(new ResourceType(1L, "parking",100.00));
-        entity.add(new ResourceType(2L, "co-working",50.00));
-
-
-        Mockito.when(resourceTypeRepository.findById(entity.get(0).getNameId())).thenReturn(Optional.of(entity.get(0)));
-        Mockito.doNothing().when(resourceTypeRepository).deleteById(entity.get(0).getNameId());
-
-        resourceTypeServices.deleteResourceType(dto.get(0).getNameId());
-
-        Mockito.verify(resourceTypeRepository).findById(dto.get(0).getNameId());
-        Mockito.verify(resourceTypeRepository).deleteById(dto.get(0).getNameId());
+        resourceTypeServices.deleteResourceType(1L);
+        Mockito.verify(resourceTypeRepository).deleteById(1L);
     }
 }

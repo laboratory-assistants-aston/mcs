@@ -114,22 +114,8 @@ class StatusServiceImplTest {
     @Test
     void deleteStatus() {
 
-        List<StatusDTO> dto = new ArrayList<>();
-        dto.add(new StatusDTO(1L, "BOOKING"));
-        dto.add(new StatusDTO(2L, "READY_TO_USE"));
-
-        List<Status> entity = new ArrayList<>();
-        entity.add(new Status(1L, "BOOKING"));
-        entity.add(new Status(2L, "READY_TO_USE"));
-
-
-        Mockito.when(statusRepository.findById(entity.get(0).getStatusId())).thenReturn(Optional.of(entity.get(0)));
-        Mockito.doNothing().when(statusRepository).deleteById(entity.get(0).getStatusId());
-
-        statusService.deleteStatus(dto.get(0).getStatusId());
-
-        Mockito.verify(statusRepository).findById(dto.get(0).getStatusId());
-        Mockito.verify(statusRepository).deleteById(dto.get(0).getStatusId());
+        statusService.deleteStatus(1L);
+        Mockito.verify(statusRepository).deleteById(1L);
 
     }
 }
