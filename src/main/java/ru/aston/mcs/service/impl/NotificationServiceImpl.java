@@ -2,79 +2,106 @@ package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.dto.NotificationResponseDTO;
+import ru.aston.mcs.dto.NotificationsRequestDTO;
 import ru.aston.mcs.entity.Notification;
-import ru.aston.mcs.exception.EntityNotFoundException;
+import ru.aston.mcs.entity.User;
 import ru.aston.mcs.exception.InvalidRequestException;
 import ru.aston.mcs.mapper.NotificationMapper;
 import ru.aston.mcs.repository.NotificationRepository;
+import ru.aston.mcs.repository.UserRepository;
 import ru.aston.mcs.service.NotificationService;
 
-
+import javax.persistence.EntityNotFoundException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
 
+    private final UserRepository userRepository;
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
 
-    public NotificationServiceImpl(NotificationRepository notificationRepository, NotificationMapper notificationMapper) {
+    public NotificationServiceImpl(UserRepository userRepository, NotificationRepository notificationRepository, NotificationMapper notificationMapper) {
+        this.userRepository = userRepository;
         this.notificationRepository = notificationRepository;
         this.notificationMapper = notificationMapper;
     }
 
     @Override
-
-    public List<NotificationDTO> getAllNotifications() {
-        return notificationMapper.toDTOList(notificationRepository.findAll());
+    public List<NotificationResponseDTO> getAllNotifications() {
+        return notificationMapper.toDTOResponseList(notificationRepository.findAll());
     }
 
     @Override
-    public NotificationDTO getNotification(Long notificationId) {
-        return notificationMapper.toDTO(
-                notificationRepository.findById(notificationId)
-                        .orElseThrow( () -> new EntityNotFoundException(notificationId)));
-    }
-
-    @Override
-    public NotificationDTO createNotification(NotificationDTO notificationDTO) {
-
-        if (notificationDTO == null ) {
+    public NotificationResponseDTO updateNotification(NotificationsRequestDTO notificationsRequestDTO) {
+        if (notificationsRequestDTO == null || notificationsRequestDTO.getId() == null) {
             throw new InvalidRequestException();
         }
-
-        return notificationMapper.toDTO(
-                notificationRepository.save(
-                        notificationMapper.toModel(notificationDTO)));
+        Notification notificationFromDb = notificationRepository.findById(notificationsRequestDTO.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        return initForNotification(notificationsRequestDTO, notificationFromDb);
     }
 
-
-
     @Override
-    public NotificationDTO updateNotification(Long id, NotificationDTO notificationDTO) {
-        if (notificationDTO == null || id == null) {
+    public void createNotification(NotificationsRequestDTO notificationsRequestDTO) {
+        if (notificationsRequestDTO == null) {
             throw new InvalidRequestException();
         }
-
-        Long notificationId = notificationDTO.getNotificationId();
-        Notification notificationFromDb = notificationRepository.findById(notificationId)
-                .orElseThrow( () -> new EntityNotFoundException(notificationId));
-
-        notificationFromDb.setUser(notificationDTO.getUser());
-        notificationFromDb.setText(notificationDTO.getText());
-        notificationFromDb.setDate(notificationDTO.getDate());
-
-        return notificationMapper.toDTO(notificationRepository.save(notificationFromDb));
+        initForNotification(notificationsRequestDTO, new Notification());
     }
 
 
     @Override
     public void deleteNotification(Long notificationId) {
-
         notificationRepository.deleteById(notificationId);
     }
 
+    @Override
+    public NotificationResponseDTO getNotification(Long notificationId) {
+        return notificationMapper.toDTOResponse(
+                notificationRepository.findById(notificationId)
+                        .orElseThrow(RuntimeException::new));
+    }
 
+    @Override
+    public List<NotificationResponseDTO> getAllNotificationsByUserId(Long userId) {
+        List<Notification> notifications = notificationRepository.findNotificationsByUser_Id(userId);
+        return notificationMapper.toDTOResponseList(notifications);
+    }
+
+    @Override
+    public NotificationResponseDTO getLastNotificationByUserId(Long userId) {
+        List<Notification> notificationsByUserid = notificationRepository
+                .findNotificationsByUser_Id(userId);
+        return notificationMapper.toDTOResponse(notificationsByUserid.stream()
+                .max(Comparator.comparing(Notification::getDate))
+                .get());
+    }
+
+    @Override
+    public void createNotificationAsList(NotificationsRequestDTO notificationsRequestDTO) {
+        if (notificationsRequestDTO == null) {
+            throw new InvalidRequestException();
+        }
+        initForNotification(notificationsRequestDTO, new Notification());
+    }
+
+    private NotificationResponseDTO initForNotification(NotificationsRequestDTO notificationsRequestDTO, Notification notificationFromDb) {
+        List<User> collect = notificationsRequestDTO.getUserId()
+                .stream()
+                .map(userId -> {
+                    User userFromDb = userRepository.findById(userId).get();
+                    userFromDb.getNotificationList().add(notificationMapper.toModel(notificationsRequestDTO));
+                    userRepository.save(userFromDb);
+                    return userFromDb;
+                }).collect(Collectors.toList());
+        notificationFromDb.setUsers(collect);
+        notificationFromDb.setText(notificationsRequestDTO.getText());
+        notificationFromDb.setDate(notificationsRequestDTO.getDate());
+        return notificationMapper.toDTOResponse(notificationRepository.save(notificationFromDb));
+    }
 }

@@ -1,16 +1,11 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     @Column(name = "user_id")
@@ -32,16 +27,24 @@ public class User {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "balance")
+    @Column(name = "balance", nullable = false)
     private Float balance;
 
     @ManyToMany(mappedBy = "users")
     private List<Role> roles;
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_notifications",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id")
+    )
+    private List<Notification> notificationList = new ArrayList<>();
+
     public User() {
     }
 
-    public User(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles) {
+    public User(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles, List<Notification> notificationList) {
         this.id = id;
         this.accessCode = accessCode;
         this.login = login;
@@ -50,6 +53,7 @@ public class User {
         this.address = address;
         this.balance = balance;
         this.roles = roles;
+        this.notificationList = notificationList;
     }
 
     public Long getId() {
@@ -114,5 +118,13 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Notification> getNotificationList() {
+        return notificationList;
+    }
+
+    public void setNotificationList(List<Notification> notificationList) {
+        this.notificationList = notificationList;
     }
 }

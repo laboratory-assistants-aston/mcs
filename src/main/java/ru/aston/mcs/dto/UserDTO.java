@@ -2,13 +2,13 @@ package ru.aston.mcs.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import ru.aston.mcs.entity.Notification;
 import ru.aston.mcs.entity.Role;
 
 import java.util.List;
 
 @ApiModel(value = "model for adding data in User table")
 public class UserDTO {
-
     private Long id;
 
     @ApiModelProperty(value = "access code for resources", example = "1234", required = true)
@@ -32,10 +32,13 @@ public class UserDTO {
     @ApiModelProperty(value = "list of roles")
     private List<Role> roles;
 
+    @ApiModelProperty(value = "list of notifications")
+    private List<Notification> notificationList;
+
     public UserDTO() {
     }
 
-    public UserDTO(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles) {
+    public UserDTO(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles, List<Notification> notificationList) {
         this.id = id;
         this.accessCode = accessCode;
         this.login = login;
@@ -44,6 +47,7 @@ public class UserDTO {
         this.address = address;
         this.balance = balance;
         this.roles = roles;
+        this.notificationList = notificationList;
     }
 
     public Long getId() {
@@ -108,5 +112,13 @@ public class UserDTO {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Notification> getNotificationList() {
+        return notificationList;
+    }
+
+    public void setNotificationList(List<Notification> notificationList) {
+        this.notificationList = notificationList;
     }
 }

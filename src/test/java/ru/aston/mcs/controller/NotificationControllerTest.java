@@ -2,13 +2,12 @@ package ru.aston.mcs.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.dto.NotificationResponseDTO;
 import ru.aston.mcs.service.NotificationService;
 
 import java.util.ArrayList;
@@ -17,10 +16,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,10 +35,10 @@ class NotificationControllerTest {
 
     @Test
     void returnListOfNotifications() throws Exception {
-        List<NotificationDTO> notifications = new ArrayList<>(
-                Arrays.asList(new NotificationDTO(1L, "firstText", null, null),
-                        new NotificationDTO(2L, "secondText", null, null),
-                        new NotificationDTO(3L, "secondText", null, null))
+        List<NotificationResponseDTO> notifications = new ArrayList<>(
+                Arrays.asList(new NotificationResponseDTO(1L, "firstText", null),
+                        new NotificationResponseDTO(2L, "secondText", null),
+                        new NotificationResponseDTO(3L, "secondText", null))
         );
 
         when(notificationService.getAllNotifications()).thenReturn(notifications);
@@ -54,7 +50,7 @@ class NotificationControllerTest {
 
     @Test
     void createNotification() throws Exception {
-        NotificationDTO notificationDTO = new NotificationDTO(1L, "firstText", null, null);
+        NotificationResponseDTO notificationDTO = new NotificationResponseDTO(1L, "firstText", null);
 
         mockMvc.perform(post("/api/notifications/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(notificationDTO)))
@@ -64,16 +60,10 @@ class NotificationControllerTest {
 
     @Test
     void updateNotification() throws Exception {
-        NotificationDTO newNotificationDTO = new NotificationDTO(null, "updateText", null, null);
-        NotificationDTO oldNotificationDTO = new NotificationDTO(1L, "firstText", null, null);
-        NotificationDTO updatedNotificationDTO = new NotificationDTO(1L, "updateText", null, null);
+        NotificationResponseDTO notificationDTO = new NotificationResponseDTO(1L, "firstText", null);
 
-        Mockito.when(notificationService.updateNotification(oldNotificationDTO.getNotificationId(), newNotificationDTO)).thenReturn(updatedNotificationDTO);
-
-
-        mockMvc.perform(put("/api/notifications/{id}", oldNotificationDTO.getNotificationId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(newNotificationDTO)))
+        mockMvc.perform(put("/api/notifications/").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(notificationDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

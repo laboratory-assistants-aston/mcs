@@ -1,17 +1,7 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,35 +10,40 @@ import java.util.List;
 public class Notification {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long notificationId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "notification_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "notification_text")
     private String text;
 
-    @Column(name = "creation_date", nullable = false)
-    private Date creationDate;
+    @ManyToMany
+    @JoinTable(
+            name = "users_notifications",
+            joinColumns = @JoinColumn(name = "notification_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> user = new ArrayList<>();
+
+    @Column(name = "date")
+    private Date date;
 
     public Notification() {
     }
 
-    public Notification(Long notificationId, String text, User user, Date creationDate) {
-        this.notificationId = notificationId;
+    public Notification(Long id, String text, List<User> users, Date date) {
+        this.id = id;
         this.text = text;
-        this.user = user;
-        this.creationDate = creationDate;
+        this.user = users;
+        this.date = date;
     }
 
-    public Long getNotificationId() {
-        return notificationId;
+    public Long getId() {
+        return id;
     }
 
-    public void setNotificationId(Long notificationId) {
-        this.notificationId = notificationId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -59,19 +54,19 @@ public class Notification {
         this.text = text;
     }
 
-    public User getUser() {
+    public List<User> getUsers() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.user = users;
     }
 
     public Date getDate() {
-        return creationDate;
+        return date;
     }
 
     public void setDate(Date date) {
-        this.creationDate = date;
+        this.date = date;
     }
 }
