@@ -74,7 +74,7 @@ class StatusServiceImplTest {
 
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.getStatusId(), entity.getStatusId());
-        Assertions.assertEquals(fromDb.getStatusName(), entity.getName());
+        Assertions.assertEquals(fromDb.getStatusName(), entity.getStatusName());
 
         Mockito.verify(statusRepository).findById(entity.getStatusId());
         Mockito.verify(statusMapper).toDTO(entity);

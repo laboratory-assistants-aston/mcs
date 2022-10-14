@@ -33,8 +33,8 @@ class ResourceControllerTest {
 
     @BeforeAll
     void setUp() {
-        mockMvc = standaloneSetup(new ResourceController(resourceService)).build();
-        resourceDTO = new ResourceDTO(0L, "", null, null);
+     /*   mockMvc = standaloneSetup(new ResourceController(resourceService)).build();
+        resourceDTO = new ResourceDTO(0L, "", null, null);*/
     }
 
     @Test

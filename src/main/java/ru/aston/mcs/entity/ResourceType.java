@@ -17,40 +17,35 @@ public class ResourceType {
     private Long resourceTypeId;
 
     @Column(name = "resource_type_name", nullable = false)
-    private String name;
+    private String resourceTypeName;
 
     @Column(name = "resource_type_cost", columnDefinition="Decimal(10,2) default '0.00'")
-    private Double cost;
+    private Double resourceTypeCost;
 
-    public ResourceType(){}
-
-    public ResourceType(Long resourceTypeId, String name, Double cost) {
-        this.resourceTypeId = resourceTypeId;
-        this.name = name;
-        this.cost = cost;
+    public ResourceType() {
     }
 
-    public Long getNameId() {
+    public Long getResourceTypeId() {
         return resourceTypeId;
     }
 
-    public void setNameId(Long nameId) {
-        this.resourceTypeId = nameId;
+    public void setResourceTypeId(Long resourceTypeId) {
+        this.resourceTypeId = resourceTypeId;
     }
 
-    public String getName() {
-        return name;
+    public String getResourceTypeName() {
+        return resourceTypeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setResourceTypeName(String resourceTypeName) {
+        this.resourceTypeName = resourceTypeName;
     }
 
-    public Double getCost() {
-        return cost;
+    public Double getResourceTypeCost() {
+        return resourceTypeCost;
     }
 
-    public void setCost(Double cost) {
-        this.cost = cost;
+    public void setResourceTypeCost(Double resourceTypeCost) {
+        this.resourceTypeCost = resourceTypeCost;
     }
 }

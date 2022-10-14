@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ResourceMapper {
+
     ResourceDTO toDTO(Resource resource);
 
     Resource toModel(ResourceDTO resourceDTO);
