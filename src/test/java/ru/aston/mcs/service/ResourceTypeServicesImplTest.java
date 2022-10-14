@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.context.annotation.Profile;
 import ru.aston.mcs.dto.ResourceTypeDTO;
 import ru.aston.mcs.entity.ResourceType;
 import ru.aston.mcs.mapper.ResourceTypeMapper;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
+@Profile("test")
 class ResourceTypeServicesImplTest {
 
     @Mock

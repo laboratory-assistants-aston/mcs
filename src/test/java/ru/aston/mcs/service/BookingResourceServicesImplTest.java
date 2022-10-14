@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Profile;
 import ru.aston.mcs.dto.BookingResourceDTO;
 import ru.aston.mcs.mapper.BookingResourceMapper;
 import ru.aston.mcs.repository.BookingResourceRepository;
@@ -17,6 +18,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
+@Profile("test")
 class BookingResourceServicesImplTest {
     @Mock
     private BookingResourceRepository bookingResourceRepository;

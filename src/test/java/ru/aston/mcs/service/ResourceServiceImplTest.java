@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Profile;
 import ru.aston.mcs.dto.ResourceDTO;
 import ru.aston.mcs.mapper.ResourceMapper;
 import ru.aston.mcs.repository.ResourceRepository;
@@ -15,6 +16,7 @@ import ru.aston.mcs.service.impl.ResourceServiceImpl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
+@Profile("test")
 class ResourceServiceImplTest {
     @Mock
     private ResourceRepository resourceRepository;
