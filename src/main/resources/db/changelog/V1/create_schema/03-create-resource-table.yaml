@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1665432453045-3
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_resource
+                  name: resources_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resource_type_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: status_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: resource_identifier
+                  type: VARCHAR(255)
+            tableName: resource

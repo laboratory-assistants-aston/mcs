@@ -1,8 +1,17 @@
 package ru.aston.mcs.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "model for adding data in ResourceType table")
 public class ResourceTypeDTO {
+
     private Long resourceTypeId;
+
+    @ApiModelProperty(value = "name of type resource", example = "co-working", required = true)
     private String name;
+
+    @ApiModelProperty(value = "cost of type resource", example = "100.00", required = true)
     private Double cost;
 
     public ResourceTypeDTO() {

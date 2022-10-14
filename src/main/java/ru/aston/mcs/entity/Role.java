@@ -17,14 +17,14 @@ public class Role {
     @Id
     @Column(name="role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long roleId;
 
     @Column(name="role_name", nullable = false)
     private String roleName;
 
     @ManyToMany
     @JoinTable(
-            name = "persons_roles",
+            name = "users_roles",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
@@ -34,17 +34,17 @@ public class Role {
     }
 
     public Role(Long id, String roleName, List<User> persons) {
-        this.id = id;
+        this.roleId = id;
         this.roleName = roleName;
         this.users = persons;
     }
 
-    public Long getId() {
-        return id;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {

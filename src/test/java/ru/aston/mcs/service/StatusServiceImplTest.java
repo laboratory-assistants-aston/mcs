@@ -1,12 +1,12 @@
+
 package ru.aston.mcs.service;
 
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import org.mockito.Mock;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -16,9 +16,12 @@ import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
 import ru.aston.mcs.service.impl.StatusServiceImpl;
-import ru.aston.mcs.util.StatusDataUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -37,16 +40,19 @@ class StatusServiceImplTest {
     @Test
     void getAllStatus() {
 
-        //Arrange
-        List<Status> entity = StatusDataUtils.createStatusEntityList();
-        List<StatusDTO> dto = StatusDataUtils.createStatusDTOList();
+        List<StatusDTO> dto = new ArrayList<>();
+        dto.add(new StatusDTO(1L, "BOOKING"));
+        dto.add(new StatusDTO(2L, "READY_TO_USE"));
+
+        List<Status> entity = new ArrayList<>();
+        entity.add(new Status(1L, "BOOKING"));
+        entity.add(new Status(2L, "READY_TO_USE"));
+
         Mockito.when(statusRepository.findAll()).thenReturn(entity);
         Mockito.when(statusMapper.toDTOList(entity)).thenReturn(dto);
 
-        //Action
         List<StatusDTO> fromDb = statusService.getAllStatus();
 
-        //Assert
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.size(), entity.size());
 
@@ -58,52 +64,58 @@ class StatusServiceImplTest {
     @Test
     void getStatus() {
 
-        //Arrange
-        Status entity = StatusDataUtils.createStatusEntity();
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
-        Mockito.when(statusRepository.findById(entity.getStatusId())).thenReturn(Optional.of(entity));
-        Mockito.when(statusMapper.toDTO(entity)).thenReturn(dto);
+        Status entity = new Status(1L, "BOOKING");
+        StatusDTO dtoFromDb = new StatusDTO(1L, "BOOKING");
 
-        //Action
+        Mockito.when(statusRepository.findById(entity.getStatusId())).thenReturn(Optional.of(entity));
+        Mockito.when(statusMapper.toDTO(entity)).thenReturn(dtoFromDb);
+
         StatusDTO fromDb = statusService.getStatus(entity.getStatusId());
 
-        //Assert
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.getStatusId(), entity.getStatusId());
-        Assertions.assertEquals(fromDb.getName(), entity.getStatusName());
+        Assertions.assertEquals(fromDb.getStatusName(), entity.getName());
 
         Mockito.verify(statusRepository).findById(entity.getStatusId());
         Mockito.verify(statusMapper).toDTO(entity);
     }
 
     @Test
-    void addAndSaveStatus() {
+    void createStatus() {
 
-        //Arrange
-        Status entity = StatusDataUtils.createStatusEntity();
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
-        Mockito.when(statusMapper.toModel(dto)).thenReturn(entity);
-        Mockito.when(statusRepository.save(entity)).thenReturn(entity);
+        StatusDTO dtoToDb = new StatusDTO(null, "BOOKING");
+        Status entity = new Status(1l, "BOOKING");
+        StatusDTO dtoFromDb = new StatusDTO(1l, "BOOKING");
+        Mockito.when(statusRepository.save(statusMapper.toModel(dtoToDb))).thenReturn(entity);
+        Mockito.when(statusMapper.toDTO(entity)).thenReturn(dtoFromDb);
 
-        //Action
-        statusService.addAndSaveStatus(dto);
+        statusService.createStatus(dtoToDb);
 
-        //Assert
-        Mockito.verify(statusMapper).toModel(dto);
-        Mockito.verify(statusRepository).save(entity);
+        Mockito.verify(statusRepository).save(statusMapper.toModel(dtoToDb));
 
+    }
+
+    @Test
+    void updateStatus() {
+
+        StatusDTO dto = new StatusDTO(null, "READY_TO_USE");
+        Status changeEntity = new Status(1L, "BOOKING");
+        Status updatedEntity = new Status(1L, "READY_TO_USE");
+
+        Mockito.when(statusRepository.findById(changeEntity.getStatusId())).thenReturn(Optional.of(changeEntity));
+        Mockito.when(statusRepository.save(updatedEntity)).thenReturn(updatedEntity);
+
+        statusService.updateStatus(changeEntity.getStatusId(), dto);
+
+        Mockito.verify(statusRepository).findById(changeEntity.getStatusId());
+        Mockito.verify(statusRepository).save(changeEntity);
     }
 
     @Test
     void deleteStatus() {
 
-        //Arrange
-        StatusDTO dto = StatusDataUtils.createStatusDTO();
+        statusService.deleteStatus(1L);
+        Mockito.verify(statusRepository).deleteById(1L);
 
-        //Action
-        statusService.deleteStatus(dto.getStatusId());
-
-        //Assert
-        Mockito.verify(statusRepository).deleteById(dto.getStatusId());
     }
 }

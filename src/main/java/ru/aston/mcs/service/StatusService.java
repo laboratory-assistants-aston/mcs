@@ -7,9 +7,11 @@ import java.util.List;
 public interface StatusService {
     List<StatusDTO> getAllStatus();
 
-   StatusDTO getStatus(Long id);
+   StatusDTO getStatus(Long statusId);
 
-   void addAndSaveStatus(StatusDTO statusDTO);
+    StatusDTO createStatus(StatusDTO statusDTO);
 
-   void deleteStatus(Long id);
+    StatusDTO updateStatus(Long statusId, StatusDTO statusDTO);
+
+    void deleteStatus(Long id);
 }

@@ -1,8 +1,12 @@
 package ru.aston.mcs.entity;
 
 import com.sun.istack.NotNull;
-
-import javax.persistence.*;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
 import java.util.Objects;
 
 @Entity
@@ -11,12 +15,11 @@ public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "name_id")
+    @Column(name = "status_id")
     private Long statusId;
 
-
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "status_name", nullable = false)
     private String statusName;
 
     public Status() {
@@ -36,11 +39,11 @@ public class Status {
         this.statusId = statusId;
     }
 
-    public String getStatusName() {
+    public String getName() {
         return statusName;
     }
 
-    public void setStatusName(String statusName) {
+    public void setName(String statusName) {
         this.statusName = statusName;
     }
 

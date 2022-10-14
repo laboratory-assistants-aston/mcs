@@ -1,34 +1,28 @@
 package ru.aston.mcs.entity;
 
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "booking_resources")
 public class BookingResource {
+
     @Id
-    @Column(name = "resources_id")
+    @Column(name = "booking_resources_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_type_id", nullable = false)
-    private ResourceType resourceType;
+    @JoinColumn(name = "resource_id", nullable = false)
+    private Resource resource;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "duration_time", nullable = false)
     private Integer durationTime;
@@ -39,31 +33,25 @@ public class BookingResource {
     @Column(name = "end_booking", nullable = false)
     private Date endBooking;
 
-    @ManyToMany
-    @JoinTable(name = "booking_resources_residents",
-            joinColumns = @JoinColumn(name = "resource_id"),
-            inverseJoinColumns = @JoinColumn(name = "resident_id"))
-    private List<Resident> residentList;
-
     public BookingResource() {
     }
 
-    public BookingResource(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
+    public BookingResource(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
         this.id = id;
-        this.resourceType = resourceType;
+        this.resource = resource;
         this.status = status;
         this.durationTime = durationTime;
         this.startBooking = startBooking;
         this.endBooking = endBooking;
-        this.residentList = residentList;
+        this.user = user;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setResourceType(ResourceType resourceType) {
-        this.resourceType = resourceType;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public void setStatus(Status status) {
@@ -82,16 +70,16 @@ public class BookingResource {
         this.endBooking = endBooking;
     }
 
-    public void setResidentList(List<Resident> residentList) {
-        this.residentList = residentList;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
+    public Resource getResource() {
+        return resource;
     }
 
     public Status getStatus() {
@@ -110,7 +98,7 @@ public class BookingResource {
         return endBooking;
     }
 
-    public List<Resident> getResidentList() {
-        return residentList;
+    public User getUser() {
+        return user;
     }
 }

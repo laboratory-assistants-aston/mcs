@@ -8,9 +8,12 @@ public interface ResourceTypeService {
 
     List<ResourceTypeDTO> getAllResourceTypes();
 
-    void addAndSaveResourceType(ResourceTypeDTO resourceTypeDTO);
+    ResourceTypeDTO getResourceType(Long nameId);
+
+    ResourceTypeDTO createResourceType(ResourceTypeDTO resourceTypeDTO);
+
+    ResourceTypeDTO updateResourceType(Long resourceTypeId, ResourceTypeDTO resourceTypeDTO);
 
     void deleteResourceType(Long nameId);
 
-    ResourceTypeDTO getResourceType(Long nameId);
 }

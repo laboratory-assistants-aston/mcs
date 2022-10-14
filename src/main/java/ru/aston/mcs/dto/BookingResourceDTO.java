@@ -1,40 +1,54 @@
 package ru.aston.mcs.dto;
 
-import  ru.aston.mcs.entity.Resident;
-import ru.aston.mcs.entity.ResourceType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import ru.aston.mcs.entity.Resource;
 import ru.aston.mcs.entity.Status;
+import ru.aston.mcs.entity.User;
 
 import java.util.Date;
-import java.util.List;
-
+@ApiModel(value = "model for adding data in booking resource table")
 public class BookingResourceDTO {
+
     private Long id;
-    private ResourceType resourceType;
+
+    @ApiModelProperty(value = "id of resource", example = "1", required = true)
+    private Resource resource;
+
+    @ApiModelProperty(value = "id of type status", example = "1", required = true)
     private Status status;
+
+    @ApiModelProperty(value = "duration time of booking", example = "2", required = true)
     private Integer durationTime;
+
+    @ApiModelProperty(value = "date of start booking", example = "22.10.2002", required = true)
     private Date startBooking;
+
+    @ApiModelProperty(value = "date of end booking", example = "22.10.2002", required = true)
     private Date endBooking;
-    private List<Resident> residentList;
+
+    @ApiModelProperty(value = "id of type user", example = "1", required = true)
+    private User user;
 
     public BookingResourceDTO() {
     }
 
-    public BookingResourceDTO(Long id, ResourceType resourceType, Status status, Integer durationTime, Date startBooking, Date endBooking, List<Resident> residentList) {
+    public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
         this.id = id;
-        this.resourceType = resourceType;
+        this.resource = resource;
         this.status = status;
         this.durationTime = durationTime;
         this.startBooking = startBooking;
         this.endBooking = endBooking;
-        this.residentList = residentList;
+        this.user = user;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setResourceType(ResourceType resourceType) {
-        this.resourceType = resourceType;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public void setStatus(Status status) {
@@ -53,16 +67,16 @@ public class BookingResourceDTO {
         this.endBooking = endBooking;
     }
 
-    public void setResidentList(List<Resident> residentList) {
-        this.residentList = residentList;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
-    public ResourceType getResourceType() {
-        return resourceType;
+    public Resource getResource() {
+        return resource;
     }
 
     public Status getStatus() {
@@ -81,7 +95,7 @@ public class BookingResourceDTO {
         return endBooking;
     }
 
-    public List<Resident> getResidentList() {
-        return residentList;
+    public User getUser() {
+        return user;
     }
 }

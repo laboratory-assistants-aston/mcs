@@ -7,8 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 import ru.aston.mcs.dto.BookingResourceDTO;
 import ru.aston.mcs.mapper.BookingResourceMapper;
 import ru.aston.mcs.repository.BookingResourceRepository;
@@ -19,50 +17,50 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 class BookingResourceServicesImplTest {
     @Mock
     private BookingResourceRepository bookingResourceRepository;
-    @Mock
-    private BookingResourceMapper bookingResourceMapper;
 
     @InjectMocks
     private BookingResourceServicesImpl bookingResourceServices;
+    @Mock
+    BookingResourceMapper bookingResourceMapper;
 
     private BookingResourceDTO bookingResourceDTO;
 
     @BeforeEach
     void createDto() {
         bookingResourceDTO = new BookingResourceDTO();
-        bookingResourceDTO.setResourceType(null);
+        bookingResourceDTO.setId(0L);
+        bookingResourceDTO.setResource(null);
         bookingResourceDTO.setStatus(null);
         bookingResourceDTO.setDurationTime(0);
-        bookingResourceDTO.setStartBooking(new Date());
         bookingResourceDTO.setEndBooking(new Date());
-        bookingResourceDTO.setResidentList(null);
+        bookingResourceDTO.setStartBooking(new Date());
+        bookingResourceDTO.setUser(null);
     }
 
     @Test
-    void getAllBookingResourceTest() {
+    void getAllResourceTest() {
         bookingResourceServices.getAllBookingResources();
         Mockito.verify(bookingResourceRepository).findAll();
     }
 
     @Test
-    void getBookingResourceByIdTest() {
-        RuntimeException runtimeException =
-                assertThrows(RuntimeException.class, () -> bookingResourceServices.getBookingResource(1L));
-        Mockito.verify(bookingResourceRepository).findById(1L);
+    void getResourceByIdTest() {
+        RuntimeException runtimeException = assertThrows(RuntimeException.class,
+                () -> bookingResourceServices.getBookingResource(0L));
+        Mockito.verify(bookingResourceRepository).findById(0L);
     }
 
     @Test
-    void createBookingResourceFromDtoTest() {
-        bookingResourceServices.addAndSaveBookingResource(bookingResourceDTO);
+    void createResourceFromDtoTest() {
+        bookingResourceServices.createBookingResource(bookingResourceDTO);
         Mockito.verify(bookingResourceRepository).save(bookingResourceMapper.toModel(bookingResourceDTO));
     }
 
     @Test
-    void deleteBookingResourceByIdTest() {
+    void deleteResourceByIdTest() {
         bookingResourceServices.deleteBookingResource(1L);
         Mockito.verify(bookingResourceRepository).deleteById(1L);
     }
