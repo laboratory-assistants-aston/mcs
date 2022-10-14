@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @WebMvcTest(ResourceController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Profile("test")
 class ResourceControllerTest {
     @MockBean
     private ResourceService resourceService;

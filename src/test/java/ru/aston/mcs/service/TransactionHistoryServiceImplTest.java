@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Profile;
 import ru.aston.mcs.dto.TransactionHistoryDTO;
 import ru.aston.mcs.entity.enums.Operation;
 import ru.aston.mcs.mapper.TransactionHistoryMapper;
@@ -18,6 +19,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
+@Profile("test")
 class TransactionHistoryServiceImplTest {
 
     @Mock
