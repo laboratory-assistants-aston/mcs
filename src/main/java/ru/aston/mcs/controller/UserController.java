@@ -6,7 +6,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,5 +78,14 @@ public class UserController {
             @ApiResponse(code = 200, message = "User was successfully deleted") })
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    @PatchMapping("/refill")
+    @ApiOperation(value = "Fill user balance", notes = "Fill user balance by id and amount for manager")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 200, message = "Balance changed") })
+    public void updateBalance(@RequestParam Long id, @RequestParam Float amount) {
+        userService.fillUserBalance(id, amount);
     }
 }

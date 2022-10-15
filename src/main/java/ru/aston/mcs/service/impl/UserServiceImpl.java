@@ -11,6 +11,7 @@ import ru.aston.mcs.service.UserService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -74,5 +75,15 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
 
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public void fillUserBalance(Long id, Float amount) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            User fillUser = user.get();
+            fillUser.setBalance(fillUser.getBalance() + amount);
+            userRepository.save(fillUser);
+        }
     }
 }

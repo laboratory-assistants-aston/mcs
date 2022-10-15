@@ -30,9 +30,6 @@ public class BookingResourceDTO {
     @ApiModelProperty(value = "id of type user", example = "1", required = true)
     private User user;
 
-    public BookingResourceDTO() {
-    }
-
     public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
         this.id = id;
         this.resource = resource;
@@ -43,59 +40,62 @@ public class BookingResourceDTO {
         this.user = user;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public void setDurationTime(Integer durationTime) {
-        this.durationTime = durationTime;
-    }
-
-    public void setStartBooking(Date startBooking) {
-        this.startBooking = startBooking;
-    }
-
-    public void setEndBooking(Date endBooking) {
-        this.endBooking = endBooking;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public BookingResourceDTO() {
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Resource getResource() {
         return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public Status getStatus() {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Integer getDurationTime() {
         return durationTime;
+    }
+
+    public void setDurationTime(Integer durationTime) {
+        this.durationTime = durationTime;
     }
 
     public Date getStartBooking() {
         return startBooking;
     }
 
+    public void setStartBooking(Date startBooking) {
+        this.startBooking = startBooking;
+    }
+
     public Date getEndBooking() {
         return endBooking;
     }
 
+    public void setEndBooking(Date endBooking) {
+        this.endBooking = endBooking;
+    }
+
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
