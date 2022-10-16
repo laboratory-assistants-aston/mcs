@@ -2,40 +2,41 @@ package ru.aston.mcs.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ru.aston.mcs.entity.User;
 
 import java.util.Date;
+import java.util.List;
+
 
 @ApiModel(value = "Table which shows information about notification")
-public class NotificationDTO {
+public class NotificationsRequestDTO {
 
-    private Long notificationId;
+    private Long id;
 
     @ApiModelProperty(value = "Notification's text")
     private String text;
 
     @ApiModelProperty(value = "User who get notifications")
-    private User user;
+    private List<Long> user;
 
     @ApiModelProperty(value = "Date when notification sends")
     private Date date;
 
-    public NotificationDTO() {
+    public NotificationsRequestDTO() {
     }
 
-    public NotificationDTO(Long notificationId, String text, User user, Date date) {
-        this.notificationId = notificationId;
+    public NotificationsRequestDTO(Long id, String text, List<Long> user, Date date) {
+        this.id = id;
         this.text = text;
         this.user = user;
         this.date = date;
     }
 
-    public Long getNotificationId() {
-        return notificationId;
+    public Long getId() {
+        return id;
     }
 
-    public void setNotificationId(Long notificationId) {
-        this.notificationId = notificationId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -46,11 +47,11 @@ public class NotificationDTO {
         this.text = text;
     }
 
-    public User getUser() {
+    public List<Long> getUserId() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(List<Long> user) {
         this.user = user;
     }
 

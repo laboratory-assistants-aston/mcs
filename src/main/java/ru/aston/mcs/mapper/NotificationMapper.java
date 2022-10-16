@@ -1,18 +1,20 @@
 package ru.aston.mcs.mapper;
 
 import org.mapstruct.Mapper;
-import ru.aston.mcs.dto.NotificationDTO;
+import ru.aston.mcs.dto.NotificationResponseDTO;
+import ru.aston.mcs.dto.NotificationsRequestDTO;
 import ru.aston.mcs.entity.Notification;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface NotificationMapper {
-    Notification toModel(NotificationDTO notificationDTO);
 
-    NotificationDTO toDTO(Notification notification);
+    List<NotificationResponseDTO> toDTOResponseList(List<Notification> notificationList);
 
-    List<Notification> toModelList(List<NotificationDTO> notificationDTOList);
+    NotificationResponseDTO toDTOResponse(Notification notification);
 
-    List<NotificationDTO> toDTOList(List<Notification> notificationList);
+    NotificationsRequestDTO toDTORequest(Notification notification);
+
+    Notification toModel(NotificationsRequestDTO notificationDTO);
 }
