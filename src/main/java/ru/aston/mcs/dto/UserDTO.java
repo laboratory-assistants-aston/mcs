@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import ru.aston.mcs.entity.Role;
 
 import java.util.List;
+import java.util.Set;
 
 @ApiModel(value = "model for adding data in User table")
 public class UserDTO {
@@ -15,7 +16,10 @@ public class UserDTO {
     private Integer accessCode;
 
     @ApiModelProperty(value = "user login", example = "adventa", required = true)
-    private String login;
+    private String userName;
+
+    @ApiModelProperty(value = "user balance", example = "1.0F", required = true)
+    private String password;
 
     @ApiModelProperty(value = "user email", example = "adventa@mail.ru", required = true)
     private String email;
@@ -30,15 +34,16 @@ public class UserDTO {
     private Float balance;
 
     @ApiModelProperty(value = "list of roles")
-    private List<Role> roles;
+    private Set<Role> roles;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles) {
-        this.id = id;
+
+    public UserDTO(String userName, String password, Integer accessCode, String email, String phone, String address, Float balance, Set<Role> roles) {
+        this.userName = userName;
+        this.password = password;
         this.accessCode = accessCode;
-        this.login = login;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -62,12 +67,12 @@ public class UserDTO {
         this.accessCode = accessCode;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String login) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -102,11 +107,19 @@ public class UserDTO {
         this.balance = balance;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

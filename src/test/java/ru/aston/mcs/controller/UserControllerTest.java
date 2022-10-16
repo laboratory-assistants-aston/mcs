@@ -38,9 +38,10 @@ public class UserControllerTest {
     @Test
     void shouldReturnListOfUsers() throws Exception {
         List<UserDTO> users = new ArrayList<>(
-                Arrays.asList(new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null),
-                        new UserDTO(2L, 123, "login2", "email2", "phone2", "address2", 2.2F, null),
-                        new UserDTO(3L, 123, "login3", "email3", "phone3", "address3", 2.2F, null))
+                Arrays.asList(
+                        new UserDTO("username1", "password1", 123, "email1", "phone1", "address1", 2.2F, null),
+                        new UserDTO("username2", "password2", 123, "email2", "phone2", "address2", 2.2F, null),
+                        new UserDTO("username3", "password3", 123, "email3", "phone3", "address3", 2.2F, null))
         );
 
         when(userService.getAllUsers()).thenReturn(users);
@@ -52,10 +53,11 @@ public class UserControllerTest {
 
     @Test
     void shouldCreateUser() throws Exception {
-        UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
+
+        UserDTO userDTO = new UserDTO("updeteUsername", "password", 123, "email", "phone", "address", 2.2F, null);
 
         mockMvc.perform(post("/api/users/").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(userDTO)))
+                        .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -63,7 +65,7 @@ public class UserControllerTest {
     @Test
     void shouldReturnUser() throws Exception {
         long id = 1L;
-        UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
+        UserDTO userDTO = new UserDTO("updeteUsername", "password", 123, "email", "phone", "address", 2.2F, null);
         when(userService.getUser(id)).thenReturn(userDTO);
         mockMvc.perform(get("/api/users/{id}", id)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
@@ -73,11 +75,14 @@ public class UserControllerTest {
     @Test
     void shouldUpdateUser() throws Exception {
         Long id = 1L;
-        UserDTO userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
-        UserDTO updatedUserDTO = new UserDTO(1L, 123, "updated", "updated", "phone", "address", 2.2F, null);
+
+        UserDTO userDTO = new UserDTO("username", "password", 123, "email", "phone", "address", 2.2F, null);
+        UserDTO updatedUserDTO = new UserDTO("updeteUsername", "password", 123, "email", "phone", "address", 2.2F, null);
+
+
         when(userService.updateUser(id, userDTO)).thenReturn(updatedUserDTO);
         mockMvc.perform(put("/api/users/{id}", id).contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(userDTO)))
+                        .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

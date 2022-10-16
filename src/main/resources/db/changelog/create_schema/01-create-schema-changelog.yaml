@@ -1,6 +1,15 @@
 databaseChangeLog:
   - changeSet:
-      id: 1665439244990-1
+      id: 1665885901657-1
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: hibernate_sequence
+            startValue: 1
+  - changeSet:
+      id: 1665885901657-2
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -46,7 +55,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: booking_resources
   - changeSet:
-      id: 1665439244990-2
+      id: 1665885901657-3
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -74,7 +83,35 @@ databaseChangeLog:
                   type: DATETIME
             tableName: notifications
   - changeSet:
-      id: 1665439244990-3
+      id: 1665885901657-4
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_refreshtoken
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: token
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expiry_date
+                  type: DATETIME
+            tableName: refreshtoken
+  - changeSet:
+      id: 1665885901657-5
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -105,7 +142,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: resource
   - changeSet:
-      id: 1665439244990-4
+      id: 1665885901657-6
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -130,7 +167,7 @@ databaseChangeLog:
                   type: Decimal(10,2)
             tableName: resource_types
   - changeSet:
-      id: 1665439244990-5
+      id: 1665885901657-7
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -151,7 +188,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: roles
   - changeSet:
-      id: 1665439244990-6
+      id: 1665885901657-8
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -172,7 +209,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: status
   - changeSet:
-      id: 1665439244990-7
+      id: 1665885901657-9
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -210,7 +247,29 @@ databaseChangeLog:
                   type: DATETIME
             tableName: transacton_history
   - changeSet:
-      id: 1665439244990-8
+      id: 1665885901657-10
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user_roles
+                  name: role_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user_roles
+                  name: user_id
+                  type: BIGINT
+            tableName: user_roles
+  - changeSet:
+      id: 1665885901657-11
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -227,52 +286,42 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: access_code
-                  type: INT
+                  name: username
+                  type: VARCHAR(255)
               - column:
                   constraints:
                     nullable: false
-                  name: login
+                  name: password
                   type: VARCHAR(255)
               - column:
                   constraints:
                     nullable: false
                   name: email
-                  type: VARCHAR(255)
+                  type: VARCHAR(50)
               - column:
-                  constraints:
-                    nullable: false
                   name: phone
                   type: VARCHAR(255)
               - column:
-                  constraints:
-                    nullable: false
                   name: address
                   type: VARCHAR(255)
+              - column:
+                  name: access_code
+                  type: INT
               - column:
                   name: balance
                   type: FLOAT
             tableName: users
   - changeSet:
-      id: 1665439244990-9
+      id: 1665885901657-12
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                  name: role_id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: user_id
-                  type: BIGINT
-            tableName: users_roles
+        - addUniqueConstraint:
+            columnNames: token
+            constraintName: uc_refreshtoken_token
+            tableName: refreshtoken
   - changeSet:
-      id: 1665439244990-10
+      id: 1665885901657-13
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -283,7 +332,7 @@ databaseChangeLog:
             referencedColumnNames: resources_id
             referencedTableName: resource
   - changeSet:
-      id: 1665439244990-11
+      id: 1665885901657-14
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -294,7 +343,7 @@ databaseChangeLog:
             referencedColumnNames: status_id
             referencedTableName: status
   - changeSet:
-      id: 1665439244990-12
+      id: 1665885901657-15
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -305,7 +354,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1665439244990-13
+      id: 1665885901657-16
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -316,7 +365,18 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1665439244990-14
+      id: 1665885901657-17
+      author: vikaz (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: refreshtoken
+            constraintName: FK_REFRESHTOKEN_ON_USER
+            referencedColumnNames: user_id
+            referencedTableName: users
+  - changeSet:
+      id: 1665885901657-18
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -327,7 +387,7 @@ databaseChangeLog:
             referencedColumnNames: resource_type_id
             referencedTableName: resource_types
   - changeSet:
-      id: 1665439244990-15
+      id: 1665885901657-19
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -338,7 +398,7 @@ databaseChangeLog:
             referencedColumnNames: status_id
             referencedTableName: status
   - changeSet:
-      id: 1665439244990-16
+      id: 1665885901657-20
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -349,24 +409,24 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1665439244990-17
+      id: 1665885901657-21
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: role_id
-            baseTableName: users_roles
+            baseTableName: user_roles
             constraintName: fk_userol_on_role
             referencedColumnNames: role_id
             referencedTableName: roles
   - changeSet:
-      id: 1665439244990-18
+      id: 1665885901657-22
       author: vikaz (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: user_id
-            baseTableName: users_roles
+            baseTableName: user_roles
             constraintName: fk_userol_on_user
             referencedColumnNames: user_id
             referencedTableName: users

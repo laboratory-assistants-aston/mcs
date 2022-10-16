@@ -1,5 +1,8 @@
 package ru.aston.mcs.entity;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -7,7 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -17,34 +25,66 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "access_code", nullable = false)
-    private Integer accessCode;
+    @Column(name = "username", nullable = false)
+    private String username;
 
-    @Column(name = "login", nullable = false)
-    private String login;
+    @Column(name = "password", nullable = false)
+    private String password;
 
+    @NotBlank
+    @Size(max = 50)
+    @Email
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "access_code")
+    private Integer accessCode;
 
     @Column(name = "balance")
     private Float balance;
 
-    @ManyToMany(mappedBy = "users")
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
     }
 
-    public User(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles) {
-        this.id = id;
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String username, String password, String email, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
+
+    public User(String username, String password, Integer accessCode, String email, String phone, String address, Float balance) {
+        this.username = username;
+        this.password = password;
         this.accessCode = accessCode;
-        this.login = login;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.balance = balance;
+    }
+
+    public User(String username, String password, Integer accessCode, String email, String phone, String address, Float balance, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.accessCode = accessCode;
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -60,20 +100,20 @@ public class User {
         this.id = id;
     }
 
-    public Integer getAccessCode() {
-        return accessCode;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccessCode(Integer accessCode) {
-        this.accessCode = accessCode;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLogin() {
-        return login;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -100,6 +140,14 @@ public class User {
         this.address = address;
     }
 
+    public Integer getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(Integer accessCode) {
+        this.accessCode = accessCode;
+    }
+
     public Float getBalance() {
         return balance;
     }
@@ -108,11 +156,11 @@ public class User {
         this.balance = balance;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }

@@ -1,18 +1,3 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/v1/create_schema/01-create-booking_resources-table.yaml
-  - include:
-      file: db/changelog/v1/create_schema/02-create-notifications-table.yaml
-  - include:
-      file: db/changelog/v1/create_schema/03-create-resource-table.yaml
-  - include:
-      file: db/changelog/v1/create_schema/04-create-resource_types-table.yaml
-  - include:
-      file: db/changelog/v1/create_schema/05-create-roles-tables.yaml
-  - include:
-      file: db/changelog/v1/create_schema/06-create-status-table.yaml
-  - include:
-      file: db/changelog/v1/create_schema/07-create-transacton_history-table.yaml
-  - include:
-      file: db/changelog/v1/create_schema/08-create-users_fk-table.yaml
-
+      file: db/changelog/create_schema/01-create-schema-changelog.yaml

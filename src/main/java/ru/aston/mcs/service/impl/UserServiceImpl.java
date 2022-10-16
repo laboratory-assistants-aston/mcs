@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         userFromDb.setAddress(userDTO.getAddress());
         userFromDb.setPhone(userDTO.getPhone());
         userFromDb.setBalance(userDTO.getBalance());
-        userFromDb.setLogin(userDTO.getLogin());
+        userFromDb.setUsername(userDTO.getUserName());
         userFromDb.setRoles(userDTO.getRoles());
         userFromDb.setEmail(userDTO.getEmail());
 

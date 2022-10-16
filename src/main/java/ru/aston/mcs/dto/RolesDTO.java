@@ -3,6 +3,7 @@ package ru.aston.mcs.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import ru.aston.mcs.entity.User;
+import ru.aston.mcs.entity.enums.ERole;
 
 import java.util.List;
 
@@ -12,18 +13,12 @@ public class RolesDTO {
     private Long id;
 
     @ApiModelProperty(value = "name of role", example = "admin", required = true)
-    private String roleName;
+    private ERole roleName;
 
-    @ApiModelProperty(value = "list of users with this role")
-    private List<User> users;
+    public RolesDTO(){}
 
-    public RolesDTO() {
-    }
-
-    public RolesDTO(Long id, String roleName, List<User> users) {
-        this.id = id;
+    public RolesDTO(ERole roleName) {
         this.roleName = roleName;
-        this.users = users;
     }
 
     public Long getId() {
@@ -34,19 +29,11 @@ public class RolesDTO {
         this.id = id;
     }
 
-    public String getRoleName() {
+    public ERole getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(ERole roleName) {
         this.roleName = roleName;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 }

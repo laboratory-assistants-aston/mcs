@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.aston.mcs.dto.RolesDTO;
+import ru.aston.mcs.entity.enums.ERole;
 import ru.aston.mcs.service.RolesService;
 
 import java.util.ArrayList;
@@ -38,9 +39,9 @@ public class RolesControllerTest {
     @Test
     void shouldReturnListOfRoles() throws Exception {
         List<RolesDTO> roles = new ArrayList<>(
-                Arrays.asList(new RolesDTO(1L, "name", null),
-                        new RolesDTO(2L, "name2", null),
-                        new RolesDTO(3L, "name3", null)));
+                Arrays.asList(new RolesDTO(ERole.ROLE_ADMIN),
+                        new RolesDTO(ERole.ROLE_USER)));
+
         when(rolesService.getAllRoles()).thenReturn(roles);
         mockMvc.perform(get("/api/roles/"))
                 .andExpect(status().isOk())
@@ -50,7 +51,7 @@ public class RolesControllerTest {
 
     @Test
     void shouldCreateRole() throws Exception {
-        RolesDTO rolesDTO = new RolesDTO(1L, "name", null);
+        RolesDTO rolesDTO = new RolesDTO(ERole.ROLE_ADMIN);
 
         mockMvc.perform(post("/api/roles/")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -62,7 +63,7 @@ public class RolesControllerTest {
     @Test
     void shouldReturnRole() throws Exception {
         long id = 1L;
-        RolesDTO rolesDTO = new RolesDTO(1L, "name", null);
+        RolesDTO rolesDTO = new RolesDTO(ERole.ROLE_ADMIN);
         when(rolesService.getRole(id)).thenReturn(rolesDTO);
         mockMvc.perform(get("/api/roles/{id}", id)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
@@ -72,8 +73,8 @@ public class RolesControllerTest {
     @Test
     void shouldUpdateRole() throws Exception {
         Long id = 1L;
-        RolesDTO rolesDTO = new RolesDTO(1L, "name", null);
-        RolesDTO updatedRolesDTO = new RolesDTO(1L, "updated", null);
+        RolesDTO rolesDTO = new RolesDTO(ERole.ROLE_ADMIN);
+        RolesDTO updatedRolesDTO = new RolesDTO(ERole.ROLE_USER);
         when(rolesService.updateRole(id, rolesDTO)).thenReturn(updatedRolesDTO);
         mockMvc.perform(put("/api/roles/{id}", id).contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(rolesDTO)))

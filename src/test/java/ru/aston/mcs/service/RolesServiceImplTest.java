@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.aston.mcs.dto.RolesDTO;
 import ru.aston.mcs.entity.Role;
+import ru.aston.mcs.entity.enums.ERole;
 import ru.aston.mcs.mapper.RolesMapper;
 import ru.aston.mcs.repository.RolesRepository;
 import ru.aston.mcs.service.impl.RolesServiceImpl;
@@ -35,8 +36,8 @@ class RolesServiceImplTest {
     @BeforeEach
     void createDto() {
         rolesDTO = new RolesDTO();
-        rolesDTO.setRoleName("roleName");
-        rolesDTO.setUsers(null);
+        rolesDTO.setRoleName(ERole.ROLE_USER);
+        //  rolesDTO.setUsers(null);
     }
 
     @Test
@@ -60,8 +61,10 @@ class RolesServiceImplTest {
 
     @Test
     void updateRoleFromDtoTest() {
-        Role roleFromDb = new Role(1L, "rolename1", null);
-        RolesDTO result = new RolesDTO(1L, "upd", null);
+/*        Role roleFromDb = new Role(1L, "rolename1", null);
+        RolesDTO result = new RolesDTO(1L, "upd", null);*/
+        Role roleFromDb = new Role(ERole.ROLE_USER);
+        RolesDTO result = new RolesDTO(ERole.ROLE_ADMIN);
 
         Mockito.when(rolesRepository.findById(anyLong())).thenReturn(Optional.of(roleFromDb));
         Mockito.when(rolesRepository.save(any(Role.class))).thenReturn(roleFromDb);

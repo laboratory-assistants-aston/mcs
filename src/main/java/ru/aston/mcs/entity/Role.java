@@ -1,5 +1,9 @@
 package ru.aston.mcs.entity;
 
+import ru.aston.mcs.entity.enums.ERole;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -14,29 +18,21 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 public class Role {
+
     @Id
     @Column(name="role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="role_name", nullable = false)
-    private String roleName;
-
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users;
+    private ERole roleName;
 
     public Role() {
     }
 
-    public Role(Long id, String roleName, List<User> persons) {
-        this.roleId = id;
+    public Role(ERole roleName) {
         this.roleName = roleName;
-        this.users = persons;
     }
 
     public Long getRoleId() {
@@ -47,19 +43,11 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public String getRoleName() {
+    public ERole getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(ERole roleName) {
         this.roleName = roleName;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 }

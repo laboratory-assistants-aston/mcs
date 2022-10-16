@@ -53,7 +53,7 @@ public class RolesServiceImpl implements RolesService {
         Role rolesFromDb = rolesRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
         rolesFromDb.setRoleName(rolesDTO.getRoleName());
-        rolesFromDb.setUsers(rolesDTO.getUsers());
+        //rolesFromDb.setUsers(rolesDTO.getUsers());
 
         Role role = rolesRepository.save(rolesFromDb);
         RolesDTO rolesDTOResult = rolesMapper.toDTO(role);
