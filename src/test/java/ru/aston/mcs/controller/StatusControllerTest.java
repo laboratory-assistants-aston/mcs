@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.aston.mcs.dto.StatusDTO;
+import ru.aston.mcs.entity.enums.StatusName;
 import ru.aston.mcs.service.StatusService;
 
 import java.util.ArrayList;
@@ -52,8 +53,8 @@ class StatusControllerTest {
     void getAllStatus() throws Exception {
 
         List<StatusDTO> dto = new ArrayList<>();
-        dto.add(new StatusDTO(1L, "BOOKING"));
-        dto.add(new StatusDTO(2L, "READY_TO_USE"));
+        dto.add(new StatusDTO(1L, StatusName.BOOKING));
+        dto.add(new StatusDTO(2L, StatusName.READY_TO_USE));
 
         Mockito.when(statusService.getAllStatus()).thenReturn(dto);
 
@@ -69,7 +70,7 @@ class StatusControllerTest {
     @Test
     void getStatus() throws Exception {
 
-        StatusDTO dto = new StatusDTO(1L, "BOOKING");
+        StatusDTO dto = new StatusDTO(1L, StatusName.BOOKING);
 
         Mockito.when(statusService.getStatus(dto.getStatusId())).thenReturn(dto);
 
@@ -84,7 +85,7 @@ class StatusControllerTest {
     @Test
     void saveStatus() throws Exception {
 
-        StatusDTO dto = new StatusDTO(1L, "BOOKING");
+        StatusDTO dto = new StatusDTO(1L, StatusName.BOOKING);
 
         Mockito.when(statusService.createStatus(dto)).thenReturn(dto);
 
@@ -102,9 +103,9 @@ class StatusControllerTest {
     @Test
     void updateStatus() throws Exception {
 
-        StatusDTO dto = new StatusDTO(null, "LOCK");
-        StatusDTO oldStatus = new StatusDTO(1L, "BOOK");
-        StatusDTO updatedStatus = new StatusDTO(1L, "LOCK");
+        StatusDTO dto = new StatusDTO(null, StatusName.BOOKING);
+        StatusDTO oldStatus = new StatusDTO(1L, StatusName.BOOKING);
+        StatusDTO updatedStatus = new StatusDTO(1L, StatusName.READY_TO_USE);
 
         Mockito.when(statusService.updateStatus(oldStatus.getStatusId(), dto)).thenReturn(updatedStatus);
 
@@ -131,7 +132,7 @@ class StatusControllerTest {
     @Test
     void deleteStatus() throws Exception {
 
-        StatusDTO dto = new StatusDTO(1L, "BOOKING");
+        StatusDTO dto = new StatusDTO(1L, StatusName.BOOKING);
 
         Mockito.doNothing().when(statusService).deleteStatus(dto.getStatusId());
         mockMvc.perform(

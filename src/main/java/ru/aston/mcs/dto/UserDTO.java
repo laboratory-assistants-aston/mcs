@@ -26,8 +26,8 @@ public class UserDTO {
     @ApiModelProperty(value = "user address", example = "SPb, Demo street 25, 1, 12", required = true)
     private String address;
 
-    @ApiModelProperty(value = "user balance", example = "1.0F", required = true)
-    private Float balance;
+    @ApiModelProperty(value = "user balance", example = "1.0L", required = true)
+    private Double balance;
 
     @ApiModelProperty(value = "list of roles")
     private List<Role> roles;
@@ -35,7 +35,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles) {
+    public UserDTO(Long id, Integer accessCode, String login, String email, String phone, String address, Double balance, List<Role> roles) {
         this.id = id;
         this.accessCode = accessCode;
         this.login = login;
@@ -94,11 +94,11 @@ public class UserDTO {
         this.address = address;
     }
 
-    public Float getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Float balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 

@@ -34,7 +34,7 @@ class UserServiceImplTest {
 
     @BeforeEach
     void createDto() {
-        userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2F, null);
+        userDTO = new UserDTO(1L, 123, "login1", "email1", "phone", "address", 2.2, null);
     }
 
 
@@ -59,8 +59,8 @@ class UserServiceImplTest {
 
     @Test
     void updateUserFromDtoTest() {
-        User userFromDb = new User(1L, 123, "none", "none", "phone", "address", 2.2F, null);
-        UserDTO result = new UserDTO(1L, 123, "upd", "upd", "phone", "address", 2.2F, null);
+        User userFromDb = new User(1L, 123, "none", "none", "phone", "address", 2.2, null);
+        UserDTO result = new UserDTO(1L, 123, "upd", "upd", "phone", "address", 2.2, null);
 
         Mockito.when(userRepository.findById(anyLong())).thenReturn(Optional.of(userFromDb));
         Mockito.when(userRepository.save(any(User.class))).thenReturn(userFromDb);

@@ -11,7 +11,7 @@ import ru.aston.mcs.service.ResourceService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/resources")
+@RequestMapping("api/resources")
 public class ResourceController {
 
     private final ResourceService resourceService;

@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import ru.aston.mcs.dto.BookingResourceDTO;
+import ru.aston.mcs.dto.BookingResourceResponseDTO;
 import ru.aston.mcs.service.BookingResourceServices;
 
 import java.util.Collections;
@@ -29,34 +29,34 @@ class BookingResourceControllerTest {
     @MockBean
     private BookingResourceServices bookingResourceServices;
 
-    BookingResourceDTO bookingResourceDTO;
+    BookingResourceResponseDTO bookingResourceResponseDTO;
 
     private MockMvc mockMvc;
 
     @BeforeAll
     void setUp() {
         mockMvc = standaloneSetup(new BookingResourceController(bookingResourceServices)).build();
-        bookingResourceDTO = new BookingResourceDTO
+        bookingResourceResponseDTO = new BookingResourceResponseDTO
                 (0L, null, null, 0, new Date(), new Date(), null);
     }
 
     @Test
     void getAllBookingResourcesTest() throws Exception {
-        when(bookingResourceServices.getAllBookingResources()).thenReturn(Collections.singletonList(bookingResourceDTO));
+        when(bookingResourceServices.getAllBookingResources()).thenReturn(Collections.singletonList(bookingResourceResponseDTO));
         MvcResult mvcResult = mockMvc
                 .perform(get("/api/resource-booking/"))
                 .andReturn();
-        verifyBody(asJsonString(Collections.singletonList(bookingResourceDTO)), mvcResult.getResponse().getContentAsString());
+        verifyBody(asJsonString(Collections.singletonList(bookingResourceResponseDTO)), mvcResult.getResponse().getContentAsString());
     }
 
     @Test
     void getBookingResourceByIdTest() throws Exception {
-        when(bookingResourceServices.getBookingResource(0L)).thenReturn(bookingResourceDTO);
+        when(bookingResourceServices.getBookingResource(0L)).thenReturn(bookingResourceResponseDTO);
 
         MvcResult mvcResult = mockMvc
                 .perform(get("/api/resource-booking/0").param("id", "0"))
                 .andReturn();
-        verifyBody(asJsonString(bookingResourceDTO), mvcResult.getResponse().getContentAsString());
+        verifyBody(asJsonString(bookingResourceResponseDTO), mvcResult.getResponse().getContentAsString());
     }
 
     @Test
@@ -64,10 +64,10 @@ class BookingResourceControllerTest {
         MvcResult mvcResult = mockMvc.perform(post("/api/resource-booking/")
                         .characterEncoding("utf-8")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(bookingResourceDTO)))
+                        .content(asJsonString(bookingResourceResponseDTO)))
                 .andExpect(status().isOk())
                 .andReturn();
-        verifyBody(asJsonString(bookingResourceDTO), mvcResult.getRequest().getContentAsString());
+        verifyBody(asJsonString(bookingResourceResponseDTO), mvcResult.getRequest().getContentAsString());
     }
 
     @Test
@@ -76,10 +76,10 @@ class BookingResourceControllerTest {
                         .characterEncoding("utf-8")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(1))
-                        .content(asJsonString(bookingResourceDTO)))
+                        .content(asJsonString(bookingResourceResponseDTO)))
                 .andExpect(status().isOk())
                 .andReturn();
-        verifyBody(asJsonString(bookingResourceDTO), mvcResult.getRequest().getContentAsString());
+        verifyBody(asJsonString(bookingResourceResponseDTO), mvcResult.getRequest().getContentAsString());
     }
 
     @Test

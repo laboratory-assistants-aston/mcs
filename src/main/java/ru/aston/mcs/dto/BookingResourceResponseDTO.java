@@ -8,7 +8,7 @@ import ru.aston.mcs.entity.User;
 
 import java.util.Date;
 @ApiModel(value = "model for adding data in booking resource table")
-public class BookingResourceDTO {
+public class BookingResourceResponseDTO {
 
     private Long id;
 
@@ -30,10 +30,11 @@ public class BookingResourceDTO {
     @ApiModelProperty(value = "id of type user", example = "1", required = true)
     private User user;
 
-    public BookingResourceDTO() {
+    public BookingResourceResponseDTO() {
     }
 
-    public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
+    public BookingResourceResponseDTO(Long id, Resource resource, Status status,
+                                      Integer durationTime, Date startBooking, Date endBooking, User user) {
         this.id = id;
         this.resource = resource;
         this.status = status;

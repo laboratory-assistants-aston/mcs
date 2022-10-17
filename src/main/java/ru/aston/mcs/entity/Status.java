@@ -1,12 +1,9 @@
 package ru.aston.mcs.entity;
 
 import com.sun.istack.NotNull;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
+import ru.aston.mcs.entity.enums.StatusName;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -19,16 +16,17 @@ public class Status {
     private Long statusId;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_name", nullable = false)
-    private String statusName;
+    private StatusName status;
 
     public Status() {
 
     }
 
-    public Status(Long statusId, String name) {
+    public Status(Long statusId, StatusName status) {
         this.statusId = statusId;
-        this.statusName = name;
+        this.status = status;
     }
 
     public Long getStatusId() {
@@ -39,24 +37,11 @@ public class Status {
         this.statusId = statusId;
     }
 
-    public String getName() {
-        return statusName;
+    public StatusName getStatus() {
+        return status;
     }
 
-    public void setName(String statusName) {
-        this.statusName = statusName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Status status = (Status) o;
-        return Objects.equals(statusId, status.statusId) && Objects.equals(statusName, status.statusName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(statusId, statusName);
+    public void setStatus(StatusName status) {
+        this.status = status;
     }
 }

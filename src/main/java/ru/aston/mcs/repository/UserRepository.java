@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.aston.mcs.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    User findUserById(Long id);
 }

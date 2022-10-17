@@ -33,7 +33,7 @@ public class User {
     private String address;
 
     @Column(name = "balance")
-    private Float balance;
+    private Double balance;
 
     @ManyToMany(mappedBy = "users")
     private List<Role> roles;
@@ -41,7 +41,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, Integer accessCode, String login, String email, String phone, String address, Float balance, List<Role> roles) {
+    public User(Long id, Integer accessCode, String login, String email, String phone, String address, Double balance, List<Role> roles) {
         this.id = id;
         this.accessCode = accessCode;
         this.login = login;
@@ -100,11 +100,11 @@ public class User {
         this.address = address;
     }
 
-    public Float getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(Float balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
