@@ -43,8 +43,7 @@ public class TransactionHistory {
     public TransactionHistory() {
     }
 
-    public TransactionHistory(Long transaction_history_id, User userId, Double operationSum, Operation operation, String description, Date modificationDate) {
-        this.transaction_history_id = transaction_history_id;
+    public TransactionHistory(User userId, Double operationSum, Operation operation, String description, Date modificationDate) {
         this.userId = userId;
         this.operationSum = operationSum;
         this.operation = operation;

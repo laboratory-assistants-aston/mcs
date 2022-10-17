@@ -1,18 +1,18 @@
 package ru.aston.mcs.service;
 
-import ru.aston.mcs.dto.BookingResourceDTO;
+import ru.aston.mcs.dto.BookingResourceResponseDTO;
 
 import java.util.List;
 
 public interface BookingResourceServices {
 
-    List<BookingResourceDTO> getAllBookingResources();
+    List<BookingResourceResponseDTO> getAllBookingResources();
 
-    BookingResourceDTO getBookingResource(Long id);
+    BookingResourceResponseDTO getBookingResource(Long id);
 
-    BookingResourceDTO createBookingResource(BookingResourceDTO resourceDto);
+    BookingResourceResponseDTO createBookingResource(BookingResourceResponseDTO resourceDto);
 
-    BookingResourceDTO updateBookingResource(Long id, BookingResourceDTO resourceDTO);
+    BookingResourceResponseDTO updateBookingResource(Long id, BookingResourceResponseDTO resourceDTO);
 
     void deleteBookingResource(Long id);
 }

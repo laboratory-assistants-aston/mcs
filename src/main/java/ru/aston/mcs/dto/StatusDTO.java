@@ -2,6 +2,7 @@ package ru.aston.mcs.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import ru.aston.mcs.entity.enums.StatusName;
 
 import java.util.Objects;
 
@@ -11,14 +12,15 @@ public class StatusDTO {
     private Long statusId;
 
     @ApiModelProperty(value = "name of status", example = "BOOKED", required = true)
-    private String statusName;
+    private StatusName statusName;
 
     public StatusDTO() {
 
     }
-    public StatusDTO(Long statusId, String name) {
+
+    public StatusDTO(Long statusId, StatusName statusName) {
         this.statusId = statusId;
-        this.statusName = name;
+        this.statusName = statusName;
     }
 
     public Long getStatusId() {
@@ -29,12 +31,11 @@ public class StatusDTO {
         this.statusId = statusId;
     }
 
-    public String getStatusName() {
+    public StatusName getStatusName() {
         return statusName;
     }
 
-    public void setStatusName(String statusName) {
+    public void setStatusName(StatusName statusName) {
         this.statusName = statusName;
     }
-
 }

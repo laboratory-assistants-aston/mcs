@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import ru.aston.mcs.dto.StatusDTO;
 import ru.aston.mcs.entity.Status;
+import ru.aston.mcs.entity.enums.StatusName;
 import ru.aston.mcs.mapper.StatusMapper;
 import ru.aston.mcs.repository.StatusRepository;
 import ru.aston.mcs.service.impl.StatusServiceImpl;
@@ -41,12 +42,12 @@ class StatusServiceImplTest {
     void getAllStatus() {
 
         List<StatusDTO> dto = new ArrayList<>();
-        dto.add(new StatusDTO(1L, "BOOKING"));
-        dto.add(new StatusDTO(2L, "READY_TO_USE"));
+        dto.add(new StatusDTO(1L, StatusName.BOOKING));
+        dto.add(new StatusDTO(2L, StatusName.READY_TO_USE));
 
         List<Status> entity = new ArrayList<>();
-        entity.add(new Status(1L, "BOOKING"));
-        entity.add(new Status(2L, "READY_TO_USE"));
+        entity.add(new Status(1L, StatusName.BOOKING));
+        entity.add(new Status(2L, StatusName.READY_TO_USE));
 
         Mockito.when(statusRepository.findAll()).thenReturn(entity);
         Mockito.when(statusMapper.toDTOList(entity)).thenReturn(dto);
@@ -64,8 +65,8 @@ class StatusServiceImplTest {
     @Test
     void getStatus() {
 
-        Status entity = new Status(1L, "BOOKING");
-        StatusDTO dtoFromDb = new StatusDTO(1L, "BOOKING");
+        Status entity = new Status(1L, StatusName.BOOKING);
+        StatusDTO dtoFromDb = new StatusDTO(1L, StatusName.BOOKING);
 
         Mockito.when(statusRepository.findById(entity.getStatusId())).thenReturn(Optional.of(entity));
         Mockito.when(statusMapper.toDTO(entity)).thenReturn(dtoFromDb);
@@ -74,7 +75,7 @@ class StatusServiceImplTest {
 
         Assertions.assertNotNull(fromDb);
         Assertions.assertEquals(fromDb.getStatusId(), entity.getStatusId());
-        Assertions.assertEquals(fromDb.getStatusName(), entity.getName());
+        Assertions.assertEquals(fromDb.getStatusName(), entity.getStatus());
 
         Mockito.verify(statusRepository).findById(entity.getStatusId());
         Mockito.verify(statusMapper).toDTO(entity);
@@ -83,9 +84,9 @@ class StatusServiceImplTest {
     @Test
     void createStatus() {
 
-        StatusDTO dtoToDb = new StatusDTO(null, "BOOKING");
-        Status entity = new Status(1l, "BOOKING");
-        StatusDTO dtoFromDb = new StatusDTO(1l, "BOOKING");
+        StatusDTO dtoToDb = new StatusDTO(null, StatusName.BOOKING);
+        Status entity = new Status(1l, StatusName.BOOKING);
+        StatusDTO dtoFromDb = new StatusDTO(1l, StatusName.BOOKING);
         Mockito.when(statusRepository.save(statusMapper.toModel(dtoToDb))).thenReturn(entity);
         Mockito.when(statusMapper.toDTO(entity)).thenReturn(dtoFromDb);
 
@@ -98,9 +99,9 @@ class StatusServiceImplTest {
     @Test
     void updateStatus() {
 
-        StatusDTO dto = new StatusDTO(null, "READY_TO_USE");
-        Status changeEntity = new Status(1L, "BOOKING");
-        Status updatedEntity = new Status(1L, "READY_TO_USE");
+        StatusDTO dto = new StatusDTO(null, StatusName.READY_TO_USE);
+        Status changeEntity = new Status(1L, StatusName.BOOKING);
+        Status updatedEntity = new Status(1L,  StatusName.READY_TO_USE);
 
         Mockito.when(statusRepository.findById(changeEntity.getStatusId())).thenReturn(Optional.of(changeEntity));
         Mockito.when(statusRepository.save(updatedEntity)).thenReturn(updatedEntity);

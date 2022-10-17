@@ -1,7 +1,7 @@
 package ru.aston.mcs.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.aston.mcs.dto.BookingResourceDTO;
+import ru.aston.mcs.dto.BookingResourceResponseDTO;
 import ru.aston.mcs.entity.BookingResource;
 import ru.aston.mcs.exception.EntityNotFoundException;
 import ru.aston.mcs.exception.InvalidRequestException;
@@ -26,12 +26,12 @@ public class BookingResourceServicesImpl implements BookingResourceServices {
     }
 
     @Override
-    public List<BookingResourceDTO> getAllBookingResources() {
+    public List<BookingResourceResponseDTO> getAllBookingResources() {
         return bookingResourceMapper.toDTOList(bookingResourceRepository.findAll());
     }
 
     @Override
-    public BookingResourceDTO getBookingResource(Long id) {
+    public BookingResourceResponseDTO getBookingResource(Long id) {
 
         return bookingResourceMapper.toDTO(
                 bookingResourceRepository.findById(id)
@@ -39,7 +39,7 @@ public class BookingResourceServicesImpl implements BookingResourceServices {
     }
 
     @Override
-    public BookingResourceDTO createBookingResource(BookingResourceDTO resourceDto) {
+    public BookingResourceResponseDTO createBookingResource(BookingResourceResponseDTO resourceDto) {
         if (resourceDto == null) {
             throw new InvalidRequestException();
         }
@@ -47,7 +47,7 @@ public class BookingResourceServicesImpl implements BookingResourceServices {
     }
 
     @Override
-    public BookingResourceDTO updateBookingResource(Long id, BookingResourceDTO resourceDto) {
+    public BookingResourceResponseDTO updateBookingResource(Long id, BookingResourceResponseDTO resourceDto) {
         if (resourceDto == null || id == null) {
             throw new InvalidRequestException();
         }
