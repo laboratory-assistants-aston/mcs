@@ -14,5 +14,7 @@ public interface UserService {
     UserDTO updateUser(Long id, UserDTO userDTO);
 
     void deleteUser(Long userId);
+
+    void fillUserBalance(Long id, Float amount);
 }
 

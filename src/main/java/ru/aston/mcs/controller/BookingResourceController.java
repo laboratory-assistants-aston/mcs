@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.mcs.dto.BookingResourceDTO;
+import ru.aston.mcs.dto.ResponseBookingResourceDTO;
 import ru.aston.mcs.service.BookingResourceServices;
 
 import java.util.List;
@@ -64,5 +65,32 @@ public class BookingResourceController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         resourcesServices.deleteBookingResource(id);
         return ResponseEntity.ok().build();
+    }
+
+    @ApiOperation(value = "Get all bookings for user", notes = "Get all bookings for user by id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 201, message = "Return is successful")})
+    @GetMapping("/list")
+    public List<ResponseBookingResourceDTO> getAllBookingsForUser(@RequestParam Long id) {
+        return resourcesServices.findAllBookingsByUserId(id);
+    }
+
+    @ApiOperation(value = "Test", notes = "Test")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 201, message = "Test")})
+    @GetMapping("/list2")
+    public List<BookingResourceDTO> getAllBookingsForUserTest(@RequestParam Long id) {
+        return resourcesServices.findAllBookingsByUserIdTest(id);
+    }
+
+    @ApiOperation(value = "Cancel booking for user", notes = "Cancel booking for user by BookingId")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid Request"),
+            @ApiResponse(code = 201, message = "Cancel is successful")})
+    @PatchMapping("/list/{id}")
+    public void cancelBookingById(@PathVariable Long id) {
+        resourcesServices.cancelBookingById(id);
     }
 }

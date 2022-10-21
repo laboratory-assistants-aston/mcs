@@ -7,16 +7,17 @@ import ru.aston.mcs.entity.Status;
 import ru.aston.mcs.entity.User;
 
 import java.util.Date;
-@ApiModel(value = "model for adding data in booking resource table")
-public class BookingResourceDTO {
+
+@ApiModel(value = "model for adding data in ResponseBookingResource table")
+public class ResponseBookingResourceDTO {
 
     private Long id;
 
     @ApiModelProperty(value = "id of resource", example = "1", required = true)
-    private Resource resource;
+    private Long resource;
 
     @ApiModelProperty(value = "id of type status", example = "1", required = true)
-    private Status status;
+    private Long status;
 
     @ApiModelProperty(value = "duration time of booking", example = "2", required = true)
     private Integer durationTime;
@@ -28,9 +29,9 @@ public class BookingResourceDTO {
     private Date endBooking;
 
     @ApiModelProperty(value = "id of type user", example = "1", required = true)
-    private User user;
+    private Long user;
 
-    public BookingResourceDTO(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
+    public ResponseBookingResourceDTO(Long id, Long resource, Long status, Integer durationTime, Date startBooking, Date endBooking, Long user) {
         this.id = id;
         this.resource = resource;
         this.status = status;
@@ -40,7 +41,7 @@ public class BookingResourceDTO {
         this.user = user;
     }
 
-    public BookingResourceDTO() {
+    public ResponseBookingResourceDTO() {
     }
 
     public Long getId() {
@@ -51,19 +52,19 @@ public class BookingResourceDTO {
         this.id = id;
     }
 
-    public Resource getResource() {
+    public Long getResource() {
         return resource;
     }
 
-    public void setResource(Resource resource) {
+    public void setResource(Long resource) {
         this.resource = resource;
     }
 
-    public Status getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 
@@ -91,11 +92,11 @@ public class BookingResourceDTO {
         this.endBooking = endBooking;
     }
 
-    public User getUser() {
+    public Long getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Long user) {
         this.user = user;
     }
 }
