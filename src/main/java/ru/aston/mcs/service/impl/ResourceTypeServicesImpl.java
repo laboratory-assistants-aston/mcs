@@ -60,8 +60,8 @@ public class ResourceTypeServicesImpl implements ResourceTypeService {
         ResourceType resourceTypeFromDb =  typeResourcesRepository.findById(resourceTypeId)
                 .orElseThrow( () -> new EntityNotFoundException(resourceTypeId));
 
-        resourceTypeFromDb.setName(resourceTypeDTO.getName());
-        resourceTypeFromDb.setCost(resourceTypeDTO.getCost());
+        resourceTypeFromDb.setResourceTypeName(resourceTypeDTO.getName());
+        resourceTypeFromDb.setResourceTypeCost(resourceTypeDTO.getCost());
 
         return typeResourcesMapper.toDTO(typeResourcesRepository.save(resourceTypeFromDb));
 

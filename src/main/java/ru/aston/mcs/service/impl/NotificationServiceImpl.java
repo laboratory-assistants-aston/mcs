@@ -64,7 +64,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         notificationFromDb.setUser(notificationDTO.getUser());
         notificationFromDb.setText(notificationDTO.getText());
-        notificationFromDb.setDate(notificationDTO.getDate());
+        notificationFromDb.setCreationDate(notificationDTO.getDate());
 
         return notificationMapper.toDTO(notificationRepository.save(notificationFromDb));
     }

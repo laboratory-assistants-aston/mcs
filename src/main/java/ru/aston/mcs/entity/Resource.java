@@ -1,7 +1,6 @@
 package ru.aston.mcs.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "resource")
@@ -11,15 +10,11 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resourceId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "resource_type_id", nullable = false)
     private ResourceType resourceType;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_id")
-    private List<BookingResource> bookingResourceList;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
@@ -30,35 +25,19 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(Long id, String resourceIdentifier, ResourceType resourceType, List<BookingResource> bookingResourceList) {
-        this.resourceId = id;
-        this.resourceIdentifier = resourceIdentifier;
+    public Resource(Long resourceId, ResourceType resourceType, Status status, String resourceIdentifier) {
+        this.resourceId = resourceId;
         this.resourceType = resourceType;
-        this.bookingResourceList = bookingResourceList;
+        this.status = status;
+        this.resourceIdentifier = resourceIdentifier;
     }
 
     public Long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Long id) {
-        this.resourceId = id;
-    }
-
-    public String getResourceIdentifier() {
-        return resourceIdentifier;
-    }
-
-    public void setResourceIdentifier(String resourceIdentifier) {
-        this.resourceIdentifier = resourceIdentifier;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setResourceId(Long resourceId) {
+        this.resourceId = resourceId;
     }
 
     public ResourceType getResourceType() {
@@ -69,11 +48,19 @@ public class Resource {
         this.resourceType = resourceType;
     }
 
-    public List<BookingResource> getBookingResourceList() {
-        return bookingResourceList;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setBookingResourceList(List<BookingResource> bookingResourceList) {
-        this.bookingResourceList = bookingResourceList;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getResourceIdentifier() {
+        return resourceIdentifier;
+    }
+
+    public void setResourceIdentifier(String resourceIdentifier) {
+        this.resourceIdentifier = resourceIdentifier;
     }
 }

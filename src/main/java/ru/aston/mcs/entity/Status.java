@@ -26,9 +26,9 @@ public class Status {
 
     }
 
-    public Status(Long statusId, String name) {
+    public Status(Long statusId, String statusName) {
         this.statusId = statusId;
-        this.statusName = name;
+        this.statusName = statusName;
     }
 
     public Long getStatusId() {
@@ -39,24 +39,11 @@ public class Status {
         this.statusId = statusId;
     }
 
-    public String getName() {
+    public String getStatusName() {
         return statusName;
     }
 
-    public void setName(String statusName) {
+    public void setStatusName(String statusName) {
         this.statusName = statusName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Status status = (Status) o;
-        return Objects.equals(statusId, status.statusId) && Objects.equals(statusName, status.statusName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(statusId, statusName);
     }
 }

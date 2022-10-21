@@ -36,10 +36,10 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(Long notificationId, String text, User user, Date creationDate) {
+    public Notification(Long notificationId, User user, String text, Date creationDate) {
         this.notificationId = notificationId;
-        this.text = text;
         this.user = user;
+        this.text = text;
         this.creationDate = creationDate;
     }
 
@@ -51,14 +51,6 @@ public class Notification {
         this.notificationId = notificationId;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public User getUser() {
         return user;
     }
@@ -67,11 +59,19 @@ public class Notification {
         this.user = user;
     }
 
-    public Date getDate() {
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setDate(Date date) {
-        this.creationDate = date;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

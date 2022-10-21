@@ -1,6 +1,7 @@
 package ru.aston.mcs.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -12,11 +13,11 @@ public class BookingResource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "resource_id", nullable = false)
     private Resource resource;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
@@ -28,77 +29,77 @@ public class BookingResource {
     private Integer durationTime;
 
     @Column(name = "start_booking", nullable = false)
-    private Date startBooking;
+    private LocalDateTime startBooking;
 
     @Column(name = "end_booking", nullable = false)
-    private Date endBooking;
+    private LocalDateTime endBooking;
 
     public BookingResource() {
     }
 
-    public BookingResource(Long id, Resource resource, Status status, Integer durationTime, Date startBooking, Date endBooking, User user) {
+    public BookingResource(Long id, Resource resource, Status status, User user, Integer durationTime, LocalDateTime startBooking, LocalDateTime endBooking) {
         this.id = id;
         this.resource = resource;
         this.status = status;
+        this.user = user;
         this.durationTime = durationTime;
         this.startBooking = startBooking;
         this.endBooking = endBooking;
-        this.user = user;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public void setDurationTime(Integer durationTime) {
-        this.durationTime = durationTime;
-    }
-
-    public void setStartBooking(Date startBooking) {
-        this.startBooking = startBooking;
-    }
-
-    public void setEndBooking(Date endBooking) {
-        this.endBooking = endBooking;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Resource getResource() {
         return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public Integer getDurationTime() {
-        return durationTime;
-    }
-
-    public Date getStartBooking() {
-        return startBooking;
-    }
-
-    public Date getEndBooking() {
-        return endBooking;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getDurationTime() {
+        return durationTime;
+    }
+
+    public void setDurationTime(Integer durationTime) {
+        this.durationTime = durationTime;
+    }
+
+    public LocalDateTime getStartBooking() {
+        return startBooking;
+    }
+
+    public void setStartBooking(LocalDateTime startBooking) {
+        this.startBooking = startBooking;
+    }
+
+    public LocalDateTime getEndBooking() {
+        return endBooking;
+    }
+
+    public void setEndBooking(LocalDateTime endBooking) {
+        this.endBooking = endBooking;
     }
 }

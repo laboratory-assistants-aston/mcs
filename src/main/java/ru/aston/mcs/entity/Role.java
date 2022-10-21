@@ -15,11 +15,11 @@ import java.util.List;
 @Table(name = "roles")
 public class Role {
     @Id
-    @Column(name="role_id")
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
-    @Column(name="role_name", nullable = false)
+    @Column(name = "role_name", nullable = false)
     private String roleName;
 
     @ManyToMany
@@ -33,10 +33,10 @@ public class Role {
     public Role() {
     }
 
-    public Role(Long id, String roleName, List<User> persons) {
-        this.roleId = id;
+    public Role(Long roleId, String roleName, List<User> users) {
+        this.roleId = roleId;
         this.roleName = roleName;
-        this.users = persons;
+        this.users = users;
     }
 
     public Long getRoleId() {

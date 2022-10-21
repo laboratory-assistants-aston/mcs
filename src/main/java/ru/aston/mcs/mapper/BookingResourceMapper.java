@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BookingResourceMapper {
+
     BookingResource toModel(BookingResourceDTO bookingResourceDTO);
 
     BookingResourceDTO toDTO(BookingResource bookingResource);
